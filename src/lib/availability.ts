@@ -1,6 +1,12 @@
 import { db } from "@/db";
 import { blockedDates } from "@/db/schema";
-import { and, asc, gte, lte } from "drizzle-orm";
+import {
+  and,
+  asc,
+  gte,
+  lte,
+} from "drizzle-orm";
+
 import {
   addDays,
   getDemoBlockedDates,
@@ -10,15 +16,17 @@ import {
 } from "@/lib/stay";
 
 export async function readAvailability() {
+  const today = todayInManila();
+  const maxDate = addDays(today, 365);
+
   try {
-    const today = todayInManila();
-    const maxDate = addDays(today, 365);
+    console.log("[availability] Starting...");
+    console.log("[availability] Today:", today);
+    console.log("[availability] Max date:", maxDate);
 
-    console.log("[availability] Loading dates:", {
-      today,
-      maxDate,
-    });
-
+    /*
+     * Test the database query.
+     */
     const rows = await db
       .select({
         unitId: blockedDates.unitId,
@@ -36,32 +44,52 @@ export async function readAvailability() {
         asc(blockedDates.date)
       );
 
-    console.log("[availability] Database rows:", rows.length);
-
-    const blockedByUnit = UNITS.reduce<Record<UnitId, string[]>>(
-      (acc, unit) => {
-        acc[unit.id] = [];
-        return acc;
-      },
-      {} as Record<UnitId, string[]>
+    console.log(
+      "[availability] Found rows:",
+      rows.length
     );
 
+    /*
+     * Create an empty blocked-date array
+     * for every configured unit.
+     */
+    const blockedByUnit =
+      UNITS.reduce<Record<UnitId, string[]>>(
+        (acc, unit) => {
+          acc[unit.id] = [];
+          return acc;
+        },
+        {} as Record<UnitId, string[]>
+      );
+
+    /*
+     * Put database dates into their respective units.
+     */
     for (const row of rows) {
       const unitId = row.unitId as UnitId;
 
-      if (blockedByUnit[unitId]) {
-        blockedByUnit[unitId].push(row.date);
+      if (!blockedByUnit[unitId]) {
+        console.warn(
+          `[availability] Unknown unitId in database: ${row.unitId}`
+        );
+
+        continue;
       }
+
+      blockedByUnit[unitId].push(row.date);
     }
 
     let isDemo = false;
 
     /*
-     * If the database has no blocked dates yet,
-     * populate it with the demo dates.
+     * If the database is empty, create demo reservations.
+     *
+     * This is only intended for initial/demo data.
      */
     if (rows.length === 0) {
-      console.log("[availability] No blocked dates found. Creating demo data.");
+      console.log(
+        "[availability] No reservations found. Creating demo dates..."
+      );
 
       const demo = getDemoBlockedDates(today);
 
@@ -79,6 +107,9 @@ export async function readAvailability() {
           .onConflictDoNothing();
       }
 
+      /*
+       * Read the dates again after insertion.
+       */
       const fresh = await db
         .select({
           unitId: blockedDates.unitId,
@@ -99,15 +130,17 @@ export async function readAvailability() {
       for (const row of fresh) {
         const unitId = row.unitId as UnitId;
 
-        if (blockedByUnit[unitId]) {
-          blockedByUnit[unitId].push(row.date);
+        if (!blockedByUnit[unitId]) {
+          continue;
         }
+
+        blockedByUnit[unitId].push(row.date);
       }
 
       isDemo = true;
 
       console.log(
-        "[availability] Demo dates created:",
+        "[availability] Demo dates inserted:",
         fresh.length
       );
     }
@@ -119,7 +152,10 @@ export async function readAvailability() {
       blockedDates: blockedByUnit[unit.id],
     }));
 
-    console.log("[availability] Successfully loaded.");
+    console.log(
+      "[availability] Successfully loaded:",
+      units
+    );
 
     return {
       today,
@@ -129,10 +165,14 @@ export async function readAvailability() {
     };
   } catch (error) {
     console.error(
-      "[availability] Failed to load availability:",
+      "[availability] DATABASE ERROR:",
       error
     );
 
-    throw new Error("Failed to load availability data.");
+    /*
+     * Preserve the original error so Next.js/server logs
+     * show the real PostgreSQL/Drizzle error.
+     */
+    throw error;
   }
 }
