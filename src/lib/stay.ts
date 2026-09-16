@@ -1,0 +1,143 @@
+export type UnitId = "hiraya" | "mayumi";
+
+export type Unit = {
+  id: UnitId;
+  name: string;
+  shortName: string;
+  eyebrow: string;
+  tagline: string;
+  description: string;
+  size: string;
+  beds: string;
+  maxGuests: number;
+  weekdayRate: number;
+  weekendRate: number;
+  cleaningFee: number;
+  minNights: number;
+  maxNights: number;
+  checkInTime: string;
+  checkOutTime: string;
+  bestFor: string;
+  vibe: string;
+  highlights: string[];
+  amenities: string[];
+  heroImage: string;
+  galleryTag: string;
+};
+
+export const UNITS: Unit[] = [
+  {
+    id: "hiraya",
+    name: "The Hiraya Suite",
+    shortName: "Hiraya",
+    eyebrow: "SIGNATURE ONE-BEDROOM",
+    tagline: "Roomy, sunlit, made for lingering.",
+    description: "Our signature one-bedroom suite is the one for slow mornings and easy evenings: a proper bedroom with a queen bed, a full living area that converts for extra guests, a little balcony, and space for four.",
+    size: "42 sqm",
+    beds: "1 queen bed + double sofa bed",
+    maxGuests: 4,
+    weekdayRate: 2800,
+    weekendRate: 3200,
+    cleaningFee: 500,
+    minNights: 1,
+    maxNights: 30,
+    checkInTime: "2:00 PM",
+    checkOutTime: "11:00 AM",
+    bestFor: "Couples getaways, small families, friend groups of 3–4, and longer stays.",
+    vibe: "Warm, roomy, and a little indulgent.",
+    highlights: ["Private balcony", "Separate living area", "Queen bed + sofa bed for 4"],
+    amenities: ["Fast Wi-Fi", "Smart TV & Netflix", "Equipped kitchen", "Air conditioning", "Swimming pool access*", "Fresh linens & towels", "Coffee essentials", "Easy self check-in", "Hot shower & toiletries", "Refrigerator", "Dining essentials", "Laptop-friendly nook", "Hair dryer", "24/7 building security", "Private balcony"],
+    heroImage: "/images/living-room.jpg",
+    galleryTag: "The signature suite",
+  },
+  {
+    id: "mayumi",
+    name: "The Mayumi Studio",
+    shortName: "Mayumi",
+    eyebrow: "COZY STUDIO",
+    tagline: "Compact, charming, quietly lovely.",
+    description: "Mayumi is our soft, sunny studio for two — a thoughtful open-plan space with a plush queen bed, a compact kitchenette, and all the little comforts you need for a sweet little escape.",
+    size: "28 sqm",
+    beds: "1 queen bed",
+    maxGuests: 2,
+    weekdayRate: 2400,
+    weekendRate: 2800,
+    cleaningFee: 400,
+    minNights: 1,
+    maxNights: 14,
+    checkInTime: "2:00 PM",
+    checkOutTime: "11:00 AM",
+    bestFor: "Solo slow-downs, couples, and short, cozy escapes.",
+    vibe: "Cozy, curated, and easy to love.",
+    highlights: ["Queen bed for two", "Bright open-plan layout", "Kitchenette for small bites"],
+    amenities: ["Fast Wi-Fi", "Smart TV & Netflix", "Kitchenette", "Air conditioning", "Swimming pool access*", "Fresh linens & towels", "Coffee essentials", "Easy self check-in", "Hot shower & toiletries", "Compact refrigerator", "Dining essentials", "Laptop-friendly spot", "Hair dryer", "24/7 building security"],
+    heroImage: "/images/mayumi-studio.jpg",
+    galleryTag: "The cozy studio",
+  },
+];
+
+export const DEFAULT_UNIT: UnitId = "hiraya";
+
+export function getUnit(unitId: UnitId): Unit {
+  return UNITS.find((u) => u.id === unitId) ?? UNITS[0];
+}
+
+export function toDateKey(date: Date): string {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+}
+
+export function fromDateKey(key: string): Date {
+  const [year, month, day] = key.split("-").map(Number);
+  return new Date(year, month - 1, day, 12);
+}
+
+export function todayInManila(): string {
+  return new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Manila", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+}
+
+export function addDays(key: string, days: number): string {
+  const date = fromDateKey(key);
+  date.setDate(date.getDate() + days);
+  return toDateKey(date);
+}
+
+export function isDateKey(value: unknown): value is string {
+  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+  const date = fromDateKey(value);
+  return Number.isFinite(date.getTime()) && toDateKey(date) === value;
+}
+
+export function getNights(checkIn: string, checkOut: string): string[] {
+  const nights: string[] = [];
+  for (let date = checkIn; date < checkOut && nights.length <= 366; date = addDays(date, 1)) nights.push(date);
+  return nights;
+}
+
+export function getQuote(unitId: UnitId, checkIn: string, checkOut: string) {
+  const unit = getUnit(unitId);
+  const nights = getNights(checkIn, checkOut);
+  const subtotal = nights.reduce((sum, night) => {
+    const day = fromDateKey(night).getDay();
+    return sum + (day === 5 || day === 6 ? unit.weekendRate : unit.weekdayRate);
+  }, 0);
+  return { unitId, nights: nights.length, subtotal, cleaningFee: unit.cleaningFee, total: subtotal + unit.cleaningFee };
+}
+
+export function formatMoney(amount: number): string {
+  return new Intl.NumberFormat("en-PH", { style: "currency", currency: "PHP", maximumFractionDigits: 0 }).format(amount);
+}
+
+export function formatDate(key: string, long = false): string {
+  return fromDateKey(key).toLocaleDateString("en-US", { month: long ? "long" : "short", day: "numeric", ...(long ? { year: "numeric" } : {}) });
+}
+
+export function getDemoBlockedDates(today: string): Record<UnitId, string[]> {
+  const offsets: Record<UnitId, number[]> = {
+    hiraya: [7, 8, 9, 16, 17, 24, 25, 35, 36, 44, 45, 51, 52, 65, 66, 75, 76, 85],
+    mayumi: [5, 6, 14, 15, 22, 31, 32, 42, 49, 58, 69, 70, 79, 80],
+  };
+  return {
+    hiraya: offsets.hiraya.map((offset) => addDays(today, offset)),
+    mayumi: offsets.mayumi.map((offset) => addDays(today, offset)),
+  };
+}
