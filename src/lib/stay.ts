@@ -130,14 +130,3 @@ export function formatMoney(amount: number): string {
 export function formatDate(key: string, long = false): string {
   return fromDateKey(key).toLocaleDateString("en-US", { month: long ? "long" : "short", day: "numeric", ...(long ? { year: "numeric" } : {}) });
 }
-
-export function getDemoBlockedDates(today: string): Record<UnitId, string[]> {
-  const offsets: Record<UnitId, number[]> = {
-    hiraya: [7, 8, 9, 16, 17, 24, 25, 35, 36, 44, 45, 51, 52, 65, 66, 75, 76, 85],
-    mayumi: [5, 6, 14, 15, 22, 31, 32, 42, 49, 58, 69, 70, 79, 80],
-  };
-  return {
-    hiraya: offsets.hiraya.map((offset) => addDays(today, offset)),
-    mayumi: offsets.mayumi.map((offset) => addDays(today, offset)),
-  };
-}
