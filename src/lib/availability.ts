@@ -1,5 +1,6 @@
 import { db } from "@/db";
 import { blockedDates } from "@/db/schema";
+import { getAirbnbBlockedDates } from "@/lib/airbnb";
 import {
   and,
   asc,
@@ -9,7 +10,6 @@ import {
 
 import {
   addDays,
-  getDemoBlockedDates,
   todayInManila,
   UNITS,
   type UnitId,
@@ -19,11 +19,14 @@ export async function readAvailability() {
   const today = todayInManila();
   const maxDate = addDays(today, 365);
 
-  console.log("[availability] Starting database query...");
+  console.log("[availability] Starting availability query...");
   console.log("[availability] Today:", today);
   console.log("[availability] Max date:", maxDate);
 
   try {
+    /*
+     * 1. Read manually blocked dates from Neon.
+     */
     const rows = await db
       .select({
         unitId: blockedDates.unitId,
@@ -42,23 +45,36 @@ export async function readAvailability() {
       );
 
     console.log(
-      "[availability] Database query successful."
-    );
-
-    console.log(
-      "[availability] Rows returned:",
+      "[availability] Neon rows:",
       rows.length
     );
 
+    /*
+     * 2. Get Airbnb blocked dates for Hiraya.
+     */
+    const airbnbHirayaDates =
+      await getAirbnbBlockedDates("hiraya");
+
+    console.log(
+      "[availability] Airbnb Hiraya dates:",
+      airbnbHirayaDates.length
+    );
+
+    /*
+     * 3. Build blocked dates by unit.
+     */
     const blockedByUnit =
-      UNITS.reduce<Record<UnitId, string[]>>(
+      UNITS.reduce<Record<UnitId, Set<string>>>(
         (acc, unit) => {
-          acc[unit.id] = [];
+          acc[unit.id] = new Set<string>();
           return acc;
         },
-        {} as Record<UnitId, string[]>
+        {} as Record<UnitId, Set<string>>
       );
 
+    /*
+     * 4. Add manually blocked dates from Neon.
+     */
     for (const row of rows) {
       const unitId = row.unitId as UnitId;
 
@@ -70,76 +86,24 @@ export async function readAvailability() {
         continue;
       }
 
-      blockedByUnit[unitId].push(row.date);
+      blockedByUnit[unitId].add(row.date);
     }
-
-    let isDemo = false;
 
     /*
-     * If there are no blocked dates,
-     * create the demo dates.
+     * 5. Add Airbnb dates to Hiraya.
      */
-    if (rows.length === 0) {
-      console.log(
-        "[availability] No blocked dates found."
-      );
-
-      const demo = getDemoBlockedDates(today);
-
-      const values = UNITS.flatMap((unit) =>
-        demo[unit.id].map((date) => ({
-          unitId: unit.id,
-          date,
-        }))
-      );
-
-      console.log(
-        "[availability] Demo rows to insert:",
-        values.length
-      );
-
-      if (values.length > 0) {
-        await db
-          .insert(blockedDates)
-          .values(values)
-          .onConflictDoNothing();
-      }
-
-      const fresh = await db
-        .select({
-          unitId: blockedDates.unitId,
-          date: blockedDates.date,
-        })
-        .from(blockedDates)
-        .where(
-          and(
-            gte(blockedDates.date, today),
-            lte(blockedDates.date, maxDate)
-          )
-        )
-        .orderBy(
-          asc(blockedDates.unitId),
-          asc(blockedDates.date)
-        );
-
-      for (const row of fresh) {
-        const unitId = row.unitId as UnitId;
-
-        if (!blockedByUnit[unitId]) {
-          continue;
-        }
-
-        blockedByUnit[unitId].push(row.date);
-      }
-
-      isDemo = true;
+    for (const date of airbnbHirayaDates) {
+      blockedByUnit.hiraya.add(date);
     }
 
+    /*
+     * 6. Convert Sets to sorted arrays.
+     */
     const units = UNITS.map((unit) => ({
       id: unit.id,
       name: unit.name,
       shortName: unit.shortName,
-      blockedDates: blockedByUnit[unit.id] ?? [],
+      blockedDates: [...blockedByUnit[unit.id]].sort(),
     }));
 
     console.log(
@@ -150,7 +114,7 @@ export async function readAvailability() {
       today,
       maxDate,
       units,
-      isDemo,
+      isDemo: false,
     };
   } catch (error) {
     console.error(
