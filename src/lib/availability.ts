@@ -19,14 +19,11 @@ export async function readAvailability() {
   const today = todayInManila();
   const maxDate = addDays(today, 365);
 
-  try {
-    console.log("[availability] Starting...");
-    console.log("[availability] Today:", today);
-    console.log("[availability] Max date:", maxDate);
+  console.log("[availability] Starting database query...");
+  console.log("[availability] Today:", today);
+  console.log("[availability] Max date:", maxDate);
 
-    /*
-     * Test the database query.
-     */
+  try {
     const rows = await db
       .select({
         unitId: blockedDates.unitId,
@@ -45,14 +42,14 @@ export async function readAvailability() {
       );
 
     console.log(
-      "[availability] Found rows:",
+      "[availability] Database query successful."
+    );
+
+    console.log(
+      "[availability] Rows returned:",
       rows.length
     );
 
-    /*
-     * Create an empty blocked-date array
-     * for every configured unit.
-     */
     const blockedByUnit =
       UNITS.reduce<Record<UnitId, string[]>>(
         (acc, unit) => {
@@ -62,15 +59,12 @@ export async function readAvailability() {
         {} as Record<UnitId, string[]>
       );
 
-    /*
-     * Put database dates into their respective units.
-     */
     for (const row of rows) {
       const unitId = row.unitId as UnitId;
 
       if (!blockedByUnit[unitId]) {
         console.warn(
-          `[availability] Unknown unitId in database: ${row.unitId}`
+          `[availability] Unknown unit ID: ${row.unitId}`
         );
 
         continue;
@@ -82,13 +76,12 @@ export async function readAvailability() {
     let isDemo = false;
 
     /*
-     * If the database is empty, create demo reservations.
-     *
-     * This is only intended for initial/demo data.
+     * If there are no blocked dates,
+     * create the demo dates.
      */
     if (rows.length === 0) {
       console.log(
-        "[availability] No reservations found. Creating demo dates..."
+        "[availability] No blocked dates found."
       );
 
       const demo = getDemoBlockedDates(today);
@@ -100,6 +93,11 @@ export async function readAvailability() {
         }))
       );
 
+      console.log(
+        "[availability] Demo rows to insert:",
+        values.length
+      );
+
       if (values.length > 0) {
         await db
           .insert(blockedDates)
@@ -107,9 +105,6 @@ export async function readAvailability() {
           .onConflictDoNothing();
       }
 
-      /*
-       * Read the dates again after insertion.
-       */
       const fresh = await db
         .select({
           unitId: blockedDates.unitId,
@@ -138,23 +133,17 @@ export async function readAvailability() {
       }
 
       isDemo = true;
-
-      console.log(
-        "[availability] Demo dates inserted:",
-        fresh.length
-      );
     }
 
     const units = UNITS.map((unit) => ({
       id: unit.id,
       name: unit.name,
       shortName: unit.shortName,
-      blockedDates: blockedByUnit[unit.id],
+      blockedDates: blockedByUnit[unit.id] ?? [],
     }));
 
     console.log(
-      "[availability] Successfully loaded:",
-      units
+      "[availability] Availability loaded successfully."
     );
 
     return {
@@ -165,14 +154,11 @@ export async function readAvailability() {
     };
   } catch (error) {
     console.error(
-      "[availability] DATABASE ERROR:",
-      error
+      "[availability] Database query failed:"
     );
 
-    /*
-     * Preserve the original error so Next.js/server logs
-     * show the real PostgreSQL/Drizzle error.
-     */
+    console.error(error);
+
     throw error;
   }
 }
