@@ -4,15 +4,17 @@ import { Pool } from "pg";
 const databaseUrl = process.env.DATABASE_URL;
 
 if (!databaseUrl) {
-  throw new Error("DATABASE_URL is required");
+  throw new Error(
+    "DATABASE_URL is not defined. Add it to your .env.local file."
+  );
 }
 
 const globalForDb = globalThis as typeof globalThis & {
-  __arenaNextJsPostgresqlPool?: Pool;
+  __hirayaPostgresPool?: Pool;
 };
 
 export const pool =
-  globalForDb.__arenaNextJsPostgresqlPool ??
+  globalForDb.__hirayaPostgresPool ??
   new Pool({
     connectionString: databaseUrl,
     max: 5,
@@ -21,11 +23,13 @@ export const pool =
   });
 
 if (process.env.NODE_ENV !== "production") {
-  globalForDb.__arenaNextJsPostgresqlPool = pool;
+  globalForDb.__hirayaPostgresPool = pool;
 }
 
 pool.on("error", (error) => {
-  console.error("[database] Unexpected PostgreSQL pool error:", error);
+  console.error("[PostgreSQL Pool Error]", error);
 });
 
-export const db = drizzle(pool);
+export const db = drizzle({
+  client: pool,
+});
