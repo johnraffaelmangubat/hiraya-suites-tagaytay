@@ -80,23 +80,32 @@ function parseAirbnbEvents(ics: string): AirbnbEvent[] {
   return events;
 }
 
-export async function getAirbnbBlockedDates(
-  unitId: UnitId
+function expandEventsToBlockedDates(
+  events: AirbnbEvent[]
+): string[] {
+  const blocked = new Set<string>();
+
+  for (const event of events) {
+    let date = event.start;
+
+    while (date < event.end) {
+      blocked.add(date);
+
+      const current = new Date(`${date}T12:00:00`);
+
+      current.setDate(current.getDate() + 1);
+
+      date = current.toISOString().slice(0, 10);
+    }
+  }
+
+  return [...blocked].sort();
+}
+
+async function fetchAirbnbCalendar(
+  unitId: UnitId,
+  url: string
 ): Promise<string[]> {
-  if (unitId !== "hiraya") {
-    return [];
-  }
-
-  const url = process.env.AIRBNB_HIRAYA_ICAL_URL;
-
-  if (!url) {
-    console.warn(
-      "[airbnb] AIRBNB_HIRAYA_ICAL_URL is not configured."
-    );
-
-    return [];
-  }
-
   try {
     const response = await fetch(url, {
       cache: "no-store",
@@ -109,34 +118,57 @@ export async function getAirbnbBlockedDates(
     }
 
     const ics = await response.text();
+
     const events = parseAirbnbEvents(ics);
 
-    const blocked = new Set<string>();
-
-    for (const event of events) {
-      let date = event.start;
-
-      while (date < event.end) {
-        blocked.add(date);
-
-        const current = new Date(`${date}T12:00:00`);
-        current.setDate(current.getDate() + 1);
-
-        date = current.toISOString().slice(0, 10);
-      }
-    }
+    const blockedDates =
+      expandEventsToBlockedDates(events);
 
     console.log(
-      `[airbnb] ${unitId}: ${blocked.size} blocked dates found.`
+      `[airbnb] ${unitId}: ${blockedDates.length} blocked dates found.`
     );
 
-    return [...blocked].sort();
+    return blockedDates;
   } catch (error) {
     console.error(
-      "[airbnb] Failed to read Airbnb calendar:",
+      `[airbnb] Failed to read ${unitId} Airbnb calendar:`,
       error
     );
 
     return [];
   }
+}
+
+export async function getAirbnbBlockedDates(
+  unitId: UnitId
+): Promise<string[]> {
+  if (unitId === "hiraya") {
+    const url = process.env.AIRBNB_HIRAYA_ICAL_URL;
+
+    if (!url) {
+      console.warn(
+        "[airbnb] AIRBNB_HIRAYA_ICAL_URL is not configured."
+      );
+
+      return [];
+    }
+
+    return fetchAirbnbCalendar(unitId, url);
+  }
+
+  if (unitId === "mayumi") {
+    const url = process.env.AIRBNB_MAYUMI_ICAL_URL;
+
+    if (!url) {
+      console.warn(
+        "[airbnb] AIRBNB_MAYUMI_ICAL_URL is not configured."
+      );
+
+      return [];
+    }
+
+    return fetchAirbnbCalendar(unitId, url);
+  }
+
+  return [];
 }
