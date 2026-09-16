@@ -11,7 +11,7 @@ const globalForDb = globalThis as typeof globalThis & {
   __arenaNextJsPostgresqlPool?: Pool;
 };
 
-const pool =
+export const pool =
   globalForDb.__arenaNextJsPostgresqlPool ??
   new Pool({
     connectionString: databaseUrl,
@@ -24,5 +24,8 @@ if (process.env.NODE_ENV !== "production") {
   globalForDb.__arenaNextJsPostgresqlPool = pool;
 }
 
+pool.on("error", (error) => {
+  console.error("[database] Unexpected PostgreSQL pool error:", error);
+});
+
 export const db = drizzle(pool);
-export { pool };
