@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import { blockedDates } from "@/db/schema";
 import { getAirbnbBlockedDates } from "@/lib/airbnb";
+
 import {
   and,
   asc,
@@ -19,13 +20,26 @@ export async function readAvailability() {
   const today = todayInManila();
   const maxDate = addDays(today, 365);
 
-  console.log("[availability] Starting availability query...");
-  console.log("[availability] Today:", today);
-  console.log("[availability] Max date:", maxDate);
+  console.log(
+    "[availability] Starting availability query..."
+  );
+
+  console.log(
+    "[availability] Today:",
+    today
+  );
+
+  console.log(
+    "[availability] Max date:",
+    maxDate
+  );
 
   try {
     /*
      * 1. Read manually blocked dates from Neon.
+     *
+     * These are real/manual blocks only.
+     * No demo dates are created.
      */
     const rows = await db
       .select({
@@ -61,19 +75,32 @@ export async function readAvailability() {
     );
 
     /*
-     * 3. Build blocked dates by unit.
+     * 3. Get Airbnb blocked dates for Mayumi.
+     */
+    const airbnbMayumiDates =
+      await getAirbnbBlockedDates("mayumi");
+
+    console.log(
+      "[availability] Airbnb Mayumi dates:",
+      airbnbMayumiDates.length
+    );
+
+    /*
+     * 4. Create an empty blocked-date set
+     *    for every unit.
      */
     const blockedByUnit =
       UNITS.reduce<Record<UnitId, Set<string>>>(
         (acc, unit) => {
           acc[unit.id] = new Set<string>();
+
           return acc;
         },
         {} as Record<UnitId, Set<string>>
       );
 
     /*
-     * 4. Add manually blocked dates from Neon.
+     * 5. Add manually blocked dates from Neon.
      */
     for (const row of rows) {
       const unitId = row.unitId as UnitId;
@@ -90,26 +117,38 @@ export async function readAvailability() {
     }
 
     /*
-     * 5. Add Airbnb dates to Hiraya.
+     * 6. Add Hiraya Airbnb dates.
      */
     for (const date of airbnbHirayaDates) {
       blockedByUnit.hiraya.add(date);
     }
 
     /*
-     * 6. Convert Sets to sorted arrays.
+     * 7. Add Mayumi Airbnb dates.
+     */
+    for (const date of airbnbMayumiDates) {
+      blockedByUnit.mayumi.add(date);
+    }
+
+    /*
+     * 8. Convert Sets into sorted arrays.
      */
     const units = UNITS.map((unit) => ({
       id: unit.id,
       name: unit.name,
       shortName: unit.shortName,
-      blockedDates: [...blockedByUnit[unit.id]].sort(),
+      blockedDates: [
+        ...blockedByUnit[unit.id],
+      ].sort(),
     }));
 
     console.log(
       "[availability] Availability loaded successfully."
     );
 
+    /*
+     * Demo/test mode has been permanently removed.
+     */
     return {
       today,
       maxDate,
@@ -118,7 +157,7 @@ export async function readAvailability() {
     };
   } catch (error) {
     console.error(
-      "[availability] Database query failed:"
+      "[availability] Availability query failed:"
     );
 
     console.error(error);
