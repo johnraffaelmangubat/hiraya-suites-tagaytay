@@ -75,7 +75,7 @@ const faqs = [
 
 function BrandLogo({ footer = false }: { footer?: boolean }) {
   return <a className={`brand ${footer ? "brand--footer" : ""}`} href="#home" aria-label="Hiraya Suites home">
-    <svg className="brand-roof" width="39" height="27" viewBox="0 0 48 34" aria-hidden="true"><path d="M3 24 19 5h11l15 19h-5L27 9 14 25H3Z" fill="currentColor" /><path d="M30 7V2h6v12M20 24v-6a4 4 0 0 1 8 0v6h-8Z" fill="none" stroke="currentColor" strokeWidth="1.7" /><path d="M24 15v9m-4-5h8" stroke="currentColor" strokeWidth="1.4" /></svg>
+    <Image src="/images/hiraya-logo.svg" alt="Hiraya Suites" width={39} height={27} className="brand-roof" />
     <span className="brand-name">Hiraya</span><span className="brand-subtitle">SUITES</span>
   </a>;
 }
