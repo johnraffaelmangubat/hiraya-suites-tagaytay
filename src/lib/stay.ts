@@ -12,6 +12,8 @@ export type Unit = {
   maxGuests: number;
   weekdayRate: number;
   weekendRate: number;
+  additionalGuestFee: number;
+  baseGuests: number;
   minNights: number;
   maxNights: number;
   checkInTime: string;
@@ -38,6 +40,8 @@ export const UNITS: Unit[] = [
     maxGuests: 4,
     weekdayRate: 1799,
     weekendRate: 1999,
+    additionalGuestFee: 300,
+    baseGuests: 2,
     minNights: 1,
     maxNights: 30,
     checkInTime: "5:00 PM",
@@ -83,6 +87,8 @@ export const UNITS: Unit[] = [
     maxGuests: 4,
     weekdayRate: 1799,
     weekendRate: 1999,
+    additionalGuestFee: 300,
+    baseGuests: 2,
     minNights: 1,
     maxNights: 14,
     checkInTime: "4:00 PM",
@@ -125,7 +131,9 @@ export function getUnit(unitId: UnitId): Unit {
 export function toDateKey(date: Date): string {
   return `${date.getFullYear()}-${String(
     date.getMonth() + 1
-  ).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+  ).padStart(2, "0")}-${String(
+    date.getDate()
+  ).padStart(2, "0")}`;
 }
 
 export function fromDateKey(key: string): Date {
@@ -192,32 +200,54 @@ export function getNights(
 export function getQuote(
   unitId: UnitId,
   checkIn: string,
-  checkOut: string
+  checkOut: string,
+  guests: number
 ) {
   const unit = getUnit(unitId);
   const nights = getNights(checkIn, checkOut);
+
+  const safeGuests = Math.max(
+    1,
+    Math.min(guests, unit.maxGuests)
+  );
+
+  const additionalGuests = Math.max(
+    0,
+    safeGuests - unit.baseGuests
+  );
+
+  const additionalGuestFeePerNight =
+    additionalGuests * unit.additionalGuestFee;
 
   const subtotal = nights.reduce(
     (sum, night) => {
       const day = fromDateKey(night).getDay();
 
-      return (
-        sum +
-        (
-          day === 5 || day === 6
-            ? unit.weekendRate
-            : unit.weekdayRate
-        )
-      );
+      const nightlyRate =
+        day === 5 || day === 6
+          ? unit.weekendRate
+          : unit.weekdayRate;
+
+      return sum + nightlyRate;
     },
     0
   );
 
+  const additionalGuestTotal =
+    additionalGuestFeePerNight * nights.length;
+
+  const total =
+    subtotal + additionalGuestTotal;
+
   return {
     unitId,
     nights: nights.length,
+    guests: safeGuests,
     subtotal,
-    total: subtotal,
+    additionalGuests,
+    additionalGuestFeePerNight,
+    additionalGuestTotal,
+    total,
   };
 }
 
