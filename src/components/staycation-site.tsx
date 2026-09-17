@@ -3241,6 +3241,25 @@ export default function StaycationSite({
         </p>
       </footer>
 
+      <a
+        href="https://m.me/HirayaSuitesTagaytay"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="floating-messenger"
+        aria-label="Message us on Facebook Messenger"
+      >
+        <svg
+          viewBox="0 0 32 32"
+          aria-hidden="true"
+          focusable="false"
+        >
+          <path
+            fill="currentColor"
+            d="M16 3C8.82 3 3 8.36 3 15c0 3.78 1.94 7.15 5.08 9.36V29l4.68-2.57c1.03.28 2.11.43 3.24.43 7.18 0 13-5.36 13-12S23.18 3 16 3Zm1.37 15.94-3.35-3.57-6.53 3.57 7.2-7.64 3.35 3.57 6.53-3.57-7.2 7.64Z"
+          />
+        </svg>
+      </a>
+
       {dateDialog && (
         <Modal
           title={`Make room for a little ${unit.shortName} getaway.`}
