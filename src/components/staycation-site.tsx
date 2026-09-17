@@ -1,7 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import {
   ArrowDown,
   ArrowRight,
@@ -247,30 +252,81 @@ const unitAmenityMap: Record<
   ],
 };
 
-const faqs = [
+const faqs: {
+  q: string;
+  a: React.ReactNode;
+}[] = [
   {
     q: "Do the units have a balcony?",
-    a: "Tower B: Yes! The unit has a balcony with a garden and city view. \nTower 4: The unit offers a city view.",
+    a: (
+      <>
+        <p>
+          <strong>Tower B:</strong> Yes! The unit has a balcony with a garden and city view.
+        </p>
+
+        <p>
+          <strong>Tower 4:</strong> The unit offers a city view.
+        </p>
+      </>
+    ),
   },
   {
     q: "How many guests can stay in the unit?",
-    a: "Both units are designed to accommodate guests comfortably. The exact maximum number of guests may depend on the booking configuration, so please check the indicated guest capacity when making your reservation.",
+    a: (
+      <p>
+        Both units are designed to accommodate guests comfortably. The exact maximum number of guests may depend on the booking configuration, so please check the indicated guest capacity when making your reservation.
+      </p>
+    ),
   },
   {
     q: "Is light cooking allowed?",
-    a: "Our base nightly rate covers up to 2 guests. An additional ₱300 per guest per night applies for the 3rd and 4th guests. Current base rates are ₱1,799 on weekdays and ₱1,999 on weekends for both suites. There is no cleaning fee.",
+    a: (
+      <>
+        <p>
+          Yes. <strong>Light cooking is allowed</strong> in both units.
+        </p>
+
+        <p>
+          Kitchen appliances are available for your convenience, including:
+        </p>
+
+        <ul>
+          <li>Refrigerator</li>
+          <li>Microwave</li>
+          <li>Induction cooker</li>
+          <li>Rice cooker</li>
+          <li>Electric kettle</li>
+        </ul>
+
+        <p>
+          Dining wares and utensils are also provided.
+        </p>
+      </>
+    ),
   },
   {
     q: "Are pets, smoking, or parties allowed?",
-    a: "To keep both suites comfortable for everyone, they are smoke-free and pet-free. Parties and unregistered visitors aren’t allowed. Please observe quiet hours from 10:00 PM to 8:00 AM and follow the building’s guest guidelines.",
+    a: (
+      <p>
+        To keep both suites comfortable for everyone, they are smoke-free and pet-free. Parties and unregistered visitors aren’t allowed. Please observe quiet hours from 10:00 PM to 8:00 AM and follow the building’s guest guidelines.
+      </p>
+    ),
   },
   {
     q: "What is the cancellation policy?",
-    a: "Cancellation terms will be confirmed by the host before payment. An inquiry sent through this website does not take payment and does not reserve dates.",
+    a: (
+      <p>
+        Cancellation terms will be confirmed by the host before payment. An inquiry sent through this website does not take payment and does not reserve dates.
+      </p>
+    ),
   },
   {
     q: "How do I book my stay?",
-    a: "Pick a suite, choose your check-in and check-out dates, add your guest count, and send an inquiry. Your preferred dates and contact details will be saved for the host to review. An inquiry does not reserve dates or take payment.",
+    a: (
+      <p>
+        Pick a suite, choose your check-in and check-out dates, add your guest count, and send an inquiry. Your preferred dates and contact details will be saved for the host to review. An inquiry does not reserve dates or take payment.
+      </p>
+    ),
   },
 ];
 
@@ -858,6 +914,7 @@ export default function StaycationSite({
                 size={15}
                 strokeWidth={1.6}
               />
+
               <span>
                 Tagaytay, Philippines
               </span>
@@ -1323,21 +1380,6 @@ export default function StaycationSite({
                     []
                 );
 
-              /*
-               * Find the first date on which this suite
-               * can actually accept a complete stay.
-               *
-               * This uses:
-               * - live availability.today
-               * - the suite's minimum-night requirement
-               * - the suite's maximum-night requirement
-               * - every blocked night returned by the
-               *   availability API
-               * - live availability.maxDate
-               *
-               * There is intentionally no arbitrary 45-day
-               * search limit.
-               */
               const nextAvailable =
                 loading ||
                 availabilityError
@@ -2442,7 +2484,9 @@ export default function StaycationSite({
                   <Plus size={18} />
                 </summary>
 
-                <p>{faq.a}</p>
+                <div className="faq-answer">
+                  {faq.a}
+                </div>
               </details>
             ))}
           </div>
