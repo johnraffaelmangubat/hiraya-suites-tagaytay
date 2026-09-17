@@ -226,8 +226,8 @@ const galleryFilters: {
 const GALLERY_PREVIEW_LIMIT = 3;
 
 function suiteLabel(suite: GallerySuite): string {
-  if (suite === "hiraya") return "Hiraya Suite";
-  if (suite === "mayumi") return "Mayumi Studio";
+  if (suite === "hiraya") return "Tower B";
+  if (suite === "mayumi") return "Tower 4";
   return "Shared space";
 }
 
