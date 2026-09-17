@@ -250,7 +250,7 @@ const unitAmenityMap: Record<
 const faqs = [
   {
     q: "Do the units have a balcony?",
-    a: "Tower B: Yes! The unit has a balcony with a garden and city view. \nTower 4: The unit offers a city view.",
+    a: "Tower B: Yes! The unit has a balcony with a garden and city view. \n\nTower 4: The unit offers a city view.",
   },
   {
     q: "How many guests can stay in each suite?",
