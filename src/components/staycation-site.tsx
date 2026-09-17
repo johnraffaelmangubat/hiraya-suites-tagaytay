@@ -1,4 +1,3 @@
-```tsx
 "use client";
 
 import Image from "next/image";
@@ -282,9 +281,11 @@ function BrandLogo({
 }) {
   return (
     <a
-      className={`brand ${
-        footer ? "brand--footer" : ""
-      }`}
+      className={
+        footer
+          ? "brand brand--footer"
+          : "brand"
+      }
       href="#home"
       aria-label="Hiraya Suites home"
     >
@@ -1327,12 +1328,12 @@ export default function StaycationSite({
                * can actually accept a complete stay.
                *
                * This uses:
-               * - the live availability.today
+               * - live availability.today
                * - the suite's minimum-night requirement
                * - the suite's maximum-night requirement
                * - every blocked night returned by the
                *   availability API
-               * - the live availability.maxDate
+               * - live availability.maxDate
                *
                * There is intentionally no arbitrary 45-day
                * search limit.
@@ -1513,6 +1514,8 @@ export default function StaycationSite({
                         <strong>
                           {loading
                             ? "Loading…"
+                            : availabilityError
+                            ? "Unavailable"
                             : nextAvailable
                             ? formatDate(
                                 nextAvailable
@@ -3080,4 +3083,3 @@ export default function StaycationSite({
     </>
   );
 }
-```
