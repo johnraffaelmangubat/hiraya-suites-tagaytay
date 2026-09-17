@@ -1096,7 +1096,6 @@ export default function StaycationSite({
 
               <span>
                 Hiraya Suite SMDC Wind Residences
-                Studio
               </span>
             </div>
 
