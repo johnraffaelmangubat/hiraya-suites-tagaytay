@@ -1079,8 +1079,8 @@ h1 em {
 }
 
 .booking-action {
-  border-left: 1px solid var(--line);
   padding: 0 15px 0 24px;
+  margin-top: 30px;
 }
 
 .booking-action .button {
