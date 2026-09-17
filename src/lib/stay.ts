@@ -31,7 +31,7 @@ export const UNITS: Unit[] = [
     id: "hiraya",
     name: "SMDC Cool Suites Tower B",
     shortName: "Tower B",
-    eyebrow: "SIGNATURE ONE-BEDROOM",
+    eyebrow: "GARDEN & CITY VIEW",
     tagline: "Roomy, sunlit, made for lingering.",
     description:
       "Our signature one-bedroom suite is the one for slow mornings and easy evenings — a proper bedroom with a queen bed, a full living area that converts to extra sleeping space, a private balcony, and room to unwind with a garden or city view.",
@@ -78,7 +78,7 @@ export const UNITS: Unit[] = [
     id: "mayumi",
     name: "SMDC Wind Residences Tower 4",
     shortName: "Tower 4",
-    eyebrow: "COZY STUDIO",
+    eyebrow: "CITY VIEW",
     tagline: "Compact, charming, quietly lovely.",
     description:
       "Soft, quiet studio for two — a thoughtful open-plan space with a plush double bed, a compact kitchenette, and all the little comforts you need for a sweet Tagaytay escape.",
