@@ -263,13 +263,17 @@ h1 em {
 
 .suite-pill {
   position: relative;
-  padding: 13px 23px;
+  padding: 10px;
   border-radius: 8px 8px 0 0;
   border: 1px solid transparent;
   border-bottom: 0;
   background: transparent;
   text-align: left;
   transition: background .2s, border-color .2s;
+}
+.suite-pill .suite-pill-inner {
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .suite-pill small {
@@ -296,9 +300,12 @@ h1 em {
 }
 
 .suite-pill.is-active {
-  background: var(--white);
+  background: #f3eee4;
   border-color: #e3ddd2;
   color: var(--bronze-dark);
+}
+.suite-pill.is-active .suite-pill-inner {
+    background: var(--white);
 }
 
 .suite-pill.is-active strong {
