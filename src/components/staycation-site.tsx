@@ -305,26 +305,82 @@ const faqs: {
     ),
   },
   {
-    q: "Are pets, smoking, or parties allowed?",
+    q: "What are the sleeping arrangements?",
+    a: (
+      <>
+        <p>
+          Tower B
+        </p>
+        <ul>
+          <li>1 Queen-size bed</li>
+          <li>1 Queen-size sofa bed</li>
+        </ul>
+
+         <p>
+          Tower 4
+        </p>
+        <ul>
+          <li>1 Full Double-sized bed</li>
+          <li>1 Full Double-sized Pull-out bed</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    q: "Is Wi-Fi available?",
     a: (
       <p>
-        To keep both suites comfortable for everyone, they are smoke-free and pet-free. Parties and unregistered visitors aren’t allowed. Please observe quiet hours from 10:00 PM to 8:00 AM and follow the building’s guest guidelines.
+        Yes. Both units have unlimited Wi-Fi for guests.
       </p>
     ),
   },
   {
-    q: "What is the cancellation policy?",
+    q: "Is Netflix available?",
     a: (
       <p>
-        Cancellation terms will be confirmed by the host before payment. An inquiry sent through this website does not take payment and does not reserve dates.
+        Yes. Both units have a 55-inch Smart TV with Netflix.
       </p>
     ),
   },
   {
-    q: "How do I book my stay?",
+    q: "Is there a PS4?",
+    a: (
+      <>
+        <p>
+          Yes! Both units have a PS4.
+        </p>
+        <p>
+         Both units halso includes.
+        </p>
+        <ul>
+          <li>Board games</li>
+          <li>Card games</li>
+          <li>Karaoke</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    q: "Are toiletries and towels provided?",
     a: (
       <p>
-        Pick a suite, choose your check-in and check-out dates, add your guest count, and send an inquiry. Your preferred dates and contact details will be saved for the host to review. An inquiry does not reserve dates or take payment.
+        Yes. Bath towels and basic toiletries are provided for guests.
+      </p>
+    ),
+  },
+  {
+    q: "Is there a hot shower?",
+    a: (
+      <p>
+        Yes. Both units have a hot shower.
+      </p>
+    ),
+  },
+   {
+    q: "Is there a full-body mirror?",
+    a: (
+      <p>
+        Yes. Both units have a full-body mirror.
       </p>
     ),
   },
