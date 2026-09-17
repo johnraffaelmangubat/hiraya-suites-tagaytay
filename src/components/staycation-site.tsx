@@ -178,13 +178,13 @@ const galleryGroups: {
 }[] = [
   {
     id: "hiraya",
-    label: "Hiraya Suite",
+    label: "SMDC Cool Suites Tower B",
     detail: "Signature one-bedroom",
     blurb: "Roomy, sunlit spaces made for lingering.",
   },
   {
     id: "mayumi",
-    label: "Mayumi Studio",
+    label: "SMDC Wind Residences Tower 4",
     detail: "Cozy studio for two",
     blurb: "Compact, charming, quietly lovely.",
   },
