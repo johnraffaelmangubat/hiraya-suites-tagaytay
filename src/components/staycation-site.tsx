@@ -2701,9 +2701,9 @@ export default function StaycationSite({
             <BrandLogo footer />
 
             <p>
-              Thoughtful spaces.
+              Your Little Pause
               <br />
-              Beautiful little stays.
+              from the Everyday
             </p>
 
             <span className="footer-location">
