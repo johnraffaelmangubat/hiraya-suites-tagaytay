@@ -1437,19 +1437,6 @@ export default function StaycationSite({
 
               <ChevronDown size={15} />
             </label>
-
-            <div className="booking-action">
-              <button
-                type="button"
-                className="button button-primary"
-                onClick={
-                  checkAvailability
-                }
-              >
-                Find my little escape{" "}
-                <ArrowRight size={18} />
-              </button>
-            </div>
           </div>
 
           <div className="quick-facts">
@@ -1507,6 +1494,18 @@ export default function StaycationSite({
               )
             )}
           </div>
+          <div className="booking-action">
+              <button
+                type="button"
+                className="button button-primary"
+                onClick={
+                  checkAvailability
+                }
+              >
+                Find my little escape{" "}
+                <ArrowRight size={18} />
+              </button>
+            </div>
         </div>
 
         <section
