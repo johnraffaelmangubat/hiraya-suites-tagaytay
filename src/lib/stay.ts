@@ -83,7 +83,7 @@ export const UNITS: Unit[] = [
     description:
       "Soft, quiet studio for two — a thoughtful open-plan space with a plush double bed, a compact kitchenette, and all the little comforts you need for a sweet Tagaytay escape.",
     size: "28 sqm",
-    beds: "1 queen bed",
+    beds: "Full Double Sized Bed and Pullout Bed",
     maxGuests: 4,
     weekdayRate: 1799,
     weekendRate: 1999,
