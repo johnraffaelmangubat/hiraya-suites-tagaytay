@@ -208,13 +208,13 @@ const galleryFilters: {
   },
   {
     id: "hiraya",
-    label: "Hiraya Suite",
-    detail: "Signature one-bedroom",
+    label: "Tower B",
+    detail: "GARDEN & CITY VIEW",
   },
   {
     id: "mayumi",
-    label: "Mayumi Studio",
-    detail: "Cozy studio for two",
+    label: "Tower 4",
+    detail: "CITY VIEW",
   },
   {
     id: "shared",
