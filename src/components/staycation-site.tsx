@@ -1,3 +1,4 @@
+```tsx
 "use client";
 
 import Image from "next/image";
@@ -1321,44 +1322,79 @@ export default function StaycationSite({
                     []
                 );
 
+              /*
+               * Find the first date on which this suite
+               * can actually accept a complete stay.
+               *
+               * This uses:
+               * - the live availability.today
+               * - the suite's minimum-night requirement
+               * - the suite's maximum-night requirement
+               * - every blocked night returned by the
+               *   availability API
+               * - the live availability.maxDate
+               *
+               * There is intentionally no arbitrary 45-day
+               * search limit.
+               */
               const nextAvailable =
-                (() => {
-                  let cursor =
-                    availability.today;
+                loading ||
+                availabilityError
+                  ? ""
+                  : (() => {
+                      let cursor =
+                        availability.today;
 
-                  for (
-                    let i = 0;
-                    i < 45;
-                    i++
-                  ) {
-                    const inNight =
-                      addDays(
-                        cursor,
-                        1
-                      );
-
-                    if (
-                      !blockedForSuite.has(
-                        cursor
-                      ) &&
-                      !blockedForSuite.has(
-                        inNight
-                      ) &&
-                      inNight <=
+                      while (
+                        cursor <=
                         availability.maxDate
-                    ) {
-                      return cursor;
-                    }
+                      ) {
+                        const checkoutDate =
+                          addDays(
+                            cursor,
+                            suite.minNights
+                          );
 
-                    cursor =
-                      addDays(
-                        cursor,
-                        1
-                      );
-                  }
+                        if (
+                          checkoutDate >
+                          availability.maxDate
+                        ) {
+                          break;
+                        }
 
-                  return "";
-                })();
+                        const requiredNights =
+                          getNights(
+                            cursor,
+                            checkoutDate
+                          );
+
+                        const stayIsAvailable =
+                          requiredNights.length >=
+                            suite.minNights &&
+                          requiredNights.length <=
+                            suite.maxNights &&
+                          requiredNights.every(
+                            (night) =>
+                              !blockedForSuite.has(
+                                night
+                              )
+                          );
+
+                        if (
+                          stayIsAvailable
+                        ) {
+                          return cursor;
+                        }
+
+                        cursor =
+                          addDays(
+                            cursor,
+                            1
+                          );
+                      }
+
+                      return "";
+                    })();
 
               return (
                 <article
@@ -1475,7 +1511,9 @@ export default function StaycationSite({
 
                       <div>
                         <strong>
-                          {nextAvailable
+                          {loading
+                            ? "Loading…"
+                            : nextAvailable
                             ? formatDate(
                                 nextAvailable
                               )
@@ -3042,3 +3080,4 @@ export default function StaycationSite({
     </>
   );
 }
+```
