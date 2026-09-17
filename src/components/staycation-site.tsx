@@ -250,14 +250,14 @@ const unitAmenityMap: Record<
 const faqs = [
   {
     q: "Do the units have a balcony?",
-    a: "Tower B: Yes! The unit has a balcony with a garden and city view. \n\nTower 4: The unit offers a city view.",
+    a: "Tower B: Yes! The unit has a balcony with a garden and city view. \nTower 4: The unit offers a city view.",
   },
   {
-    q: "How many guests can stay in each suite?",
-    a: "Both suites accommodate up to 4 guests. The Hiraya Suite is our 42 sqm one-bedroom with a queen bed and double sofa bed. The Mayumi Studio is our 28 sqm studio with a queen bed and additional sleeping capacity for up to 4 guests.",
+    q: "How many guests can stay in the unit?",
+    a: "Both units are designed to accommodate guests comfortably. The exact maximum number of guests may depend on the booking configuration, so please check the indicated guest capacity when making your reservation.",
   },
   {
-    q: "How does your pricing work?",
+    q: "Is light cooking allowed?",
     a: "Our base nightly rate covers up to 2 guests. An additional ₱300 per guest per night applies for the 3rd and 4th guests. Current base rates are ₱1,799 on weekdays and ₱1,999 on weekends for both suites. There is no cleaning fee.",
   },
   {
