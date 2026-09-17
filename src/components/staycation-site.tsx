@@ -75,55 +75,175 @@ const navLinks = [
   { label: "Location", id: "location" },
 ];
 
-const photos = [
+type GallerySuite = UnitId | "shared";
+type GalleryFilter = "all" | GallerySuite;
+
+type GalleryPhoto = {
+  id: string;
+  src: string;
+  title: string;
+  room: string;
+  suite: GallerySuite;
+  alt: string;
+};
+
+const photos: GalleryPhoto[] = [
   {
+    id: "hiraya-living",
     src: "/images/living-room.jpg",
     title: "Your cozy living space",
-    category: "Hiraya · Living area",
-    suite: "hiraya" as UnitId,
+    room: "Living area",
+    suite: "hiraya",
     alt: "Warm, neutral living room with a soft beige sofa and thoughtfully styled furnishings",
   },
   {
+    id: "hiraya-bedroom",
     src: "/images/bedroom.jpg",
     title: "Sleep in. You deserve it.",
-    category: "Hiraya · Rest & recharge",
-    suite: "hiraya" as UnitId,
+    room: "Bedroom",
+    suite: "hiraya",
     alt: "Inviting bedroom with crisp linens, a comfortable bed, and soft natural light",
   },
   {
-    src: "/images/mayumi-studio.jpg",
-    title: "A soft little sunlit nook",
-    category: "Mayumi · The studio",
-    suite: "mayumi" as UnitId,
-    alt: "Cozy open-plan studio apartment with warm wood, neutral tones, and sunlight",
-  },
-  {
-    src: "/images/pool.jpg",
-    title: "A slower kind of afternoon",
-    category: "Shared building pool",
-    alt: "An outdoor swimming pool surrounded by tropical palm trees",
-  },
-  {
+    id: "hiraya-lounge",
     src: "/images/lounge.jpg",
     title: "Make yourself at home",
-    category: "Hiraya · Lounging",
-    suite: "hiraya" as UnitId,
+    room: "Lounge corner",
+    suite: "hiraya",
     alt: "Cozy apartment lounge with a beige sofa, coffee table, and television",
   },
   {
+    id: "hiraya-kitchen",
     src: "/images/kitchen.jpg",
     title: "Something good is brewing",
-    category: "Hiraya · Cook & gather",
-    suite: "hiraya" as UnitId,
+    room: "Kitchen & dining",
+    suite: "hiraya",
     alt: "A contemporary kitchen and dining area with warm neutral cabinetry",
   },
   {
+    id: "mayumi-studio",
+    src: "/images/mayumi-studio.jpg",
+    title: "A soft little sunlit nook",
+    room: "Open-plan studio",
+    suite: "mayumi",
+    alt: "Cozy open-plan studio apartment with warm wood, neutral tones, and sunlight",
+  },
+  {
+    id: "mayumi-bedroom",
+    src: "/images/mayumi-bedroom.jpg",
+    title: "Quiet nights for two",
+    room: "Sleeping nook",
+    suite: "mayumi",
+    alt: "Contemporary light bedroom with a comfortable bed and soft natural light",
+  },
+  {
+    id: "mayumi-living",
+    src: "/images/mayumi-living.jpg",
+    title: "Compact, but so considered",
+    room: "Living & dining",
+    suite: "mayumi",
+    alt: "Bright open studio with dining table near the bed and a soft, modern layout",
+  },
+  {
+    id: "mayumi-dining",
+    src: "/images/mayumi-dining.jpg",
+    title: "A little table for two",
+    room: "Dining corner",
+    suite: "mayumi",
+    alt: "Modern dining corner with warm wood tones and contemporary styling",
+  },
+  {
+    id: "shared-pool",
+    src: "/images/pool.jpg",
+    title: "A slower kind of afternoon",
+    room: "Building pool",
+    suite: "shared",
+    alt: "An outdoor swimming pool surrounded by tropical palm trees",
+  },
+  {
+    id: "shared-mornings",
     src: "/images/slow-mornings.jpg",
     title: "No alarms. No hurry.",
-    category: "Shared little joys",
+    room: "Slow mornings",
+    suite: "shared",
     alt: "A cup of coffee beside an open book and a dried rose on soft linen",
   },
 ];
+
+const galleryGroups: {
+  id: GallerySuite;
+  label: string;
+  detail: string;
+  blurb: string;
+}[] = [
+  {
+    id: "hiraya",
+    label: "Hiraya Suite",
+    detail: "Signature one-bedroom",
+    blurb: "Roomy, sunlit spaces made for lingering.",
+  },
+  {
+    id: "mayumi",
+    label: "Mayumi Studio",
+    detail: "Cozy studio for two",
+    blurb: "Compact, charming, quietly lovely.",
+  },
+  {
+    id: "shared",
+    label: "Shared spaces",
+    detail: "Pool & little joys",
+    blurb: "The little extras both suites can enjoy.",
+  },
+];
+
+const galleryFilters: {
+  id: GalleryFilter;
+  label: string;
+  detail: string;
+}[] = [
+  {
+    id: "all",
+    label: "All photos",
+    detail: "Both suites + shared spaces",
+  },
+  {
+    id: "hiraya",
+    label: "Hiraya Suite",
+    detail: "Signature one-bedroom",
+  },
+  {
+    id: "mayumi",
+    label: "Mayumi Studio",
+    detail: "Cozy studio for two",
+  },
+  {
+    id: "shared",
+    label: "Shared spaces",
+    detail: "Pool & little joys",
+  },
+];
+
+const GALLERY_PREVIEW_LIMIT = 3;
+
+function suiteLabel(suite: GallerySuite): string {
+  if (suite === "hiraya") return "Hiraya Suite";
+  if (suite === "mayumi") return "Mayumi Studio";
+  return "Shared space";
+}
+
+function suiteShort(suite: GallerySuite): string {
+  if (suite === "hiraya") return "Hiraya";
+  if (suite === "mayumi") return "Mayumi";
+  return "Shared";
+}
+
+function photosForSuite(
+  suite: GallerySuite
+): GalleryPhoto[] {
+  return photos.filter(
+    (photo) => photo.suite === suite
+  );
+}
 
 const propertyAmenities = [
   {
@@ -633,6 +753,9 @@ export default function StaycationSite({
   const [inquiryOpen, setInquiryOpen] =
     useState(false);
 
+  const [galleryFilter, setGalleryFilter] =
+    useState<GalleryFilter>("all");
+
   const [galleryIndex, setGalleryIndex] =
     useState<number | null>(null);
 
@@ -686,6 +809,55 @@ export default function StaycationSite({
           guests
         )
       : null;
+
+  const filteredPhotos = useMemo(
+    () =>
+      galleryFilter === "all"
+        ? photos
+        : photos.filter(
+            (photo) =>
+              photo.suite === galleryFilter
+          ),
+    [galleryFilter]
+  );
+
+  const photoCounts = useMemo(
+    () => ({
+      all: photos.length,
+      hiraya: photosForSuite("hiraya").length,
+      mayumi: photosForSuite("mayumi").length,
+      shared: photosForSuite("shared").length,
+    }),
+    []
+  );
+
+  const galleryCollections = useMemo(
+    () =>
+      galleryGroups.map((group) => {
+        const groupPhotos =
+          photosForSuite(group.id);
+
+        return {
+          ...group,
+          photos: groupPhotos,
+          preview: groupPhotos.slice(
+            0,
+            GALLERY_PREVIEW_LIMIT
+          ),
+          remaining: Math.max(
+            0,
+            groupPhotos.length -
+              GALLERY_PREVIEW_LIMIT
+          ),
+        };
+      }),
+    []
+  );
+
+  const activeGalleryPhoto =
+    galleryIndex === null
+      ? null
+      : filteredPhotos[galleryIndex] ?? null;
 
   const loadAvailability =
     useCallback(async () => {
@@ -758,7 +930,12 @@ export default function StaycationSite({
   }, []);
 
   useEffect(() => {
-    if (galleryIndex === null) return;
+    if (
+      galleryIndex === null ||
+      filteredPhotos.length === 0
+    ) {
+      return;
+    }
 
     const handleKey = (
       event: KeyboardEvent
@@ -773,7 +950,7 @@ export default function StaycationSite({
             current === null
               ? null
               : (current + 1) %
-                photos.length
+                filteredPhotos.length
         );
       }
 
@@ -788,8 +965,8 @@ export default function StaycationSite({
               ? null
               : (current -
                   1 +
-                  photos.length) %
-                photos.length
+                  filteredPhotos.length) %
+                filteredPhotos.length
         );
       }
     };
@@ -804,7 +981,31 @@ export default function StaycationSite({
         "keydown",
         handleKey
       );
-  }, [galleryIndex]);
+  }, [
+    galleryIndex,
+    filteredPhotos.length,
+  ]);
+
+  useEffect(() => {
+    if (galleryIndex === null) {
+      return;
+    }
+
+    if (filteredPhotos.length === 0) {
+      setGalleryIndex(null);
+      return;
+    }
+
+    if (
+      galleryIndex >=
+      filteredPhotos.length
+    ) {
+      setGalleryIndex(0);
+    }
+  }, [
+    filteredPhotos.length,
+    galleryIndex,
+  ]);
 
   useEffect(() => {
     setGuests((current) =>
@@ -944,6 +1145,45 @@ export default function StaycationSite({
           end: "",
         });
       }
+    }
+  }
+
+  function openGallery(
+    filter: GalleryFilter = "all",
+    photoId?: string
+  ) {
+    const nextPhotos =
+      filter === "all"
+        ? photos
+        : photos.filter(
+            (photo) =>
+              photo.suite === filter
+          );
+
+    const nextIndex = photoId
+      ? Math.max(
+          0,
+          nextPhotos.findIndex(
+            (photo) =>
+              photo.id === photoId
+          )
+        )
+      : 0;
+
+    setGalleryFilter(filter);
+
+    setGalleryIndex(
+      nextIndex === -1 ? 0 : nextIndex
+    );
+  }
+
+  function changeGalleryFilter(
+    next: GalleryFilter
+  ) {
+    setGalleryFilter(next);
+
+    if (galleryIndex !== null) {
+      setGalleryIndex(0);
     }
   }
 
@@ -1140,9 +1380,12 @@ export default function StaycationSite({
               type="button"
               className="hero-main-photo image-button"
               onClick={() =>
-                setGalleryIndex(0)
+                openGallery(
+                  "hiraya",
+                  "hiraya-living"
+                )
               }
-              aria-label="Explore the suite photo gallery"
+              aria-label="Explore the Hiraya Suite photo gallery"
             >
               <Image
                 src="/images/living-room.jpg"
@@ -1185,13 +1428,22 @@ export default function StaycationSite({
               type="button"
               className="hero-inset image-button"
               onClick={() =>
-                setGalleryIndex(2)
+                openGallery(
+                  "mayumi",
+                  "mayumi-studio"
+                )
               }
-              aria-label="View the Mayumi Studio"
+              aria-label="View the Mayumi Studio gallery"
             >
               <Image
                 src="/images/mayumi-studio.jpg"
-                alt={photos[2].alt}
+                alt={
+                  photos.find(
+                    (photo) =>
+                      photo.id ===
+                      "mayumi-studio"
+                  )!.alt
+                }
                 fill
                 sizes="250px"
               />
@@ -1494,18 +1746,19 @@ export default function StaycationSite({
               )
             )}
           </div>
+
           <div className="booking-action">
-              <button
-                type="button"
-                className="button button-primary"
-                onClick={
-                  checkAvailability
-                }
-              >
-                Find my little escape{" "}
-                <ArrowRight size={18} />
-              </button>
-            </div>
+            <button
+              type="button"
+              className="button button-primary"
+              onClick={
+                checkAvailability
+              }
+            >
+              Find my little escape{" "}
+              <ArrowRight size={18} />
+            </button>
+          </div>
         </div>
 
         <section
@@ -1888,8 +2141,7 @@ export default function StaycationSite({
           <div className="section-heading">
             <div>
               <p className="eyebrow">
-                A PEEK AT YOUR NEXT
-                PAUSE
+                A PEEK INTO YOUR NEXT PAUSE
               </p>
 
               <h2>
@@ -1898,9 +2150,7 @@ export default function StaycationSite({
               </h2>
 
               <p>
-                Sunlit corners. Cozy
-                details. Room to unwind
-                across both suites.
+                Photos are grouped by suite, with a short preview on the page. Open any group to browse the full set without making the page endless.
               </p>
             </div>
 
@@ -1908,62 +2158,221 @@ export default function StaycationSite({
               type="button"
               className="button button-outline"
               onClick={() =>
-                setGalleryIndex(0)
+                openGallery("all")
               }
             >
-              <Grid2X2 size={16} /> View
-              all photos
+              <Grid2X2 size={16} /> View all{" "}
+              {photoCounts.all} photos
             </button>
           </div>
 
-          <div className="gallery-grid">
-            {photos
-              .slice(0, 4)
-              .map(
-                (
-                  photo,
-                  index
-                ) => (
-                  <button
-                    type="button"
-                    className={`gallery-photo gallery-photo--${index}`}
-                    key={photo.src}
-                    onClick={() =>
-                      setGalleryIndex(
-                        index
-                      )
-                    }
-                    aria-label={`View ${photo.category} photo`}
-                  >
-                    <Image
-                      src={photo.src}
-                      alt={photo.alt}
-                      fill
-                      sizes="(max-width: 600px) 85vw, (max-width: 900px) 45vw, 35vw"
-                    />
-
-                    <span className="gallery-photo-arrow">
-                      <ArrowUpRight
-                        size={19}
-                      />
-                    </span>
-
-                    <span className="gallery-photo-label">
-                      <span>
-                        0
-                        {index + 1}
+          <div
+            className="gallery-collections"
+            aria-label="Photo collections by suite"
+          >
+            {galleryCollections.map(
+              (collection) => (
+                <article
+                  key={collection.id}
+                  className={`gallery-collection suite-${collection.id}`}
+                >
+                  <div className="gallery-collection-header">
+                    <div>
+                      <span
+                        className={`gallery-suite-badge suite-${collection.id}`}
+                      >
+                        {suiteShort(
+                          collection.id
+                        )}
                       </span>
-                      {photo.category}
-                    </span>
-                  </button>
-                )
-              )}
+
+                      <h3>
+                        {collection.label}
+                      </h3>
+
+                      <p>
+                        {collection.blurb}
+                      </p>
+                    </div>
+
+                    <div className="gallery-collection-meta">
+                      <strong>
+                        {
+                          collection.photos
+                            .length
+                        }
+                      </strong>
+
+                      <span>
+                        {collection.photos
+                          .length === 1
+                          ? "photo"
+                          : "photos"}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className="gallery-collection-grid">
+                    {collection.preview.map(
+                      (photo, index) => {
+                        const isLastPreview =
+                          index ===
+                            collection
+                              .preview
+                              .length -
+                              1 &&
+                          collection.remaining >
+                            0;
+
+                        return (
+                          <button
+                            type="button"
+                            className={`gallery-photo gallery-photo--preview suite-${photo.suite}${
+                              isLastPreview
+                                ? " has-more"
+                                : ""
+                            }`}
+                            key={photo.id}
+                            onClick={() =>
+                              openGallery(
+                                collection.id,
+                                photo.id
+                              )
+                            }
+                            aria-label={
+                              isLastPreview
+                                ? `View all ${collection.photos.length} ${collection.label} photos`
+                                : `View ${suiteLabel(photo.suite)} · ${photo.room}`
+                            }
+                          >
+                            <Image
+                              src={photo.src}
+                              alt={photo.alt}
+                              fill
+                              sizes="(max-width: 700px) 90vw, 360px"
+                            />
+
+                            <span
+                              className={`gallery-suite-badge suite-${photo.suite}`}
+                            >
+                              {suiteShort(
+                                photo.suite
+                              )}
+                            </span>
+
+                            {isLastPreview ? (
+                              <span className="gallery-more-overlay">
+                                <Grid2X2
+                                  size={18}
+                                />
+
+                                <strong>
+                                  +
+                                  {
+                                    collection.remaining
+                                  }{" "}
+                                  more
+                                </strong>
+
+                                <small>
+                                  View full{" "}
+                                  {suiteShort(
+                                    collection.id
+                                  )}{" "}
+                                  gallery
+                                </small>
+                              </span>
+                            ) : (
+                              <>
+                                <span className="gallery-photo-arrow">
+                                  <ArrowUpRight
+                                    size={18}
+                                  />
+                                </span>
+
+                                <span className="gallery-photo-label">
+                                  <span>
+                                    {String(
+                                      index +
+                                        1
+                                    ).padStart(
+                                      2,
+                                      "0"
+                                    )}
+                                  </span>
+
+                                  {photo.room}
+                                </span>
+                              </>
+                            )}
+                          </button>
+                        );
+                      }
+                    )}
+                  </div>
+
+                  <div className="gallery-collection-actions">
+                    <button
+                      type="button"
+                      className="button button-outline"
+                      onClick={() =>
+                        openGallery(
+                          collection.id
+                        )
+                      }
+                    >
+                      View all{" "}
+                      {
+                        collection.photos
+                          .length
+                      }{" "}
+                      {suiteShort(
+                        collection.id
+                      )}{" "}
+                      photos{" "}
+                      <ArrowUpRight
+                        size={16}
+                      />
+                    </button>
+
+                    {collection.id !==
+                      "shared" && (
+                      <button
+                        type="button"
+                        className="text-link"
+                        onClick={() => {
+                          selectUnit(
+                            collection.id as UnitId
+                          );
+
+                          document
+                            .getElementById(
+                              "availability"
+                            )
+                            ?.scrollIntoView({
+                              behavior:
+                                "smooth",
+                            });
+                        }}
+                      >
+                        Check{" "}
+                        {suiteShort(
+                          collection.id
+                        )}{" "}
+                        dates{" "}
+                        <ArrowRight
+                          size={15}
+                        />
+                      </button>
+                    )}
+                  </div>
+                </article>
+              )
+            )}
           </div>
 
           <p className="gallery-note">
-            A little inspiration for
-            your stay. Photography is
-            illustrative.
+            Page previews stay compact on purpose. Add as many photos as you like — guests open the full set in the lightbox, grouped by suite. Photography is illustrative.
           </p>
         </section>
 
@@ -2198,9 +2607,7 @@ export default function StaycationSite({
                   <select
                     aria-label="Guests for your stay"
                     value={guests}
-                    onChange={(
-                      event
-                    ) =>
+                    onChange={(event) =>
                       setGuests(
                         Number(
                           event.target
@@ -2473,8 +2880,8 @@ export default function StaycationSite({
             </a>
 
             <p className="location-note">
-              Aguinaldo Highway (aka Tagaytay-Nasugbu Highway), Barangay Maharlika West, 
-               <br />
+              Aguinaldo Highway (aka Tagaytay-Nasugbu Highway), Barangay Maharlika West,
+              <br />
               Tagaytay City, Cavite, 4120, Philippines
             </p>
           </div>
@@ -3029,137 +3436,243 @@ export default function StaycationSite({
         />
       )}
 
-      {galleryIndex !== null && (
-        <Modal
-          title={
-            photos[galleryIndex]
-              .title
-          }
-          subtitle={`${String(
-            galleryIndex + 1
-          ).padStart(
-            2,
-            "0"
-          )} / ${String(
-            photos.length
-          ).padStart(
-            2,
-            "0"
-          )} · ${
-            photos[galleryIndex]
-              .category
-          }`}
-          onClose={() =>
-            setGalleryIndex(
-              null
-            )
-          }
-          variant="gallery"
-        >
-          <div className="gallery-viewer">
-            <div className="gallery-viewer-image">
-              <Image
-                src={
-                  photos[
-                    galleryIndex
-                  ].src
-                }
-                alt={
-                  photos[
-                    galleryIndex
-                  ].alt
-                }
-                fill
-                sizes="(max-width: 700px) 95vw, 900px"
-                priority
-              />
-
-              <button
-                type="button"
-                className="gallery-nav gallery-prev"
-                onClick={() =>
-                  setGalleryIndex(
-                    (galleryIndex -
-                      1 +
-                      photos.length) %
-                      photos.length
-                  )
-                }
-                aria-label="Previous photo"
+      {activeGalleryPhoto &&
+        galleryIndex !== null && (
+          <Modal
+            title={
+              activeGalleryPhoto.title
+            }
+            subtitle={`${String(
+              galleryIndex + 1
+            ).padStart(
+              2,
+              "0"
+            )} / ${String(
+              filteredPhotos.length
+            ).padStart(
+              2,
+              "0"
+            )} · ${suiteLabel(
+              activeGalleryPhoto.suite
+            )} · ${
+              activeGalleryPhoto.room
+            }`}
+            onClose={() =>
+              setGalleryIndex(
+                null
+              )
+            }
+            variant="gallery"
+          >
+            <div className="gallery-viewer">
+              <div
+                className="gallery-viewer-toolbar"
+                role="tablist"
+                aria-label="Lightbox suite filter"
               >
-                <ChevronLeft
-                  size={24}
-                />
-              </button>
+                {galleryFilters.map(
+                  (filter) => (
+                    <button
+                      key={filter.id}
+                      type="button"
+                      role="tab"
+                      aria-selected={
+                        galleryFilter ===
+                        filter.id
+                      }
+                      className={`gallery-viewer-filter ${
+                        galleryFilter ===
+                        filter.id
+                          ? "is-active"
+                          : ""
+                      }`}
+                      onClick={() =>
+                        changeGalleryFilter(
+                          filter.id
+                        )
+                      }
+                    >
+                      {filter.label}
 
-              <button
-                type="button"
-                className="gallery-nav gallery-next"
-                onClick={() =>
-                  setGalleryIndex(
-                    (galleryIndex +
-                      1) %
-                      photos.length
+                      <small>
+                        {
+                          photoCounts[
+                            filter.id
+                          ]
+                        }
+                      </small>
+                    </button>
                   )
-                }
-                aria-label="Next photo"
-              >
-                <ChevronRight
-                  size={24}
-                />
-              </button>
-            </div>
+                )}
+              </div>
 
-            <div className="gallery-thumbnails">
-              {photos.map(
-                (
-                  photo,
-                  index
-                ) => (
+              <div className="gallery-viewer-image">
+                <Image
+                  src={
+                    activeGalleryPhoto.src
+                  }
+                  alt={
+                    activeGalleryPhoto.alt
+                  }
+                  fill
+                  sizes="(max-width: 700px) 95vw, 900px"
+                  priority
+                />
+
+                <span
+                  className={`gallery-suite-badge gallery-suite-badge--viewer suite-${activeGalleryPhoto.suite}`}
+                >
+                  {suiteLabel(
+                    activeGalleryPhoto.suite
+                  )}
+                </span>
+
+                <button
+                  type="button"
+                  className="gallery-nav gallery-prev"
+                  onClick={() =>
+                    setGalleryIndex(
+                      (galleryIndex -
+                        1 +
+                        filteredPhotos.length) %
+                        filteredPhotos.length
+                    )
+                  }
+                  aria-label="Previous photo"
+                >
+                  <ChevronLeft
+                    size={24}
+                  />
+                </button>
+
+                <button
+                  type="button"
+                  className="gallery-nav gallery-next"
+                  onClick={() =>
+                    setGalleryIndex(
+                      (galleryIndex + 1) %
+                        filteredPhotos.length
+                    )
+                  }
+                  aria-label="Next photo"
+                >
+                  <ChevronRight
+                    size={24}
+                  />
+                </button>
+              </div>
+
+              <div className="gallery-viewer-meta">
+                <div>
+                  <strong>
+                    {
+                      activeGalleryPhoto.room
+                    }
+                  </strong>
+
+                  <span>
+                    {suiteLabel(
+                      activeGalleryPhoto.suite
+                    )}
+                  </span>
+                </div>
+
+                {activeGalleryPhoto.suite !==
+                  "shared" && (
                   <button
                     type="button"
-                    key={
-                      photo.src
-                    }
-                    className={
-                      index ===
-                      galleryIndex
-                        ? "is-active"
-                        : ""
-                    }
-                    onClick={() =>
+                    className="button button-outline"
+                    onClick={() => {
+                      selectUnit(
+                        activeGalleryPhoto.suite as UnitId
+                      );
+
                       setGalleryIndex(
-                        index
-                      )
-                    }
-                    aria-label={`View ${photo.category}`}
-                    aria-pressed={
-                      index ===
-                      galleryIndex
-                    }
+                        null
+                      );
+
+                      document
+                        .getElementById(
+                          "availability"
+                        )
+                        ?.scrollIntoView({
+                          behavior:
+                            "smooth",
+                        });
+                    }}
                   >
-                    <Image
-                      src={
-                        photo.src
-                      }
-                      alt=""
-                      fill
-                      sizes="100px"
+                    Check{" "}
+                    {suiteShort(
+                      activeGalleryPhoto.suite
+                    )}{" "}
+                    dates{" "}
+                    <ArrowRight
+                      size={16}
                     />
                   </button>
-                )
-              )}
-            </div>
+                )}
+              </div>
 
-            <p className="fine-print">
-              A little visual
-              inspiration. These
-              photographs are
-              illustrative.
-            </p>
-          </div>
-        </Modal>
-      )}
+              <div
+                className={`gallery-thumbnails gallery-thumbnails--${Math.min(
+                  filteredPhotos.length,
+                  8
+                )}`}
+              >
+                {filteredPhotos.map(
+                  (
+                    photo,
+                    index
+                  ) => (
+                    <button
+                      type="button"
+                      key={photo.id}
+                      className={
+                        index ===
+                        galleryIndex
+                          ? "is-active"
+                          : ""
+                      }
+                      onClick={() =>
+                        setGalleryIndex(
+                          index
+                        )
+                      }
+                      aria-label={`View ${suiteLabel(
+                        photo.suite
+                      )} · ${
+                        photo.room
+                      }`}
+                      aria-pressed={
+                        index ===
+                        galleryIndex
+                      }
+                    >
+                      <Image
+                        src={photo.src}
+                        alt=""
+                        fill
+                        sizes="100px"
+                      />
+
+                      <span
+                        className={`gallery-thumb-badge suite-${photo.suite}`}
+                      >
+                        {suiteShort(
+                          photo.suite
+                        )}
+                      </span>
+                    </button>
+                  )
+                )}
+              </div>
+
+              <p className="fine-print">
+                A little visual inspiration. These are placeholder photos, not images of the actual units. Each photo is tagged so you can tell Hiraya from Mayumi at a glance.
+              </p>
+            </div>
+          </Modal>
+        )}
 
       {infoDialog ===
         "privacy" && (
@@ -3265,9 +3778,7 @@ export default function StaycationSite({
                   href={credit.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  key={
-                    credit.name
-                  }
+                  key={credit.name}
                 >
                   <span>
                     <strong>
