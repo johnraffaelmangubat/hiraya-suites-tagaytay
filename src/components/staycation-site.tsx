@@ -249,8 +249,9 @@ const unitAmenityMap: Record<
 
 const faqs = [
   {
-    q: "What time is check-in and check-out?",
-    a: "The Hiraya Suite has check-in from 5:00 PM and check-out by 3:00 PM. The Mayumi Studio has check-in from 4:00 PM and check-out by 2:00 PM. Self check-in instructions are shared before arrival.",
+    q: "Do the units have a balcony?",
+    a: "Tower B: Yes! The unit has a balcony with a garden and city view. 
+      Tower 4: The unit offers a city view.",
   },
   {
     q: "How many guests can stay in each suite?",
