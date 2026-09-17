@@ -1466,7 +1466,7 @@ export default function StaycationSite({
             role="group"
             aria-label="Choose your suite"
           >
-            <div className="suite-pill-wrapper">
+            
             <button
               type="button"
               className={`suite-pill ${
@@ -1482,6 +1482,7 @@ export default function StaycationSite({
                 "hiraya"
               }
             >
+              <div className="suite-pill-inner">
               <small>
                 SIGNATURE
               </small>
@@ -1502,10 +1503,9 @@ export default function StaycationSite({
                 )}
                 /night
               </span>
-            </button>
             </div>
-
-            <div className="suite-pill-wrapper">
+            </button>
+            
             <button
               type="button"
               className={`suite-pill ${
@@ -1521,6 +1521,7 @@ export default function StaycationSite({
                 "mayumi"
               }
             >
+              <div className="suite-pill-inner">
               <small>
                 COZY STUDIO
               </small>
@@ -1541,8 +1542,9 @@ export default function StaycationSite({
                 )}
                 /night
               </span>
+              </div>
             </button>
-             </div>
+             
           </div>
 
           <div
