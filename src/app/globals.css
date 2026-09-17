@@ -261,7 +261,7 @@ h1 em {
   margin-bottom: -1px;
 }
 
-.suite-pill {
+.suite-pill-wrapper {
   position: relative;
   padding: 13px 23px;
   border-radius: 8px 8px 0 0;
@@ -272,14 +272,14 @@ h1 em {
   transition: background .2s, border-color .2s;
 }
 
-.suite-pill small {
+.suite-pill-wrapper small {
   display: block;
   color: #9a8e7d;
   font-size: 14px;
   letter-spacing: 1.35px;
 }
 
-.suite-pill strong {
+.suite-pill-wrapper strong {
   display: block;
   margin-top: 6px;
   font-family: var(--font-serif), serif;
@@ -288,24 +288,24 @@ h1 em {
   color: #4e4334;
 }
 
-.suite-pill span {
+.suite-pill-wrapper span {
   display: block;
   margin-top: 4px;
   font-size: 14px;
   color: #928673;
 }
 
-.suite-pill.is-active {
+.suite-pill-wrapper.is-active {
   background: var(--white);
   border-color: #e3ddd2;
   color: var(--bronze-dark);
 }
 
-.suite-pill.is-active strong {
+.suite-pill-wrapper.is-active strong {
   color: #634f36;
 }
 
-.suite-pill.is-active:before {
+.suite-pill-wrapper.is-active:before {
   content: "";
   position: absolute;
   inset: auto -1px -1px;
@@ -2704,11 +2704,11 @@ h1 em {
     gap: 13px;
   }
 
-  .suite-pill strong {
+  .suite-pill-wrapper strong {
     font-size: 22px;
   }
 
-  .suite-pill span {
+  .suite-pill-wrapper span {
     font-size: 14px;
   }
 
@@ -4034,22 +4034,22 @@ h1 em {
     background: var(--white);
   }
 
-  .suite-pill {
+  .suite-pill-wrapper {
     border-radius: 0;
     border-bottom: 1px solid var(--line);
     padding: 13px 18px;
   }
 
-  .suite-pill:last-child {
+  .suite-pill-wrapper:last-child {
     border-bottom: 0;
   }
 
-  .suite-pill strong {
+  .suite-pill-wrapper strong {
     font-size: 20px;
     margin-top: 5px;
   }
 
-  .suite-pill span {
+  .suite-pill-wrapper span {
     font-size: 14px;
   }
 
