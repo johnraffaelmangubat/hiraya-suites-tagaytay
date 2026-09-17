@@ -1095,7 +1095,7 @@ export default function StaycationSite({
               <span className="little-dot" />
 
               <span>
-                Hiraya Suite · Mayumi
+                Hiraya Suite SMDC Wind Residences
                 Studio
               </span>
             </div>
