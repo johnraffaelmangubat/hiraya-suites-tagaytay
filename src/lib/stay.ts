@@ -28,7 +28,7 @@ export type Unit = {
 
 export const UNITS: Unit[] = [
   {
-    id: "Tower B",
+    id: "tower-b",
     name: "SMDC Cool Suites Tower B",
     shortName: "Tower B",
     eyebrow: "SIGNATURE ONE-BEDROOM",
@@ -75,7 +75,7 @@ export const UNITS: Unit[] = [
     galleryTag: "The signature suite",
   },
   {
-    id: "Tower 4",
+    id: "tower-4",
     name: "SMDC Wind Residences Tower 4",
     shortName: "Tower 4",
     eyebrow: "COZY STUDIO",
