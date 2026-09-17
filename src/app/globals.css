@@ -3474,7 +3474,6 @@ h1 em {
 
   .booking-action {
     padding: 12px 10px 12px 20px;
-    border-left: 1px solid var(--line);
   }
 
   .booking-action .button {
