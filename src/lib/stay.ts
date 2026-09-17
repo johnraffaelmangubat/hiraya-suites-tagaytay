@@ -34,7 +34,7 @@ export const UNITS: Unit[] = [
     eyebrow: "SIGNATURE ONE-BEDROOM",
     tagline: "Roomy, sunlit, made for lingering.",
     description:
-      "Our signature one-bedroom suite is the one for slow mornings and easy evenings: a proper bedroom with a queen bed, a full living area that converts for extra guests, a little balcony, and space for four.",
+      "Our signature one-bedroom suite is the one for slow mornings and easy evenings — a proper bedroom with a queen bed, a full living area that converts to extra sleeping space, a private balcony, and room to unwind with a garden or city view.",
     size: "42 sqm",
     beds: "1 queen bed + double sofa bed",
     maxGuests: 4,
@@ -81,7 +81,7 @@ export const UNITS: Unit[] = [
     eyebrow: "COZY STUDIO",
     tagline: "Compact, charming, quietly lovely.",
     description:
-      "Mayumi is our soft, sunny studio for two — a thoughtful open-plan space with a plush queen bed, a compact kitchenette, and all the little comforts you need for a sweet little escape.",
+      "Soft, quiet studio for two — a thoughtful open-plan space with a plush double bed, a compact kitchenette, and all the little comforts you need for a sweet Tagaytay escape.",
     size: "28 sqm",
     beds: "1 queen bed",
     maxGuests: 4,
