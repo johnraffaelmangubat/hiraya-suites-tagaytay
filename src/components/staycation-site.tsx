@@ -257,29 +257,151 @@ const faqs: {
   a: React.ReactNode;
 }[] = [
   {
-    q: "Do the units have a balcony?",
+    q: "How much is the stay?",
     a: (
       <>
         <p>
-          <strong>Tower B:</strong> Yes! The unit has a balcony with a garden and city view.
+          Rates vary depending on the{" "}
+          <strong>
+            date, number of guests, weekends, holidays, and availability
+          </strong>
+          .
         </p>
 
         <p>
-          <strong>Tower 4:</strong> The unit offers a city view.
+          For the most accurate and updated rate, please check our Airbnb
+          listings or message us directly.
+        </p>
+
+        <p>
+          <strong>Additional fees:</strong>
+        </p>
+
+        <ul>
+          <li>
+            Pool: <strong>₱150/person/day</strong> — regular days
+          </li>
+          <li>
+            Pool: <strong>₱300/person/day</strong> — holidays
+          </li>
+          <li>
+            Basement Parking: <strong>₱400/night</strong>
+          </li>
+          <li>
+            Commercial Parking: <strong>Free</strong> — overnight parking is
+            not allowed
+          </li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    q: "Where can I book?",
+    a: (
+      <>
+        <p>
+          You can book either of our units through Airbnb:
+        </p>
+
+        <p>
+          <strong>Tower B — 9th Floor</strong>
+          <br />
+          Balcony • Garden &amp; City View
+          <br />
+          airbnb.com/h/hirayasuitestagaytay
+        </p>
+
+        <p>
+          <strong>Tower 4 — 8th Floor</strong>
+          <br />
+          City View
+          <br />
+          airbnb.com/h/hirayasuitestagaytaytower4
+        </p>
+
+        <p>
+          You may also message us directly for availability and rates.
         </p>
       </>
     ),
   },
   {
-    q: "How many guests can stay in the unit?",
+    q: "What are the check-in and check-out times?",
     a: (
-      <p>
-        Both units are designed to accommodate guests comfortably. The exact maximum number of guests may depend on the booking configuration, so please check the indicated guest capacity when making your reservation.
-      </p>
+      <>
+        <p>
+          <strong>Tower B</strong>
+        </p>
+
+        <ul>
+          <li>
+            Check-in: <strong>5:00 PM</strong>
+          </li>
+          <li>
+            Check-out: <strong>3:00 PM</strong>
+          </li>
+        </ul>
+
+        <p>
+          <strong>Tower 4</strong>
+        </p>
+
+        <ul>
+          <li>
+            Check-in: <strong>4:00 PM</strong>
+          </li>
+          <li>
+            Check-out: <strong>2:00 PM</strong>
+          </li>
+        </ul>
+
+        <p>
+          Both units offer <strong>self check-in and self check-out</strong>.
+        </p>
+      </>
     ),
   },
   {
-    q: "Is light cooking allowed?",
+    q: "Is parking available?",
+    a: (
+      <>
+        <p>
+          Yes. <strong>Basement parking is ₱400/night.</strong>
+        </p>
+
+        <p>
+          Commercial parking is <strong>free</strong>, but overnight parking
+          is not allowed.
+        </p>
+      </>
+    ),
+  },
+  {
+    q: "Is pool access included?",
+    a: (
+      <>
+        <p>
+          Pool access is <strong>not included</strong> in the room rate.
+        </p>
+
+        <ul>
+          <li>
+            <strong>₱150/person/day</strong> — regular days
+          </li>
+          <li>
+            <strong>₱300/person/day</strong> — holidays
+          </li>
+        </ul>
+
+        <p>
+          Other condo amenities may also have applicable fees and are subject
+          to building rules and availability.
+        </p>
+      </>
+    ),
+  },
+  {
+    q: "Can we cook?",
     a: (
       <>
         <p>
@@ -287,21 +409,96 @@ const faqs: {
         </p>
 
         <p>
-          Kitchen appliances are available for your convenience, including:
+          Basic kitchen appliances, dining wares, and utensils are provided.
         </p>
+      </>
+    ),
+  },
+  {
+    q: "What is included in the room?",
+    a: (
+      <>
+        <p>Both units include:</p>
 
         <ul>
-          <li>Refrigerator</li>
-          <li>Microwave</li>
-          <li>Induction cooker</li>
-          <li>Rice cooker</li>
-          <li>Electric kettle</li>
+          <li>55&quot; Smart TV with Netflix</li>
+          <li>Unlimited Wi-Fi</li>
+          <li>PS4 &amp; games</li>
+          <li>Kitchen appliances</li>
+          <li>Dining wares &amp; utensils</li>
+          <li>Hot shower</li>
+          <li>Toiletries &amp; bath towels</li>
+          <li>Honesty Store</li>
         </ul>
 
         <p>
-          Dining wares and utensils are also provided.
+          Each unit also has additional features specific to its setup.
         </p>
       </>
+    ),
+  },
+  {
+    q: "What is the difference between the two units?",
+    a: (
+      <>
+        <p>
+          <strong>Tower B — 9th Floor</strong>
+        </p>
+
+        <ul>
+          <li>Balcony with Garden &amp; City View</li>
+          <li>Queen Bed + Queen Sofa Bed</li>
+          <li>Speaker with Microphone</li>
+          <li>PS4, Board Games &amp; Card Games</li>
+        </ul>
+
+        <p>
+          <strong>Tower 4 — 8th Floor</strong>
+        </p>
+
+        <ul>
+          <li>City View</li>
+          <li>Full Double Bed</li>
+          <li>PS4 + Karaoke</li>
+          <li>Board &amp; Card Games</li>
+          <li>Badminton &amp; Pickleball Equipment</li>
+        </ul>
+      </>
+    ),
+  },
+  {
+    q: "Can I request early check-in or late check-out?",
+    a: (
+      <>
+        <p>
+          Early check-in and late check-out may be accommodated depending on
+          availability and the cleaning schedule.
+        </p>
+
+        <p>
+          Please message us in advance so we can check.
+        </p>
+      </>
+    ),
+  },
+  {
+    q: "How can I inquire?",
+    a: (
+      <p>
+        For availability, current rates, or other questions, feel free to{" "}
+        <strong>send us a message directly</strong> or book through our Airbnb
+        listings above.
+      </p>
+    ),
+  },
+  {
+    q: "How many guests can stay in the unit?",
+    a: (
+      <p>
+        Both units are designed to accommodate guests comfortably. The exact
+        maximum number of guests may depend on the booking configuration, so
+        please check the indicated guest capacity when making your reservation.
+      </p>
     ),
   },
   {
@@ -309,16 +506,18 @@ const faqs: {
     a: (
       <>
         <p>
-          Tower B
+          <strong>Tower B</strong>
         </p>
+
         <ul>
           <li>1 Queen-size bed</li>
           <li>1 Queen-size sofa bed</li>
         </ul>
 
-         <p>
-          Tower 4
+        <p>
+          <strong>Tower 4</strong>
         </p>
+
         <ul>
           <li>1 Full Double-sized bed</li>
           <li>1 Full Double-sized Pull-out bed</li>
@@ -349,9 +548,11 @@ const faqs: {
         <p>
           Yes! Both units have a PS4.
         </p>
+
         <p>
-         Both units halso includes.
+          Both units also include:
         </p>
+
         <ul>
           <li>Board games</li>
           <li>Card games</li>
@@ -376,7 +577,7 @@ const faqs: {
       </p>
     ),
   },
-   {
+  {
     q: "Is there a full-body mirror?",
     a: (
       <p>
