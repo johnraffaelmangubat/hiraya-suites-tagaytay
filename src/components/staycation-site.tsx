@@ -2473,12 +2473,7 @@ export default function StaycationSite({
             </a>
 
             <p className="location-note">
-              Sample location: Tagaytay
-              City, Philippines.
-              <br />
-              The exact property address
-              is shared with confirmed
-              guests.
+              Aguinaldo Highway (also known as Tagaytay-Nasugbu Highway), Barangay Maharlika West, Tagaytay City, Cavite, 4120, Philippines
             </p>
           </div>
 
