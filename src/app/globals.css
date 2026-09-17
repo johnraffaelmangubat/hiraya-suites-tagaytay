@@ -4044,8 +4044,11 @@ h1 em {
   .suite-pill {
     border-radius: 0;
     border-bottom: 1px solid var(--line);
-    padding: 13px 18px;
+    padding: 10px;
   }
+  .suite-pill .suite-pill-inner {
+    padding: 10px;
+}
 
   .suite-pill:last-child {
     border-bottom: 0;
