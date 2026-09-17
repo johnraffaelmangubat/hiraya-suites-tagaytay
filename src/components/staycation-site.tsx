@@ -232,8 +232,8 @@ function suiteLabel(suite: GallerySuite): string {
 }
 
 function suiteShort(suite: GallerySuite): string {
-  if (suite === "hiraya") return "Hiraya";
-  if (suite === "mayumi") return "Mayumi";
+  if (suite === "hiraya") return "Tower B";
+  if (suite === "mayumi") return "Tower 4";
   return "Shared";
 }
 
