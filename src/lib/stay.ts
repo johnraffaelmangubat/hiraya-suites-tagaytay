@@ -35,7 +35,7 @@ export const UNITS: Unit[] = [
     tagline: "Roomy, sunlit, made for lingering.",
     description:
       "Our signature one-bedroom suite is the one for slow mornings and easy evenings — a proper bedroom with a queen bed, a full living area that converts to extra sleeping space, a private balcony, and room to unwind with a garden or city view.",
-    size: "42 sqm",
+    size: "23.23 sqm",
     beds: "1 queen bed + double sofa bed",
     maxGuests: 4,
     weekdayRate: 1799,
@@ -82,7 +82,7 @@ export const UNITS: Unit[] = [
     tagline: "Compact, charming, quietly lovely.",
     description:
       "Soft, quiet studio for two — a thoughtful open-plan space with a plush double bed, a compact kitchenette, and all the little comforts you need for a sweet Tagaytay escape.",
-    size: "28 sqm",
+    size: "26.62 sqm",
     beds: "1 Full Double Sized Bed and Pullout Bed",
     maxGuests: 4,
     weekdayRate: 1799,
