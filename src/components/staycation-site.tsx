@@ -1235,7 +1235,7 @@ export default function StaycationSite({
               </small>
 
               <strong>
-                The Hiraya Suite
+                SMDC Cool Suites Tower B
               </strong>
 
               <span>
@@ -1272,7 +1272,7 @@ export default function StaycationSite({
               </small>
 
               <strong>
-                The Mayumi Studio
+                SMDC Wind Residences Tower 4
               </strong>
 
               <span>
