@@ -29,7 +29,7 @@ export type Unit = {
 export const UNITS: Unit[] = [
   {
     id: "hiraya",
-    name: "The Hiraya Suite",
+    name: "SMDC Cool Suites Tower B",
     shortName: "Hiraya",
     eyebrow: "SIGNATURE ONE-BEDROOM",
     tagline: "Roomy, sunlit, made for lingering.",
@@ -76,7 +76,7 @@ export const UNITS: Unit[] = [
   },
   {
     id: "mayumi",
-    name: "The Mayumi Studio",
+    name: "SMDC Wind Residences Tower 4",
     shortName: "Mayumi",
     eyebrow: "COZY STUDIO",
     tagline: "Compact, charming, quietly lovely.",
