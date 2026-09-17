@@ -52,7 +52,7 @@ export const UNITS: Unit[] = [
     highlights: [
       "Private balcony",
       "Separate living area",
-      "Queen bed + sofa bed for 4",
+      "Queen bed + sofa bed for 2",
     ],
     amenities: [
       "Fast Wi-Fi",
@@ -97,7 +97,7 @@ export const UNITS: Unit[] = [
       "Solo slow-downs, couples, and short, cozy escapes.",
     vibe: "Cozy, curated, and easy to love.",
     highlights: [
-      "Queen bed for two",
+      "Full Double Sized Bed and Pullout Bed",
       "Bright open-plan layout",
       "Kitchenette for small bites",
     ],
