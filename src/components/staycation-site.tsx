@@ -2473,7 +2473,8 @@ export default function StaycationSite({
             </a>
 
             <p className="location-note">
-              Aguinaldo Highway (aka Tagaytay-Nasugbu Highway), Barangay Maharlika West, \nTagaytay City, Cavite, 4120, Philippines
+              Aguinaldo Highway (aka Tagaytay-Nasugbu Highway), Barangay Maharlika West, 
+              Tagaytay City, Cavite, 4120, Philippines
             </p>
           </div>
 
