@@ -1484,7 +1484,7 @@ export default function StaycationSite({
             >
               <div className="suite-pill-inner">
               <small>
-                SIGNATURE
+                GARDEN & CITY VIEW
               </small>
 
               <strong>
@@ -1523,7 +1523,7 @@ export default function StaycationSite({
             >
               <div className="suite-pill-inner">
               <small>
-                COZY STUDIO
+                CITY VIEW
               </small>
 
               <strong>
