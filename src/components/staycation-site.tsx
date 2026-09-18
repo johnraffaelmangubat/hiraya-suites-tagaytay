@@ -5,6 +5,7 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import {
@@ -13,6 +14,7 @@ import {
   ArrowUpRight,
   Bath,
   BedDouble,
+  Cake,
   CalendarCheck2,
   CalendarDays,
   Check,
@@ -23,6 +25,7 @@ import {
   Coffee,
   CookingPot,
   DoorOpen,
+  Gift,
   Grid2X2,
   Heart,
   House,
@@ -35,18 +38,23 @@ import {
   Monitor,
   ParkingCircle,
   Plus,
+  Quote,
   Refrigerator,
   Scan,
   ShieldCheck,
   ShoppingBag,
   Snowflake,
+  Sparkles,
+  Star,
   Sun,
+  Target,
   Tv,
   UsersRound,
   Utensils,
   Waves,
   Wifi,
   Wind,
+  Wine,
   X,
 } from "lucide-react";
 import Calendar, {
@@ -285,6 +293,87 @@ const propertyAmenities = [
     icon: ParkingCircle,
     name: "Paid parking nearby",
     detail: "Subject to availability and building rates.",
+  },
+];
+
+const facilitySports = [
+  { name: "Basketball Court", note: "Subject to building schedule" },
+  { name: "Tennis Court", note: "Subject to building schedule" },
+  { name: "Badminton Court", note: "Free for guests" },
+  { name: "Pickleball Court", note: "Free for guests" },
+  { name: "Billiards", note: "Indoor recreation" },
+  { name: "Darts", note: "Indoor recreation" },
+  { name: "Table Tennis", note: "Indoor recreation" },
+];
+
+const surprisePackages = [
+  {
+    name: "Classic Package",
+    price: 1200,
+    badge: "Most requested",
+    items: [
+      "Happy Birthday / Happy Anniversary / Happy Monthsary banner",
+      "20 ceiling balloons with ribbons",
+      "10 floor balloons",
+      "Fairy lights",
+    ],
+  },
+  {
+    name: "Special Package",
+    price: 1700,
+    badge: "Extra special",
+    items: [
+      "Happy Birthday / Happy Anniversary / Happy Monthsary banner",
+      "20 ceiling balloons with ribbons",
+      "10 floor balloons",
+      "Fairy lights",
+      "Mini cake or wine",
+    ],
+  },
+];
+
+const testimonials = [
+  {
+    name: "Alyssa & Marco",
+    stay: "Tower B Suite · Anniversary weekend",
+    quote:
+      "The suite felt warm the moment we walked in. Soft lighting, a quiet balcony, and everything we needed for a slow, lovely stay.",
+    rating: 5,
+  },
+  {
+    name: "Denise R.",
+    stay: "Tower 4 Studio · Solo reset",
+    quote:
+      "Small but so thoughtfully put together. I came for a quiet night and left feeling completely recharged.",
+    rating: 5,
+  },
+  {
+    name: "The Santos Family",
+    stay: "Tower B Suite · Family staycation",
+    quote:
+      "Plenty of space for four, easy check-in, and the building amenities made the kids so happy. We’ll be back.",
+    rating: 5,
+  },
+  {
+    name: "Jenna & Paul",
+    stay: "Tower 4 Studio · Monthsary escape",
+    quote:
+      "We requested the surprise set-up and it was perfect. Walking into fairy lights and balloons made the whole night feel extra special.",
+    rating: 5,
+  },
+  {
+    name: "Chris L.",
+    stay: "Tower B Suite · Work-from-getaway",
+    quote:
+      "Quiet, clean, and easy to settle into. Fast Wi-Fi, a comfy desk corner, and the pool downstairs when I needed a break.",
+    rating: 5,
+  },
+  {
+    name: "Mia & Friends",
+    stay: "Tower B Suite · Girls’ staycation",
+    quote:
+      "Beautiful space, thoughtful touches, and booking was simple. It truly felt like a little pause from everyday life.",
+    rating: 5,
   },
 ];
 
@@ -692,6 +781,18 @@ export default function StaycationSite({
       "privacy" | "credits" | null
     >(null);
 
+  const [reviewIndex, setReviewIndex] =
+    useState(0);
+
+  const [reviewsPaused, setReviewsPaused] =
+    useState(false);
+
+  const [reviewsPerView, setReviewsPerView] =
+    useState(1);
+
+  const reviewTouchStartX =
+    useRef<number | null>(null);
+
   const unit = useMemo<Unit>(
     () => getUnit(selectedUnit),
     [selectedUnit]
@@ -786,6 +887,26 @@ export default function StaycationSite({
     galleryIndex === null
       ? null
       : filteredPhotos[galleryIndex] ?? null;
+
+  const reviewPages = useMemo(() => {
+    const pages: (typeof testimonials)[] =
+      [];
+
+    for (
+      let i = 0;
+      i < testimonials.length;
+      i += reviewsPerView
+    ) {
+      pages.push(
+        testimonials.slice(
+          i,
+          i + reviewsPerView
+        )
+      );
+    }
+
+    return pages;
+  }, [reviewsPerView]);
 
   const loadAvailability =
     useCallback(async () => {
@@ -945,6 +1066,65 @@ export default function StaycationSite({
   }, [
     selectedUnit,
     unit.maxGuests,
+  ]);
+
+  useEffect(() => {
+    const mql = window.matchMedia(
+      "(min-width: 900px)"
+    );
+
+    const applyReviewsPerView = () =>
+      setReviewsPerView(
+        mql.matches ? 3 : 1
+      );
+
+    applyReviewsPerView();
+
+    mql.addEventListener(
+      "change",
+      applyReviewsPerView
+    );
+
+    return () =>
+      mql.removeEventListener(
+        "change",
+        applyReviewsPerView
+      );
+  }, []);
+
+  useEffect(() => {
+    setReviewIndex((current) =>
+      Math.min(
+        current,
+        Math.max(
+          0,
+          reviewPages.length - 1
+        )
+      )
+    );
+  }, [reviewPages.length]);
+
+  useEffect(() => {
+    if (
+      reviewsPaused ||
+      reviewPages.length <= 1
+    ) {
+      return;
+    }
+
+    const timer = window.setInterval(() => {
+      setReviewIndex(
+        (current) =>
+          (current + 1) %
+          reviewPages.length
+      );
+    }, 5200);
+
+    return () =>
+      window.clearInterval(timer);
+  }, [
+    reviewsPaused,
+    reviewPages.length,
   ]);
 
   function selectDate(date: string) {
@@ -2069,6 +2249,222 @@ export default function StaycationSite({
         </section>
 
         <section
+          className="facilities-section section"
+          id="facilities"
+        >
+          <div className="wrap">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">
+                  SMDC BUILDING AMENITIES
+                  & FACILITIES
+                </p>
+
+                <h2>
+                  More than a suite.
+                  <br />
+                  <em>
+                    A whole little
+                    playground.
+                  </em>
+                </h2>
+
+                <p>
+                  Guests of Hiraya
+                  Suites can enjoy the
+                  building’s shared
+                  facilities, subject to
+                  schedules and house
+                  rules.
+                </p>
+              </div>
+            </div>
+
+            <div className="facilities-layout">
+              <article className="facility-feature">
+                <div className="facility-feature-photos">
+                  <div className="facility-photo facility-photo--main">
+                    <Image
+                      src="/images/pool.jpg"
+                      alt="Outdoor swimming pool surrounded by tropical greenery"
+                      fill
+                      sizes="(max-width: 800px) 100vw, 55vw"
+                    />
+
+                    <span className="facility-photo-tag">
+                      Outdoor pool
+                    </span>
+                  </div>
+
+                  <div className="facility-photo facility-photo--side">
+                    <Image
+                      src="/images/indoor-pool.jpg"
+                      alt="Indoor swimming pool with calm blue water"
+                      fill
+                      sizes="(max-width: 800px) 100vw, 30vw"
+                    />
+
+                    <span className="facility-photo-tag">
+                      Indoor pool
+                    </span>
+                  </div>
+                </div>
+
+                <div className="facility-feature-copy">
+                  <div className="facility-icon">
+                    <Waves
+                      size={26}
+                      strokeWidth={1.4}
+                    />
+                  </div>
+
+                  <h3>
+                    Outdoor Pool & Indoor
+                    Pool
+                  </h3>
+
+                  <p>
+                    Take a slow swim or a
+                    refreshing dip. Pool
+                    access is available
+                    for Hiraya Suites
+                    guests upon request
+                    and subject to
+                    building rules.
+                  </p>
+
+                  <div className="facility-rates">
+                    <div>
+                      <strong>
+                        ₱150
+                      </strong>
+
+                      <span>
+                        / head / day ·
+                        Regular days
+                      </span>
+                    </div>
+
+                    <div>
+                      <strong>
+                        ₱300
+                      </strong>
+
+                      <span>
+                        / head / day ·
+                        Holidays
+                      </span>
+                    </div>
+                  </div>
+
+                  <ul className="facility-rules">
+                    <li>
+                      <Check
+                        size={14}
+                      />{" "}
+                      Arrange pool access
+                      with your host
+                      before or during
+                      your stay
+                    </li>
+
+                    <li>
+                      <Check
+                        size={14}
+                      />{" "}
+                      Follow building
+                      pool hours and
+                      guest guidelines
+                    </li>
+
+                    <li>
+                      <Check
+                        size={14}
+                      />{" "}
+                      Rates are per
+                      person, per day,
+                      and may change
+                      without notice
+                    </li>
+                  </ul>
+                </div>
+              </article>
+
+              <div className="facilities-grid-wrap">
+                <div className="facilities-grid-intro">
+                  <div className="facility-icon">
+                    <Target
+                      size={24}
+                      strokeWidth={1.4}
+                    />
+                  </div>
+
+                  <div>
+                    <h3>
+                      Sports &
+                      recreation
+                    </h3>
+
+                    <p>
+                      Move a little,
+                      play a little, or
+                      just explore
+                      what’s around the
+                      building.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="facilities-grid">
+                  {facilitySports.map(
+                    (item) => (
+                      <div
+                        className="facility-card"
+                        key={item.name}
+                      >
+                        <strong>
+                          {item.name}
+                        </strong>
+
+                        <span>
+                          {item.note}
+                        </span>
+                      </div>
+                    )
+                  )}
+                </div>
+
+                <div className="facility-side-photo">
+                  <Image
+                    src="/images/basketball.jpg"
+                    alt="Outdoor basketball court"
+                    fill
+                    sizes="(max-width: 800px) 100vw, 40vw"
+                  />
+
+                  <span className="facility-photo-tag">
+                    Building courts &
+                    recreation
+                  </span>
+                </div>
+
+                <p className="facility-footnote">
+                  Facility access,
+                  hours, and fees are
+                  managed by the
+                  building and may vary.
+                  Please confirm
+                  availability and
+                  rules with your host.
+                  Details shown are for
+                  guest guidance.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section
           className="gallery-section section wrap"
           id="gallery"
         >
@@ -2719,6 +3115,153 @@ export default function StaycationSite({
         </section>
 
         <section
+          className="addons-section section wrap"
+          id="addons"
+        >
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">
+                SURPRISE DECORATION
+                SERVICES
+              </p>
+
+              <h2>
+                Make the stay a little
+                <br />
+                <em>more special.</em>
+              </h2>
+
+              <p>
+                Celebrate a birthday,
+                anniversary, or monthsary
+                with a room set-up
+                prepared before your
+                arrival. Available for
+                our guests upon request.
+              </p>
+            </div>
+          </div>
+
+          <div className="addons-grid">
+            {surprisePackages.map(
+              (pkg) => (
+                <article
+                  className="addon-card"
+                  key={pkg.name}
+                >
+                  <div className="addon-card-top">
+                    <span className="addon-badge">
+                      <Gift
+                        size={14}
+                      />{" "}
+                      {pkg.badge}
+                    </span>
+
+                    <h3>
+                      {pkg.name}
+                    </h3>
+
+                    <div className="addon-price">
+                      <strong>
+                        {formatMoney(
+                          pkg.price
+                        )}
+                      </strong>
+
+                      <span>
+                        per set-up
+                      </span>
+                    </div>
+                  </div>
+
+                  <ul className="addon-list">
+                    {pkg.items.map(
+                      (item) => (
+                        <li key={item}>
+                          <Check
+                            size={15}
+                          />{" "}
+                          {item}
+                        </li>
+                      )
+                    )}
+                  </ul>
+
+                  <button
+                    type="button"
+                    className="button button-outline full-width"
+                    onClick={() =>
+                      setInquiryOpen(
+                        true
+                      )
+                    }
+                  >
+                    Request this set-up{" "}
+                    <ArrowUpRight
+                      size={16}
+                    />
+                  </button>
+                </article>
+              )
+            )}
+
+            <aside className="addon-note-card">
+              <div className="facility-icon">
+                <Sparkles
+                  size={24}
+                  strokeWidth={1.4}
+                />
+              </div>
+
+              <h3>
+                Please arrange in
+                advance
+              </h3>
+
+              <p>
+                Surprise set-ups need a
+                little lead time so we
+                can prepare everything
+                before you arrive. Share
+                the occasion, preferred
+                package, and your stay
+                details when you
+                inquire.
+              </p>
+
+              <div className="addon-extras">
+                <span>
+                  <Cake size={16} /> Mini
+                  cake option
+                </span>
+
+                <span>
+                  <Wine size={16} /> Wine
+                  option
+                </span>
+
+                <span>
+                  <Heart size={16} />{" "}
+                  Birthday · Anniversary
+                  · Monthsary
+                </span>
+              </div>
+
+              <button
+                type="button"
+                className="text-link"
+                onClick={() =>
+                  setInquiryOpen(true)
+                }
+              >
+                Ask about add-ons{" "}
+                <ArrowRight size={15} />
+              </button>
+            </aside>
+          </div>
+        </section>
+
+        <section
           className="location-section section wrap"
           id="location"
         >
@@ -2840,6 +3383,318 @@ export default function StaycationSite({
                 A whole new feeling.
               </em>
             </div>
+          </div>
+        </section>
+
+        <section
+          className="reviews-section section"
+          id="reviews"
+        >
+          <div className="wrap">
+            <div className="section-heading">
+              <div>
+                <p className="eyebrow">
+                  GUEST LOVE NOTES
+                </p>
+
+                <h2>
+                  Stays that feel like
+                  <br />
+                  <em>
+                    a soft little yes.
+                  </em>
+                </h2>
+
+                <p>
+                  A few words from
+                  guests who slowed down
+                  with us.
+                </p>
+              </div>
+
+              <div className="reviews-heading-side">
+                <div className="reviews-score">
+                  <strong>5.0</strong>
+
+                  <div>
+                    <span
+                      className="reviews-stars"
+                      aria-hidden="true"
+                    >
+                      {Array.from(
+                        { length: 5 },
+                        (_, i) => (
+                          <Star
+                            key={i}
+                            size={14}
+                            fill="currentColor"
+                          />
+                        )
+                      )}
+                    </span>
+
+                    <small>
+                      Guest rating
+                    </small>
+                  </div>
+                </div>
+
+                <div
+                  className="reviews-controls"
+                  aria-label="Review slider controls"
+                >
+                  <button
+                    type="button"
+                    className="icon-button reviews-nav"
+                    aria-label="Previous reviews"
+                    onClick={() =>
+                      setReviewIndex(
+                        (current) =>
+                          (current -
+                            1 +
+                            reviewPages.length) %
+                          reviewPages.length
+                      )
+                    }
+                  >
+                    <ChevronLeft
+                      size={18}
+                    />
+                  </button>
+
+                  <button
+                    type="button"
+                    className="icon-button reviews-nav"
+                    aria-label="Next reviews"
+                    onClick={() =>
+                      setReviewIndex(
+                        (current) =>
+                          (current +
+                            1) %
+                          reviewPages.length
+                      )
+                    }
+                  >
+                    <ChevronRight
+                      size={18}
+                    />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="reviews-slider"
+              onMouseEnter={() =>
+                setReviewsPaused(true)
+              }
+              onMouseLeave={() =>
+                setReviewsPaused(false)
+              }
+              onFocusCapture={() =>
+                setReviewsPaused(true)
+              }
+              onBlurCapture={(
+                event
+              ) => {
+                if (
+                  !event.currentTarget.contains(
+                    event.relatedTarget as Node | null
+                  )
+                ) {
+                  setReviewsPaused(
+                    false
+                  );
+                }
+              }}
+              onTouchStart={(
+                event
+              ) => {
+                reviewTouchStartX.current =
+                  event.changedTouches[0]
+                    ?.clientX ?? null;
+
+                setReviewsPaused(true);
+              }}
+              onTouchEnd={(event) => {
+                const startX =
+                  reviewTouchStartX.current;
+
+                const endX =
+                  event.changedTouches[0]
+                    ?.clientX ?? null;
+
+                reviewTouchStartX.current =
+                  null;
+
+                setReviewsPaused(false);
+
+                if (
+                  startX == null ||
+                  endX == null
+                ) {
+                  return;
+                }
+
+                const delta =
+                  endX - startX;
+
+                if (
+                  Math.abs(delta) < 40
+                ) {
+                  return;
+                }
+
+                if (delta < 0) {
+                  setReviewIndex(
+                    (current) =>
+                      (current + 1) %
+                      reviewPages.length
+                  );
+                } else {
+                  setReviewIndex(
+                    (current) =>
+                      (current -
+                        1 +
+                        reviewPages.length) %
+                      reviewPages.length
+                  );
+                }
+              }}
+            >
+              <div
+                className="reviews-track"
+                style={{
+                  transform: `translateX(-${
+                    reviewIndex * 100
+                  }%)`,
+                }}
+                aria-live="polite"
+              >
+                {reviewPages.map(
+                  (page, pageIndex) => (
+                    <div
+                      className="review-page"
+                      key={pageIndex}
+                      aria-hidden={
+                        pageIndex !==
+                        reviewIndex
+                      }
+                    >
+                      {page.map(
+                        (review) => (
+                          <article
+                            className="review-card"
+                            key={
+                              review.name
+                            }
+                          >
+                            <div className="review-card-top">
+                              <Quote
+                                size={22}
+                                strokeWidth={1.4}
+                              />
+
+                              <div
+                                className="review-stars"
+                                aria-label={`${review.rating} out of 5 stars`}
+                              >
+                                {Array.from(
+                                  {
+                                    length:
+                                      review.rating,
+                                  },
+                                  (
+                                    _,
+                                    i
+                                  ) => (
+                                    <Star
+                                      key={
+                                        i
+                                      }
+                                      size={13}
+                                      fill="currentColor"
+                                    />
+                                  )
+                                )}
+                              </div>
+                            </div>
+
+                            <p>
+                              “
+                              {
+                                review.quote
+                              }
+                              ”
+                            </p>
+
+                            <div className="review-author">
+                              <strong>
+                                {
+                                  review.name
+                                }
+                              </strong>
+
+                              <span>
+                                {
+                                  review.stay
+                                }
+                              </span>
+                            </div>
+                          </article>
+                        )
+                      )}
+                    </div>
+                  )
+                )}
+              </div>
+            </div>
+
+            <div
+              className="reviews-dots"
+              role="tablist"
+              aria-label="Choose a set of guest reviews"
+            >
+              {reviewPages.map(
+                (_, pageIndex) => (
+                  <button
+                    key={pageIndex}
+                    type="button"
+                    role="tab"
+                    aria-selected={
+                      pageIndex ===
+                      reviewIndex
+                    }
+                    aria-label={`Show reviews, page ${
+                      pageIndex + 1
+                    }`}
+                    className={`reviews-dot ${
+                      pageIndex ===
+                      reviewIndex
+                        ? "is-active"
+                        : ""
+                    }`}
+                    onClick={() =>
+                      setReviewIndex(
+                        pageIndex
+                      )
+                    }
+                  />
+                )
+              )}
+            </div>
+
+            <p className="reviews-slider-note">
+              {String(
+                reviewIndex + 1
+              ).padStart(2, "0")}{" "}
+              /{" "}
+              {String(
+                reviewPages.length
+              ).padStart(2, "0")}{" "}
+              · Swipe through guest
+              love notes
+            </p>
           </div>
         </section>
 
