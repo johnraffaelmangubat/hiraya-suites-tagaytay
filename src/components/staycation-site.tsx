@@ -3865,12 +3865,6 @@ export default function StaycationSite({
             <h3>
               Follow Hiraya
             </h3>
-
-            <p>
-              A little more Hiraya,
-              wherever you are.
-            </p>
-
             <div
               className="footer-social-links"
               style={{
