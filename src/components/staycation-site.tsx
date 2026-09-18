@@ -3305,8 +3305,11 @@ export default function StaycationSite({
               <Building2 size={18} />
               <p>View our Airbnb listing to check availability and reserve your stay. Final listing link can be added here when ready.</p>
             </div>
-            <a className="button button-outline full-width" href="https://www.airbnb.com" target="_blank" rel="noopener noreferrer">
-              View Airbnb listing <ArrowUpRight size={16} />
+            <a className="button button-outline full-width" href="airbnb.com/h/hirayasuitestagaytay" target="_blank" rel="noopener noreferrer">
+              Airbnb Tower B <ArrowUpRight size={16} />
+            </a>
+             <a className="button button-outline full-width" href="airbnb.com/h/hirayasuitestagaytaytower4" target="_blank" rel="noopener noreferrer">
+              Airbnb Tower 4 <ArrowUpRight size={16} />
             </a>
             <p className="fine-print">Replace this with your live Airbnb listing URL when available. Booking terms on Airbnb follow the platform’s policies.</p>
           </article>
