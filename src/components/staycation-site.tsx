@@ -3900,7 +3900,7 @@ export default function StaycationSite({
                   focusable="false"
                 >
                   <path
-                    fill="currentColor"
+                    fill="#b5a389"
                     d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.7-1.6h1.5V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1V11H7.6v3h2.7v8h3.2Z"
                   />
                 </svg>
@@ -3938,7 +3938,7 @@ export default function StaycationSite({
                     height="17"
                     rx="4.5"
                     fill="none"
-                    stroke="currentColor"
+                    stroke="#b5a389"
                     strokeWidth="1.8"
                   />
                   <circle
