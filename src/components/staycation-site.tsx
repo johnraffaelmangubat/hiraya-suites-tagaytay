@@ -606,18 +606,27 @@ const faqs: {
     ),
   },
   {
-    q: "Can I request early check-in or late check-out?",
-    a: (
-      <>
-        <p>
-          Early check-in and late check-out may be accommodated depending on availability and the cleaning schedule.Early check-in and late check-out may be accommodated depending on availability and the cleaning schedule.
-        </p>
+  q: "Can I request early check-in or late check-out?",
+  a: (
+    <>
+      <p>
+        Early check-in and late check-out may be accommodated depending on
+        availability and the cleaning schedule.
+      </p>
 
-        <p>
-          Please message us in advance so we can check.
-        </p>
-      </>
-    ),
+      <p>
+        Please{" "}
+        <a
+          href="https://m.me/HirayaSuitesTagaytay"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          message us
+        </a>{" "}
+        in advance so we can check.
+      </p>
+    </>
+  ),
   },
   {
     q: "Can I request a surprise room set-up?",
@@ -629,7 +638,15 @@ const faqs: {
         </p>
 
         <p>
-          Please message us in advance so we can check.
+          Please {" "}
+          <a
+          href="https://m.me/HirayaSuitesTagaytay"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          message us
+        </a>{" "} 
+          in advance so we can check.
         </p>
       </>
     ),
