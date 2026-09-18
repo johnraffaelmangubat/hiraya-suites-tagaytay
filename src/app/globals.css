@@ -2573,6 +2573,7 @@ h1 em {
 }
 .footer-column.footer-socials h3 {
     margin: 0;
+    min-width: 87px;
 }
 
 .back-top {
