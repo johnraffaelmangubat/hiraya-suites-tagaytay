@@ -631,29 +631,6 @@ const faqs: {
   {
     q: "Can I request a surprise room set-up?",
     a: (
-      <>
-        <p>
-          Early check-in and late check-out may be accommodated depending on
-          availability and the cleaning schedule.
-        </p>
-
-        <p>
-          Please {" "}
-          <a
-          href="https://m.me/HirayaSuitesTagaytay"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          message us
-        </a>{" "} 
-          in advance so we can check.
-        </p>
-      </>
-    ),
-  },
-  {
-    q: "How can I inquire?",
-    a: (
       <p>
         Yes! Surprise set-ups are available for birthdays, anniversaries, and monthsaries. Choose your preferred package and send us your preferred color or theme. Please arrange your set-up in advance so we can prepare everything before your arrival.
       </p>
