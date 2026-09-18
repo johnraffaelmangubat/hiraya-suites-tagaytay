@@ -377,7 +377,7 @@ const faqs: {
   a: React.ReactNode;
 }[] = [
   {
-    q: "How much is the stay?",
+    q: "How much does a stay cost?",
     a: (
       <>
         <p>
@@ -389,58 +389,17 @@ const faqs: {
         </p>
 
         <p>
-          For the most accurate and updated rate, please check our Airbnb
-          listings or message us directly.
+          For the most accurate and updated rates, check our Availability page or Airbnb listings, or message us directly..
         </p>
-
-        <p>
-          <strong>Additional fees:</strong>
-        </p>
-
-        <ul>
-          <li>
-            Pool: <strong>₱150/person/day</strong> — regular days
-          </li>
-          <li>
-            Pool: <strong>₱300/person/day</strong> — holidays
-          </li>
-          <li>
-            Basement Parking: <strong>₱400/night</strong>
-          </li>
-          <li>
-            Commercial Parking: <strong>Free</strong> — overnight parking is
-            not allowed
-          </li>
-        </ul>
       </>
     ),
   },
   {
-    q: "Where can I book?",
+    q: "How can I check available dates and rates?",
     a: (
       <>
         <p>
-          You can book either of our units through Airbnb:
-        </p>
-
-        <p>
-          <strong>Tower B — 9th Floor</strong>
-          <br />
-          Balcony • Garden &amp; City View
-          <br />
-          airbnb.com/h/hirayasuitestagaytay
-        </p>
-
-        <p>
-          <strong>Tower 4 — 8th Floor</strong>
-          <br />
-          City View
-          <br />
-          airbnb.com/h/hirayasuitestagaytaytower4
-        </p>
-
-        <p>
-          You may also message us directly for availability and rates.
+          You can view the availability calendar and preview rates on our Availability page. You may also message us directly for assistance.
         </p>
       </>
     ),
@@ -486,12 +445,8 @@ const faqs: {
     a: (
       <>
         <p>
-          Yes. <strong>Basement parking is ₱400/night.</strong>
-        </p>
+          Yes. Basement parking is available for our guests at ₱400/night for cars and ₱300/night for motorcycles. Parking is subject to availability, so we recommend arranging it in advance.
 
-        <p>
-          Commercial parking is <strong>free</strong>, but overnight parking
-          is not allowed.
         </p>
       </>
     ),
@@ -521,7 +476,7 @@ const faqs: {
     ),
   },
   {
-    q: "Can we cook?",
+    q: "Can we cook in the unit?",
     a: (
       <>
         <p>
@@ -558,36 +513,21 @@ const faqs: {
     ),
   },
   {
-    q: "What is the difference between the two units?",
+    q: "Can I request early check-in or late check-out?",
     a: (
       <>
         <p>
-          <strong>Tower B — 9th Floor</strong>
+          Early check-in and late check-out may be accommodated depending on availability and the cleaning schedule.Early check-in and late check-out may be accommodated depending on availability and the cleaning schedule.
         </p>
-
-        <ul>
-          <li>Balcony with Garden &amp; City View</li>
-          <li>Queen Bed + Queen Sofa Bed</li>
-          <li>Speaker with Microphone</li>
-          <li>PS4, Board Games &amp; Card Games</li>
-        </ul>
 
         <p>
-          <strong>Tower 4 — 8th Floor</strong>
+          Please message us in advance so we can check.
         </p>
-
-        <ul>
-          <li>City View</li>
-          <li>Full Double Bed</li>
-          <li>PS4 + Karaoke</li>
-          <li>Board &amp; Card Games</li>
-          <li>Badminton &amp; Pickleball Equipment</li>
-        </ul>
       </>
     ),
   },
   {
-    q: "Can I request early check-in or late check-out?",
+    q: "Can I request a surprise room set-up?",
     a: (
       <>
         <p>
@@ -605,19 +545,7 @@ const faqs: {
     q: "How can I inquire?",
     a: (
       <p>
-        For availability, current rates, or other questions, feel free to{" "}
-        <strong>send us a message directly</strong> or book through our Airbnb
-        listings above.
-      </p>
-    ),
-  },
-  {
-    q: "How many guests can stay in the unit?",
-    a: (
-      <p>
-        Both units are designed to accommodate guests comfortably. The exact
-        maximum number of guests may depend on the booking configuration, so
-        please check the indicated guest capacity when making your reservation.
+        Yes! Surprise set-ups are available for birthdays, anniversaries, and monthsaries. Choose your preferred package and send us your preferred color or theme. Please arrange your set-up in advance so we can prepare everything before your arrival.
       </p>
     ),
   },
