@@ -3871,7 +3871,6 @@ export default function StaycationSite({
                 display: "flex",
                 alignItems: "center",
                 gap: "10px",
-                marginTop: "14px",
               }}
             >
               <a
