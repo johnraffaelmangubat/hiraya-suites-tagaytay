@@ -3655,8 +3655,7 @@ export default function StaycationSite({
                 />
 
                 <h3>
-                  A little care goes a
-                  long way
+                  A little care goes a long way
                 </h3>
 
                 <p>
@@ -3664,7 +3663,7 @@ export default function StaycationSite({
                   parties in either suite.
                   <br />
                   Quiet hours: 10:00 PM –
-                  8:00 AM.
+                  5:00 AM.
                 </p>
               </div>
 
