@@ -3284,9 +3284,6 @@ export default function StaycationSite({
             <div className="reserve-cta-box">
               <h4>Ready to reserve?</h4>
               <p>Send us a message with your selected dates, preferred unit, and number of guests.</p>
-              <button type="button" className="button button-primary full-width" onClick={() => setInquiryOpen(true)}>
-                Message us to reserve <ArrowUpRight size={17} />
-              </button>
               <a href="https://m.me/HirayaSuitesTagaytay" target="_blank" rel="noopener noreferrer" className="button button-primary full-width" >
                 Message us to reserve <ArrowUpRight size={17} />
               </a>
@@ -3306,7 +3303,7 @@ export default function StaycationSite({
             </ul>
             <div className="reserve-airbnb-note">
               <Building2 size={18} />
-              <p>View our Airbnb listing to check availability and reserve your stay. Final listing link can be added here when ready.</p>
+              <p>View our Airbnb listing to check availability and reserve your stay.</p>
             </div>
             <a className="button button-outline full-width margin-bottom" href="https://www.airbnb.com/h/hirayasuitestagaytay" target="_blank" rel="noopener noreferrer">
               Airbnb Tower B <ArrowUpRight size={16} />
@@ -3314,7 +3311,7 @@ export default function StaycationSite({
              <a className="button button-outline full-width" href="https://www.airbnb.com/h/hirayasuitestagaytaytower4" target="_blank" rel="noopener noreferrer">
               Airbnb Tower 4 <ArrowUpRight size={16} />
             </a>
-            <p className="fine-print">Replace this with your live Airbnb listing URL when available. Booking terms on Airbnb follow the platform’s policies.</p>
+            <p className="fine-print">Booking terms on Airbnb follow the platform’s policies.</p>
           </article>
         </div>
       </div></section>
