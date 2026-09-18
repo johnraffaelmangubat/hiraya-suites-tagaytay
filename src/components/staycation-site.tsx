@@ -12,6 +12,7 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
+  Banknote,
   Bath,
   BedDouble,
   Cake,
@@ -24,11 +25,14 @@ import {
   Clock3,
   Coffee,
   CookingPot,
+  CreditCard,
   DoorOpen,
+  Building2,
   Gift,
   Grid2X2,
   Heart,
   House,
+  Landmark,
   Info,
   Leaf,
   LoaderCircle,
@@ -788,7 +792,7 @@ export default function StaycationSite({
     useState(false);
 
   const [reviewsPerView, setReviewsPerView] =
-    useState(1);
+    useState(2);
 
   const reviewTouchStartX =
     useRef<number | null>(null);
@@ -888,25 +892,44 @@ export default function StaycationSite({
       ? null
       : filteredPhotos[galleryIndex] ?? null;
 
-  const reviewPages = useMemo(() => {
-    const pages: (typeof testimonials)[] =
-      [];
+  const maxReviewIndex = Math.max(
+    0,
+    testimonials.length - reviewsPerView
+  );
 
-    for (
-      let i = 0;
-      i < testimonials.length;
-      i += reviewsPerView
-    ) {
-      pages.push(
-        testimonials.slice(
-          i,
-          i + reviewsPerView
-        )
-      );
+  const reviewPages = maxReviewIndex + 1;
+
+  useEffect(() => {
+    setReviewIndex((current) =>
+      Math.min(current, maxReviewIndex)
+    );
+  }, [maxReviewIndex]);
+
+  useEffect(() => {
+    if (reviewsPaused || reviewPages <= 1) {
+      return;
     }
 
-    return pages;
-  }, [reviewsPerView]);
+    const timer = window.setInterval(() => {
+      setReviewIndex((current) =>
+        current >= maxReviewIndex ? 0 : current + 1
+      );
+    }, 5200);
+
+    return () => window.clearInterval(timer);
+  }, [reviewsPaused, maxReviewIndex, reviewPages]);
+
+  function goToPrevReview() {
+    setReviewIndex((current) =>
+      current <= 0 ? maxReviewIndex : current - 1
+    );
+  }
+
+  function goToNextReview() {
+    setReviewIndex((current) =>
+      current >= maxReviewIndex ? 0 : current + 1
+    );
+  }
 
   const loadAvailability =
     useCallback(async () => {
@@ -1075,7 +1098,7 @@ export default function StaycationSite({
 
     const applyReviewsPerView = () =>
       setReviewsPerView(
-        mql.matches ? 3 : 1
+        mql.matches ? 2 : 1
       );
 
     applyReviewsPerView();
@@ -1091,41 +1114,6 @@ export default function StaycationSite({
         applyReviewsPerView
       );
   }, []);
-
-  useEffect(() => {
-    setReviewIndex((current) =>
-      Math.min(
-        current,
-        Math.max(
-          0,
-          reviewPages.length - 1
-        )
-      )
-    );
-  }, [reviewPages.length]);
-
-  useEffect(() => {
-    if (
-      reviewsPaused ||
-      reviewPages.length <= 1
-    ) {
-      return;
-    }
-
-    const timer = window.setInterval(() => {
-      setReviewIndex(
-        (current) =>
-          (current + 1) %
-          reviewPages.length
-      );
-    }, 5200);
-
-    return () =>
-      window.clearInterval(timer);
-  }, [
-    reviewsPaused,
-    reviewPages.length,
-  ]);
 
   function selectDate(date: string) {
     if (
@@ -3261,7 +3249,73 @@ export default function StaycationSite({
           </div>
         </section>
 
-        <section
+        <section className="reserve-section section" id="reserve"><div className="wrap">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">HOW TO RESERVE</p>
+            <h2>Once you’ve found your dates,<br /><em>choose how to book.</em></h2>
+            <p>Reserve directly with us, or book through Airbnb if you prefer card payments.</p>
+          </div>
+        </div>
+
+        <div className="reserve-grid">
+          <article className="reserve-card reserve-card--primary">
+            <div className="reserve-card-head">
+              <span className="reserve-kicker"><Landmark size={15} /> Recommended</span>
+              <h3>Direct Booking</h3>
+              <p>Reserve directly with us through our official channels.</p>
+            </div>
+
+            <div className="reserve-steps">
+              <h4>To confirm your reservation</h4>
+              <div className="reserve-step"><span>01</span><div><strong>₱1,000 down payment</strong><p>Deductible from your total room rate</p></div></div>
+              <div className="reserve-step"><span>02</span><div><strong>Remaining balance</strong><p>Payable upon arrival</p></div></div>
+              <div className="reserve-step"><span>03</span><div><strong>₱500 security deposit</strong><p>Collected upon arrival and refundable after check-out, subject to the house rules</p></div></div>
+            </div>
+
+            <div className="reserve-payment">
+              <Banknote size={18} />
+              <div>
+                <strong>Payment method</strong>
+                <span>Bank transfer</span>
+              </div>
+            </div>
+
+            <div className="reserve-cta-box">
+              <h4>Ready to reserve?</h4>
+              <p>Send us a message with your selected dates, preferred unit, and number of guests.</p>
+              <button type="button" className="button button-primary full-width" onClick={() => setInquiryOpen(true)}>
+                Message us to reserve <ArrowUpRight size={17} />
+              </button>
+            </div>
+          </article>
+
+          <article className="reserve-card">
+            <div className="reserve-card-head">
+              <span className="reserve-kicker"><CreditCard size={15} /> Alternative</span>
+              <h3>Via Airbnb</h3>
+              <p>Prefer paying by debit or credit card? You can also reserve through Airbnb.</p>
+            </div>
+            <ul className="reserve-bullets">
+              <li><Check size={15} /> Pay through Airbnb’s available payment options</li>
+              <li><Check size={15} /> Check live availability on the platform</li>
+              <li><Check size={15} /> Ideal if you prefer card checkout</li>
+            </ul>
+            <div className="reserve-airbnb-note">
+              <Building2 size={18} />
+              <p>View our Airbnb listing to check availability and reserve your stay. Final listing link can be added here when ready.</p>
+            </div>
+            <a className="button button-outline full-width" href="https://www.airbnb.com" target="_blank" rel="noopener noreferrer">
+              View Airbnb listing <ArrowUpRight size={16} />
+            </a>
+            <p className="fine-print">Replace this with your live Airbnb listing URL when available. Booking terms on Airbnb follow the platform’s policies.</p>
+          </article>
+        </div>
+      </div></section>
+
+      
+
+      <section
           className="location-section section wrap"
           id="location"
         >
@@ -3386,319 +3440,176 @@ export default function StaycationSite({
           </div>
         </section>
 
-        <section
-          className="reviews-section section"
-          id="reviews"
-        >
-          <div className="wrap">
-            <div className="section-heading">
+        <section className="reviews-section section" id="reviews"><div className="wrap">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">GUEST LOVE NOTES</p>
+            <h2>Stays that feel like<br /><em>a soft little yes.</em></h2>
+            <p>A few words from guests who slowed down with us.</p>
+          </div>
+          <div className="reviews-heading-side">
+            <div className="reviews-score">
+              <strong>5.0</strong>
               <div>
-                <p className="eyebrow">
-                  GUEST LOVE NOTES
-                </p>
-
-                <h2>
-                  Stays that feel like
-                  <br />
-                  <em>
-                    a soft little yes.
-                  </em>
-                </h2>
-
-                <p>
-                  A few words from
-                  guests who slowed down
-                  with us.
-                </p>
+                <span className="reviews-stars" aria-hidden="true">
+                  {Array.from({ length: 5 }, (_, i) => (
+                    <Star key={i} size={14} fill="currentColor" />
+                  ))}
+                </span>
+                <small>Guest rating</small>
               </div>
+            </div>
+            <div className="reviews-controls" aria-label="Review slider controls">
+              <button type="button" className="icon-button reviews-nav" aria-label="Previous reviews" onClick={goToPrevReview}>
+                <ChevronLeft size={18} />
+              </button>
+              <button type="button" className="icon-button reviews-nav" aria-label="Next reviews" onClick={goToNextReview}>
+                <ChevronRight size={18} />
+              </button>
+            </div>
+          </div>
+        </div>
 
-              <div className="reviews-heading-side">
-                <div className="reviews-score">
-                  <strong>5.0</strong>
+        <div
+          className={`reviews-slider reviews-slider--${reviewsPerView}`}
+          onMouseEnter={() => setReviewsPaused(true)}
+          onMouseLeave={() => setReviewsPaused(false)}
+          onFocusCapture={() => setReviewsPaused(true)}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+              setReviewsPaused(false);
+            }
+          }}
+          onTouchStart={(event) => {
+            reviewTouchStartX.current =
+              event.changedTouches[0]?.clientX ?? null;
+            setReviewsPaused(true);
+          }}
+          onTouchEnd={(event) => {
+            const startX = reviewTouchStartX.current;
+            const endX = event.changedTouches[0]?.clientX ?? null;
+            reviewTouchStartX.current = null;
+            setReviewsPaused(false);
 
-                  <div>
-                    <span
-                      className="reviews-stars"
-                      aria-hidden="true"
+            if (startX == null || endX == null) return;
+
+            const delta = endX - startX;
+            if (Math.abs(delta) < 40) return;
+
+            if (delta < 0) goToNextReview();
+            else goToPrevReview();
+          }}
+        >
+          <div
+            className="reviews-track"
+            style={{
+              transform:
+                reviewsPerView > 1
+                  ? `translateX(calc(-${reviewIndex} * ((100% - var(--reviews-gap)) / ${reviewsPerView} + var(--reviews-gap))))`
+                  : `translateX(-${reviewIndex * 100}%)`,
+            }}
+            aria-live="polite"
+          >
+            {testimonials.map((review, index) => {
+              const isVisible =
+                index >= reviewIndex &&
+                index < reviewIndex + reviewsPerView;
+
+              return (
+                <article
+                  className={`review-card ${
+                    isVisible ? "is-active" : ""
+                  }`}
+                  key={review.name}
+                  aria-hidden={!isVisible}
+                >
+                  <div className="review-card-top">
+                    <Quote size={22} strokeWidth={1.4} />
+                    <div
+                      className="review-stars"
+                      aria-label={`${review.rating} out of 5 stars`}
                     >
                       {Array.from(
-                        { length: 5 },
+                        { length: review.rating },
                         (_, i) => (
                           <Star
                             key={i}
-                            size={14}
+                            size={13}
                             fill="currentColor"
                           />
                         )
                       )}
-                    </span>
-
-                    <small>
-                      Guest rating
-                    </small>
-                  </div>
-                </div>
-
-                <div
-                  className="reviews-controls"
-                  aria-label="Review slider controls"
-                >
-                  <button
-                    type="button"
-                    className="icon-button reviews-nav"
-                    aria-label="Previous reviews"
-                    onClick={() =>
-                      setReviewIndex(
-                        (current) =>
-                          (current -
-                            1 +
-                            reviewPages.length) %
-                          reviewPages.length
-                      )
-                    }
-                  >
-                    <ChevronLeft
-                      size={18}
-                    />
-                  </button>
-
-                  <button
-                    type="button"
-                    className="icon-button reviews-nav"
-                    aria-label="Next reviews"
-                    onClick={() =>
-                      setReviewIndex(
-                        (current) =>
-                          (current +
-                            1) %
-                          reviewPages.length
-                      )
-                    }
-                  >
-                    <ChevronRight
-                      size={18}
-                    />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div
-              className="reviews-slider"
-              onMouseEnter={() =>
-                setReviewsPaused(true)
-              }
-              onMouseLeave={() =>
-                setReviewsPaused(false)
-              }
-              onFocusCapture={() =>
-                setReviewsPaused(true)
-              }
-              onBlurCapture={(
-                event
-              ) => {
-                if (
-                  !event.currentTarget.contains(
-                    event.relatedTarget as Node | null
-                  )
-                ) {
-                  setReviewsPaused(
-                    false
-                  );
-                }
-              }}
-              onTouchStart={(
-                event
-              ) => {
-                reviewTouchStartX.current =
-                  event.changedTouches[0]
-                    ?.clientX ?? null;
-
-                setReviewsPaused(true);
-              }}
-              onTouchEnd={(event) => {
-                const startX =
-                  reviewTouchStartX.current;
-
-                const endX =
-                  event.changedTouches[0]
-                    ?.clientX ?? null;
-
-                reviewTouchStartX.current =
-                  null;
-
-                setReviewsPaused(false);
-
-                if (
-                  startX == null ||
-                  endX == null
-                ) {
-                  return;
-                }
-
-                const delta =
-                  endX - startX;
-
-                if (
-                  Math.abs(delta) < 40
-                ) {
-                  return;
-                }
-
-                if (delta < 0) {
-                  setReviewIndex(
-                    (current) =>
-                      (current + 1) %
-                      reviewPages.length
-                  );
-                } else {
-                  setReviewIndex(
-                    (current) =>
-                      (current -
-                        1 +
-                        reviewPages.length) %
-                      reviewPages.length
-                  );
-                }
-              }}
-            >
-              <div
-                className="reviews-track"
-                style={{
-                  transform: `translateX(-${
-                    reviewIndex * 100
-                  }%)`,
-                }}
-                aria-live="polite"
-              >
-                {reviewPages.map(
-                  (page, pageIndex) => (
-                    <div
-                      className="review-page"
-                      key={pageIndex}
-                      aria-hidden={
-                        pageIndex !==
-                        reviewIndex
-                      }
-                    >
-                      {page.map(
-                        (review) => (
-                          <article
-                            className="review-card"
-                            key={
-                              review.name
-                            }
-                          >
-                            <div className="review-card-top">
-                              <Quote
-                                size={22}
-                                strokeWidth={1.4}
-                              />
-
-                              <div
-                                className="review-stars"
-                                aria-label={`${review.rating} out of 5 stars`}
-                              >
-                                {Array.from(
-                                  {
-                                    length:
-                                      review.rating,
-                                  },
-                                  (
-                                    _,
-                                    i
-                                  ) => (
-                                    <Star
-                                      key={
-                                        i
-                                      }
-                                      size={13}
-                                      fill="currentColor"
-                                    />
-                                  )
-                                )}
-                              </div>
-                            </div>
-
-                            <p>
-                              “
-                              {
-                                review.quote
-                              }
-                              ”
-                            </p>
-
-                            <div className="review-author">
-                              <strong>
-                                {
-                                  review.name
-                                }
-                              </strong>
-
-                              <span>
-                                {
-                                  review.stay
-                                }
-                              </span>
-                            </div>
-                          </article>
-                        )
-                      )}
                     </div>
-                  )
-                )}
-              </div>
-            </div>
+                  </div>
 
-            <div
-              className="reviews-dots"
-              role="tablist"
-              aria-label="Choose a set of guest reviews"
-            >
-              {reviewPages.map(
-                (_, pageIndex) => (
-                  <button
-                    key={pageIndex}
-                    type="button"
-                    role="tab"
-                    aria-selected={
-                      pageIndex ===
-                      reviewIndex
-                    }
-                    aria-label={`Show reviews, page ${
-                      pageIndex + 1
-                    }`}
-                    className={`reviews-dot ${
-                      pageIndex ===
-                      reviewIndex
-                        ? "is-active"
-                        : ""
-                    }`}
-                    onClick={() =>
-                      setReviewIndex(
-                        pageIndex
-                      )
-                    }
-                  />
-                )
-              )}
-            </div>
+                  <p>“{review.quote}”</p>
 
-            <p className="reviews-slider-note">
-              {String(
-                reviewIndex + 1
-              ).padStart(2, "0")}{" "}
-              /{" "}
-              {String(
-                reviewPages.length
-              ).padStart(2, "0")}{" "}
-              · Swipe through guest
-              love notes
-            </p>
+                  <div className="review-author">
+                    <strong>{review.name}</strong>
+                    <span>{review.stay}</span>
+                  </div>
+                </article>
+              );
+            })}
           </div>
-        </section>
+        </div>
 
-        <section className="good-to-know-section section">
+        <div
+          className="reviews-dots"
+          role="tablist"
+          aria-label="Choose a guest review pair"
+        >
+          {Array.from({ length: reviewPages }, (_, page) => {
+            const startName =
+              testimonials[page]?.name ?? `page-${page}`;
+            const endName =
+              testimonials[
+                Math.min(
+                  page + reviewsPerView - 1,
+                  testimonials.length - 1
+                )
+              ]?.name;
+
+            return (
+              <button
+                key={`review-page-${page}-${startName}`}
+                type="button"
+                role="tab"
+                aria-selected={page === reviewIndex}
+                aria-label={
+                  reviewsPerView > 1
+                    ? `Show reviews from ${startName} and ${endName}`
+                    : `Show review from ${startName}`
+                }
+                className={`reviews-dot ${
+                  page === reviewIndex ? "is-active" : ""
+                }`}
+                onClick={() => setReviewIndex(page)}
+              />
+            );
+          })}
+        </div>
+
+        <p className="reviews-slider-note">
+          {String(reviewIndex + 1).padStart(2, "0")}
+          {reviewsPerView > 1
+            ? `–${String(
+                Math.min(
+                  reviewIndex + reviewsPerView,
+                  testimonials.length
+                )
+              ).padStart(2, "0")}`
+            : ""}
+          {" / "}
+          {String(testimonials.length).padStart(2, "0")}
+          {" · "}
+          {reviewsPerView > 1
+            ? "Two guest notes at a time"
+            : "Swipe through guest love notes"}
+        </p>
+      </div></section>
+
+      <section className="good-to-know-section section">
           <div className="wrap">
             <div className="section-heading">
               <div>
