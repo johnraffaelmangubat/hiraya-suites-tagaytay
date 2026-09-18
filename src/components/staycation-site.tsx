@@ -3638,30 +3638,13 @@ export default function StaycationSite({
                 />
 
                 <h3>
-                  Your time to settle
-                  in
+                  Check-in & Check-out
                 </h3>
 
                 <p>
-                  Hiraya check-in from{" "}
-                  <strong>
-                    5:00 PM
-                  </strong>
+                  Tower B: Check-in 5:00 PM · Check-out 3:00 PM                 
                   <br />
-                  Hiraya check-out by{" "}
-                  <strong>
-                    3:00 PM
-                  </strong>
-                  <br />
-                  Mayumi check-in from{" "}
-                  <strong>
-                    4:00 PM
-                  </strong>
-                  <br />
-                  Mayumi check-out by{" "}
-                  <strong>
-                    2:00 PM
-                  </strong>
+                  Tower 4: Check-in 4:00 PM · Check-out 2:00 PM
                 </p>
               </div>
 
