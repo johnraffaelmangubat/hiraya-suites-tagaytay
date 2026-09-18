@@ -81,6 +81,9 @@ summary {
 button {
   border: 0;
 }
+.button.margin-bottom {
+    margin-bottom: 20px;
+}
 
 svg {
   flex-shrink: 0;
