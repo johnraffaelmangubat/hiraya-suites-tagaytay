@@ -2352,6 +2352,10 @@ h1 em {
 .faq-list {
   border-top: 1px solid var(--line);
 }
+.faq-list a {
+    text-decoration: underline;
+    color: var(--bronze);
+}
 
 .faq-item {
   border-bottom: 1px solid var(--line);
