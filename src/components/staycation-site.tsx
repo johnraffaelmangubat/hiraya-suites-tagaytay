@@ -3860,6 +3860,143 @@ export default function StaycationSite({
               />
             </button>
           </div>
+
+          <div className="footer-column footer-socials">
+            <h3>
+              Follow Hiraya
+            </h3>
+
+            <p>
+              A little more Hiraya,
+              wherever you are.
+            </p>
+
+            <div
+              className="footer-social-links"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                marginTop: "14px",
+              }}
+            >
+              <a
+                href="https://www.facebook.com/share/19rPmSxiRM/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Hiraya Suites on Facebook"
+                title="Facebook"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "40px",
+                  height: "40px",
+                  border: "1px solid currentColor",
+                  borderRadius: "999px",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.6 1.7-1.6h1.5V4.8c-.3 0-1.3-.1-2.4-.1-2.4 0-4 1.5-4 4.1V11H7.6v3h2.7v8h3.2Z"
+                  />
+                </svg>
+              </a>
+
+              <a
+                href="https://www.instagram.com/hirayasuites.tagaytay?stkn=d2Z2MXN6OGh6YTQy"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Hiraya Suites on Instagram"
+                title="Instagram"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "40px",
+                  height: "40px",
+                  border: "1px solid currentColor",
+                  borderRadius: "999px",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <rect
+                    x="3.5"
+                    y="3.5"
+                    width="17"
+                    height="17"
+                    rx="4.5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  />
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="4"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  />
+                  <circle
+                    cx="17.6"
+                    cy="6.6"
+                    r="1.1"
+                    fill="currentColor"
+                  />
+                </svg>
+              </a>
+
+              <a
+                href="https://www.tiktok.com/@hirayasuites.tagaytay?_r=1&_t=ZS-99pkFOeA04i"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Hiraya Suites on TikTok"
+                title="TikTok"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "40px",
+                  height: "40px",
+                  border: "1px solid currentColor",
+                  borderRadius: "999px",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M14.2 4h3c.2 1.7 1.1 3 2.8 3.8v3.1c-1.2 0-2.2-.3-3.2-.9v5.7c0 3.2-2.3 5.3-5.4 5.3-2.9 0-5.2-2.1-5.2-5s2.2-5 5.2-5c.4 0 .8 0 1.2.1v3.1c-.4-.2-.8-.3-1.2-.3-1.1 0-2 .8-2 2s.9 2 2 2c1.3 0 2-1 2-2.3V4Z"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
 
         <div className="footer-bottom">
