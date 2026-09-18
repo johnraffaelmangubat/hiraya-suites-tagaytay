@@ -2566,6 +2566,14 @@ h1 em {
 .footer-bottom > div > a {
   margin-left: 18px;
 }
+.footer-column.footer-socials {
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+}
+.footer-column.footer-socials h3 {
+    margin: 0;
+}
 
 .back-top {
   transform: rotate(180deg);
