@@ -4505,52 +4505,141 @@ export default function StaycationSite({
       {infoDialog ===
         "privacy" && (
         <Modal
-          title="Your details, thoughtfully handled."
-          onClose={() =>
-            setInfoDialog(null)
-          }
+          title="A few things to keep in mind."
+          onClose={() => setInfoDialog(null)}
         >
-          <div className="policy-copy">
-            <h3>
-              What this website stores
-            </h3>
+        <div className="policy-copy">
+          <h3> House Rules </h3>
 
-            <p>
-              When you send an inquiry,
-              your chosen suite, name,
-              email, optional phone
-              number, message, guest
-              count, and selected dates
-              are saved in the
-              application’s database.
-            </p>
+    <p>
+      We want every guest to enjoy a
+      comfortable and peaceful stay.
+      Please take a moment to review
+      these simple house rules before
+      your stay.
+    </p>
 
-            <h3>
-              Why we ask
-            </h3>
+    <h3>
+      No Smoking Indoors
+    </h3>
 
-            <p>
-              These details are used to
-              record and review your
-              stay inquiry. No payment is
-              taken through this inquiry
-              form, and submitting an
-              inquiry does not reserve
-              dates.
-            </p>
+    <p>
+      Smoking inside the unit is strictly
+      prohibited.
+    </p>
 
-            <h3>
-              You’re in control
-            </h3>
+    <h3>
+      Keep Noise Low
+    </h3>
 
-            <p>
-              Contact and data-retention
-              policies should be finalized
-              by the property owner before
-              launch.
-            </p>
-          </div>
-        </Modal>
+    <p>
+      Enjoy the peaceful Tagaytay vibe.
+      Please avoid loud noise, especially
+      late at night, and be considerate
+      of our neighbors.
+    </p>
+
+    <h3>
+      Maximum Guests
+    </h3>
+
+    <p>
+      Please follow the unit's maximum
+      guest capacity. Only registered
+      guests are allowed to stay overnight.
+    </p>
+
+    <h3>
+      Care for the Space
+    </h3>
+
+    <p>
+      Please keep the unit reasonably tidy
+      during your stay. There is no need
+      to deep-clean before checkout, but
+      we kindly ask that you avoid leaving
+      a large mess behind.
+    </p>
+
+    <h3>
+      Save Energy
+    </h3>
+
+    <p>
+      Please turn off the lights, air
+      conditioning, and other appliances
+      when they are not in use or when
+      leaving the unit.
+    </p>
+
+    <h3>
+      Damaged or Lost Items
+    </h3>
+
+    <p>
+      Accidents happen. If anything is
+      damaged, broken, stained, or missing,
+      please let us know as soon as possible
+      so we can address it promptly.
+    </p>
+
+    <h3>
+      Do Not Remove Items
+    </h3>
+
+    <p>
+      All unit items, including decor,
+      linens, appliances, and other
+      furnishings, must remain inside the
+      condo. Please do not take any items
+      with you.
+    </p>
+
+    <h3>
+      Trash Disposal
+    </h3>
+
+    <p>
+      Before checkout, please dispose of
+      your garbage in the building's
+      designated disposal area. This helps
+      us keep the space fresh and ready
+      for the next guest.
+    </p>
+
+    <h3>
+      Security Deposit
+    </h3>
+
+    <p>
+      Any damage, stains, or missing items
+      found after your stay may be deducted
+      from the security deposit. We
+      appreciate your help in treating the
+      space with the same care you would
+      give your own home.
+    </p>
+
+    <h3>
+      Important Reminders
+    </h3>
+
+    <p>
+      Please do not unplug the refrigerator.
+      It must remain plugged in at all times
+      to prevent spoilage and maintain proper
+      operation.
+    </p>
+
+    <p>
+      If anything breaks, spills, or gets
+      damaged during your stay, please let
+      us know immediately rather than waiting
+      until checkout. Prompt reporting allows
+      us to assist you as quickly as possible.
+    </p>
+  </div>
+</Modal>
       )}
 
       {infoDialog ===
