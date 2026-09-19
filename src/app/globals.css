@@ -1675,7 +1675,7 @@ h1 em {
   font-family: var(--font-serif), serif;
   font-style: italic;
   max-width: none;
-  min-height: 150px;
+  min-height: 100px;
 }
 
 .review-author strong {
