@@ -376,7 +376,7 @@ const testimonials = [
     name: "J & A",
     stay: "Tower B Suite · Birthday Celebration",
     quote:
-      "We had fun here last night. We spent my BF 25th bday and it was a blast. We hd an amazing memories in this unit",
+      "We had fun here last night. We spent my bf 25th bday and it was a blast. We had an amazing memories in this unit",
     rating: 5,
   },
 ];
