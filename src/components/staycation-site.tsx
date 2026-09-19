@@ -338,45 +338,45 @@ const surprisePackages = [
 
 const testimonials = [
   {
-    name: "Alyssa & Marco",
+    name: "Tracy",
     stay: "Tower B Suite · Anniversary weekend",
     quote:
-      "The suite felt warm the moment we walked in. Soft lighting, a quiet balcony, and everything we needed for a slow, lovely stay.",
+      "The best! Feels like home. Will definitely go back but with my partner soon. Celebrated our anniversary here alone since LDR kami but still enjoyed staying here!",
     rating: 5,
   },
   {
-    name: "Denise R.",
-    stay: "Tower 4 Studio · Solo reset",
+    name: "J&J",
+    stay: "Tower B Suite · Weekend Reset",
     quote:
-      "Small but so thoughtfully put together. I came for a quiet night and left feeling completely recharged.",
+      "Thank you Hiraya, sobrang nice ng room ang bango. super enjoy ang stay ng 3 days and 2 nights. Babalik ulit for aure!!!",
     rating: 5,
   },
   {
-    name: "The Santos Family",
+    name: "Secret",
     stay: "Tower B Suite · Family staycation",
     quote:
-      "Plenty of space for four, easy check-in, and the building amenities made the kids so happy. We’ll be back.",
+      "Thank you so much!! nag enjoy po kami sa pag stay sa unit nyo po. Also, Thank you rin po sa mabilis na pag respond sa mga messages pag may kailangan kami!",
     rating: 5,
   },
   {
-    name: "Jenna & Paul",
-    stay: "Tower 4 Studio · Monthsary escape",
+    name: "Kenn & Maui",
+    stay: "Tower B Suite · Anniversary escape",
     quote:
-      "We requested the surprise set-up and it was perfect. Walking into fairy lights and balloons made the whole night feel extra special.",
+      "Thank you so much! Super maasikaso, mabait. Super minimalist ng designs, clean look ang atake. we really enjoyed our stay here po. sure na sure na babalik and well try your other unit. Thank you so much! We appreciate you po! It's our anniversary",
     rating: 5,
   },
   {
-    name: "Chris L.",
+    name: "KP & JD",
     stay: "Tower B Suite · Work-from-getaway",
     quote:
-      "Quiet, clean, and easy to settle into. Fast Wi-Fi, a comfy desk corner, and the pool downstairs when I needed a break.",
+      "Hiraya is perfect! Very clean, smells good, and has everything you need. No problems at all during our stay. It is so relaxing, I honestly want to live here! You will surely love this place. Highly recommended",
     rating: 5,
   },
   {
-    name: "Mia & Friends",
-    stay: "Tower B Suite · Girls’ staycation",
+    name: "J & A",
+    stay: "Tower B Suite · Birthday Celebration",
     quote:
-      "Beautiful space, thoughtful touches, and booking was simple. It truly felt like a little pause from everyday life.",
+      "We had fun here last night. We spent my BF 25th bday and it was a blast. We hd an amazing memories in this unit",
     rating: 5,
   },
 ];
