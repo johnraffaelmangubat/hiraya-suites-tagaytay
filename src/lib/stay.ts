@@ -36,7 +36,7 @@ export const UNITS: Unit[] = [
     description:
       "Our signature one-bedroom suite is the one for slow mornings and easy evenings — a proper bedroom with a queen bed, a full living area that converts to extra sleeping space, a private balcony, and room to unwind with a garden or city view.",
     size: "23.23 sqm",
-    beds: "1 queen bed + double sofa bed",
+    beds: "1 Queen Bed + Double Sofa Bed",
     maxGuests: 4,
     weekdayRate: 1999,
     weekendRate: 2199,
