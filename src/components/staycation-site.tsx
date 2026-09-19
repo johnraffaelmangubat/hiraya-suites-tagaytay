@@ -345,14 +345,14 @@ const testimonials = [
     rating: 5,
   },
   {
-    name: "J&J",
+    name: "J & J",
     stay: "Tower B Suite · Weekend Reset",
     quote:
       "Thank you Hiraya, sobrang nice ng room ang bango. super enjoy ang stay ng 3 days and 2 nights. Babalik ulit for aure!!!",
     rating: 5,
   },
   {
-    name: "Secret",
+    name: " M & M",
     stay: "Tower B Suite · Family staycation",
     quote:
       "Thank you so much!! nag enjoy po kami sa pag stay sa unit nyo po. Also, Thank you rin po sa mabilis na pag respond sa mga messages pag may kailangan kami!",
