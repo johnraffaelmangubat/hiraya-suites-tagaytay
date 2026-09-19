@@ -4008,7 +4008,7 @@ export default function StaycationSite({
                 )
               }
             >
-              Privacy
+              House Rules
             </button>
 
             <span>·</span>
