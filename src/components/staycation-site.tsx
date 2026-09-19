@@ -4496,7 +4496,7 @@ export default function StaycationSite({
               </div>
 
               <p className="fine-print">
-                A little visual inspiration. These are placeholder photos, not images of the actual units. Each photo is tagged so you can tell Hiraya from Mayumi at a glance.
+                A little visual inspiration. Each photo is tagged so you can tell Tower 4 from Tower B at a glance.
               </p>
             </div>
           </Modal>
