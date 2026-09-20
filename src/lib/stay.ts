@@ -71,7 +71,7 @@ export const UNITS: Unit[] = [
       "24/7 building security",
       "Private balcony",
     ],
-    heroImage: "/images/living-room.jpg",
+    heroImage: "/images/towerb/bedroom.jpg",
     galleryTag: "The signature suite",
   },
   {
