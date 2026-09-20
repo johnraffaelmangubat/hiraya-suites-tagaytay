@@ -2614,10 +2614,12 @@ export default function StaycationSite({
                     <div>
                       <strong>
                         ₱300
+                        <span className="inline-rate">
+                          / head / day
+                        </span>
                       </strong>
 
                       <span>
-                        / head / day ·
                         Holidays
                       </span>
                     </div>
