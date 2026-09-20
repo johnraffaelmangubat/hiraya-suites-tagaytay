@@ -213,6 +213,22 @@ const photos: GalleryPhoto[] = [
     suite: "shared",
     alt: "An outdoor swimming pool surrounded by tropical palm trees",
   },
+  {
+    id: "shared-pool",
+    src: "/images/clubhouse-garden.jpg",
+    title: "A slower kind of afternoon",
+    room: "Building pool",
+    suite: "shared",
+    alt: "An outdoor swimming pool surrounded by tropical palm trees",
+  },
+  {
+    id: "shared-pool",
+    src: "/images/clubhouse-lounge.jpg",
+    title: "A slower kind of afternoon",
+    room: "Building pool",
+    suite: "shared",
+    alt: "An outdoor swimming pool surrounded by tropical palm trees",
+  },
 ];
 
 const galleryGroups: {
