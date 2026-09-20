@@ -2601,7 +2601,7 @@ export default function StaycationSite({
                     <div>
                       <strong>
                         ₱150
-                        <span>
+                        <span className="inline-rate">
                           / head / day
                         </span>
                       </strong>
