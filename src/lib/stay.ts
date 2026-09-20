@@ -117,7 +117,7 @@ export const UNITS: Unit[] = [
       "Hair dryer",
       "24/7 building security",
     ],
-    heroImage: "/images/mayumi-studio.jpg",
+    heroImage: "/images/tower4/bedroom.jpg",
     galleryTag: "The cozy studio",
   },
 ];
