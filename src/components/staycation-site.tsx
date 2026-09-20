@@ -50,6 +50,7 @@ import {
   Snowflake,
   Sparkles,
   Star,
+  Store,
   Sun,
   Target,
   Tv,
