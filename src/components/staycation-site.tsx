@@ -691,16 +691,8 @@ const unitAmenityMap: Record<
       label: "Full kitchen",
     },
     {
-      icon: Utensils,
-      label: "Dining for four",
-    },
-    {
       icon: Refrigerator,
-      label: "Full refrigerator",
-    },
-    {
-      icon: Monitor,
-      label: "Laptop nook",
+      label: "Refrigerator",
     },
     {
       icon: Wind,
@@ -714,7 +706,7 @@ const unitAmenityMap: Record<
   mayumi: [
     {
       icon: BedDouble,
-      label: "Queen bed",
+      label: "Double sofa bed",
     },
     {
       icon: Bath,
@@ -730,7 +722,7 @@ const unitAmenityMap: Record<
     },
     {
       icon: Refrigerator,
-      label: "Mini refrigerator",
+      label: "Refrigerator",
     },
     {
       icon: Monitor,
