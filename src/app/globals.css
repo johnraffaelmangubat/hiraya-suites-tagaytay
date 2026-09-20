@@ -1322,6 +1322,7 @@ h1 em {
 .facility-rates > div { padding: 16px 14px; border-radius: 10px; background: #f5f0e6; }
 .facility-rates strong { display: block; font-family: var(--font-serif), serif; font-size: 28px; font-weight: 500; color: #5d4a31; line-height: 1; }
 .facility-rates span { display: block; margin-top: 7px; font-size: 14px; color: #8a7d68; line-height: 1.5; }
+.facility-rates .inline-rate { display: inline-block; margin-left: 5px; }
 .facility-rules { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
 .facility-rules li { display: flex; gap: 10px; align-items: flex-start; color: #6d6150; font-size: 14px; line-height: 1.6; }
 .facility-rules svg { color: #8d7a5c; margin-top: 2px; flex-shrink: 0; }
