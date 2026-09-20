@@ -2601,10 +2601,12 @@ export default function StaycationSite({
                     <div>
                       <strong>
                         ₱150
+                        <span>
+                          / head / day
+                        </span>
                       </strong>
 
                       <span>
-                        / head / day ·
                         Regular days
                       </span>
                     </div>
