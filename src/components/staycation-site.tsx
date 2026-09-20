@@ -380,6 +380,48 @@ const testimonials = [
       "We had fun here last night. We spent my bf 25th bday and it was a blast. We had an amazing memories in this unit",
     rating: 5,
   },
+  {
+    name: "HR",
+    stay: "Tower B Suite · Weekend Getaway",
+    quote:
+      "Thank you po! Super ganda and malinis we really enjoyed oour stay!",
+    rating: 5,
+  },
+  {
+    name: "Sannmigg",
+    stay: "Tower B Suite · Relax",
+    quote:
+      "I enjoyed the vibe and the weather!!! I feel at peace, Thank you Hiraya!!",
+    rating: 5,
+  },
+  {
+    name: "Cess & Nicki",
+    stay: "Tower 4 Suite · NBA 2K",
+    quote:
+      "Thank you so much po! We really enjoyed our stay! babalik po kami ulit next time para talunin ulit ang asawa ko sa NBA 2k! LOL",
+    rating: 5,
+  },
+  {
+    name: "S & J",
+    stay: "Tower 4 Suite · City View",
+    quote:
+      "Sobrang linis ng unit, lahat ng need naandito, so far ito ang pinaka maganda at pinaka malinis na staycation. Babalik balikan!",
+    rating: 5,
+  },
+  {
+    name: "AJ & NJ",
+    stay: "Tower 4 Suite · City View",
+    quote:
+      "Thank you for this amazing place! 10/10. Second time booking here! and they didn't disappoint! Thank you for letting us experience your new units. More blessings and customer to come!!",
+    rating: 5,
+  },
+  {
+    name: "J & L",
+    stay: "Tower 4 Suite · City View",
+    quote:
+      "Great service and a wonderful host! Very welcomed and comfortable throughout our stay. Thank you for the excellent hospitality. Highly recommended!",
+    rating: 5,
+  },
 ];
 
 const unitAmenityMap: Record<
