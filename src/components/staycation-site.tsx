@@ -289,9 +289,9 @@ const propertyAmenities = [
     detail: "Feel at ease throughout your stay.",
   },
   {
-    icon: Coffee,
-    name: "Coffee essentials",
-    detail: "Good mornings start here.",
+    icon: Store,
+    name: "Honesty Store",
+    detail: "Grab what you need, anytime.",
   },
   {
     icon: ParkingCircle,
