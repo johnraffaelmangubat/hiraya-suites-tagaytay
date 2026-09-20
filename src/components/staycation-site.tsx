@@ -403,23 +403,37 @@ const testimonials = [
   },
   {
     name: "S & J",
-    stay: "Tower 4 Suite · City View",
+    stay: "Tower 4 Suite · Couple's getaway",
     quote:
       "Sobrang linis ng unit, lahat ng need naandito, so far ito ang pinaka maganda at pinaka malinis na staycation. Babalik balikan!",
     rating: 5,
   },
   {
     name: "AJ & NJ",
-    stay: "Tower 4 Suite · City View",
+    stay: "Tower 4 Suite · Second stay",
     quote:
       "Thank you for this amazing place! 10/10. Second time booking here! and they didn't disappoint! Thank you for letting us experience your new units. More blessings and customer to come!!",
     rating: 5,
   },
   {
     name: "J & L",
-    stay: "Tower 4 Suite · City View",
+    stay: "Tower 4 Suite · Relaxing getaway",
     quote:
       "Great service and a wonderful host! Very welcomed and comfortable throughout our stay. Thank you for the excellent hospitality. Highly recommended!",
+    rating: 5,
+  },
+  {
+    name: "Jesalyn",
+    stay: "Tower B Suite · Cozy Escape",
+    quote:
+      "Our staycation may have been short, but it was exactly the cozy escape we needed. We especially loved how calm and cozy the ambiance was — perfect for resting, unwinding, and spending quality time together. Even though we only stayed for a short while, it still felt refreshing and memorable. Definitely a place we’d love to come back to for a longer stay next time!",
+    rating: 5,
+  },
+  {
+    name: "Chevrolette",
+    stay: "Tower B Suite · Weekend getaway",
+    quote:
+      "Highly recommend! very responsive & accommodating, we enjoy our stay thank you so much!",
     rating: 5,
   },
 ];
