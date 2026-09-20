@@ -213,14 +213,6 @@ const photos: GalleryPhoto[] = [
     suite: "shared",
     alt: "An outdoor swimming pool surrounded by tropical palm trees",
   },
-  {
-    id: "shared-mornings",
-    src: "/images/slow-mornings.jpg",
-    title: "No alarms. No hurry.",
-    room: "Slow mornings",
-    suite: "shared",
-    alt: "A cup of coffee beside an open book and a dried rose on soft linen",
-  },
 ];
 
 const galleryGroups: {
