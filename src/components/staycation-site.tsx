@@ -2452,7 +2452,7 @@ export default function StaycationSite({
                 <div className="facility-feature-photos">
                   <div className="facility-photo facility-photo--main">
                     <Image
-                      src="/images/pool.jpg"
+                      src="/images/outdoor-pool.jpg"
                       alt="Outdoor swimming pool surrounded by tropical greenery"
                       fill
                       sizes="(max-width: 800px) 100vw, 55vw"
@@ -2465,7 +2465,7 @@ export default function StaycationSite({
 
                   <div className="facility-photo facility-photo--side">
                     <Image
-                      src="/images/indoor-pool.jpg"
+                      src="/images/outdoor-pools.jpg"
                       alt="Indoor swimming pool with calm blue water"
                       fill
                       sizes="(max-width: 800px) 100vw, 30vw"
