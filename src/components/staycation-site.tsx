@@ -1699,7 +1699,7 @@ export default function StaycationSite({
               <span className="little-dot" />
 
               <span>
-                Hiraya Suite SMDC Wind Residences
+                SMDC Wind Residences
               </span>
             </div>
 
@@ -2512,7 +2512,7 @@ export default function StaycationSite({
             <div className="section-heading">
               <div>
                 <p className="eyebrow">
-                  SMDC BUILDING AMENITIES
+                  SMDC AMENITIES
                   & FACILITIES
                 </p>
 
@@ -2528,7 +2528,7 @@ export default function StaycationSite({
                 <p>
                   Guests of Hiraya
                   Suites can enjoy the
-                  building’s shared
+                  condominium’s shared
                   facilities, subject to
                   schedules and house
                   rules.
