@@ -3507,7 +3507,7 @@ export default function StaycationSite({
                 rel="noopener noreferrer"
                 className="text-link"
               >
-                Request this set-up{" "}
+                Ask about add-ons{" "}
                 <ArrowRight size={15} />
               </a>
             </aside>
