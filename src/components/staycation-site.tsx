@@ -3977,22 +3977,21 @@ export default function StaycationSite({
               <br />
               We’re happy to help.
             </p>
-
-            <button
-              type="button"
+           <a
+             href="https://m.me/HirayaSuitesTagaytay"
+             target="_blank"
+             rel="noopener noreferrer"
               className="text-link"
-              onClick={() =>
-                setInquiryOpen(true)
-              }
             >
-              <MessageCircle
+             <MessageCircle
                 size={17}
               />{" "}
               Ask your host{" "}
               <ArrowUpRight
                 size={16}
               />
-            </button>
+            </a>
+
           </div>
 
           <div className="faq-list">
