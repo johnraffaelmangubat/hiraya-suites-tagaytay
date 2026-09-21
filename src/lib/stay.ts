@@ -34,7 +34,7 @@ export const UNITS: Unit[] = [
     eyebrow: "GARDEN & CITY VIEW",
     tagline: "Roomy, sunlit, made for lingering.",
     description:
-      "Our signature one-bedroom suite is the one for slow mornings and easy evenings — a proper bedroom with a queen bed, a full living area that converts to extra sleeping space, a private balcony, and room to unwind with a garden or city view.",
+      "Our signature one-bedroom suite is the one for slow mornings and easy evenings — a plush queen bed plus a queen sofa bed, a private balcony with garden and city views, and self check-in so you can settle in on your own time. Light cooking is welcome, and everything from a rice cooker to Netflix on the 55inch TV is ready when you are.",
     size: "23.23 sqm",
     beds: "1 Queen Bed + Double Sofa Bed",
     maxGuests: 4,
@@ -81,7 +81,7 @@ export const UNITS: Unit[] = [
     eyebrow: "CITY VIEW",
     tagline: "Compact, charming, quietly lovely.",
     description:
-      "Soft, quiet studio for two — a thoughtful open-plan space with a plush double bed, a compact kitchenette, and all the little comforts you need for a sweet Tagaytay escape.",
+      "A soft, quiet studio with a full double bed dressed for comfort, a private balcony with city views, and self check-in so you can arrive on your own schedule. Light cooking is welcome, with a full set of kitchen appliances, Netflix on the 55inch TV, and even karaoke and board games for a proper Tagaytay night in.",
     size: "26.62 sqm",
     beds: "1 Full Double Sized Bed and Pullout Bed",
     maxGuests: 4,
