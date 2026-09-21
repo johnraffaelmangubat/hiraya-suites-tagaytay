@@ -3447,20 +3447,15 @@ export default function StaycationSite({
                     )}
                   </ul>
 
-                  <button
-                    type="button"
+                  <a>
+                    href="https://m.me/HirayaSuitesTagaytay"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="button button-outline full-width"
-                    onClick={() =>
-                      setInquiryOpen(
-                        true
-                      )
-                    }
                   >
-                    Request this set-up{" "}
-                    <ArrowUpRight
-                      size={16}
-                    />
-                  </button>
+                  Request this set-up{" "}
+                  <ArrowUpRight size={16} />
+                  </a>
                 </article>
               )
             )}
