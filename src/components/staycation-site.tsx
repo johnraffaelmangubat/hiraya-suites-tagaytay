@@ -2554,14 +2554,14 @@ export default function StaycationSite({
 
                   <div className="facility-photo facility-photo--side">
                     <Image
-                      src="/images/outdoor-pools.jpg"
+                      src="/images/playground.jpg"
                       alt="Indoor swimming pool with calm blue water"
                       fill
                       sizes="(max-width: 800px) 100vw, 30vw"
                     />
 
                     <span className="facility-photo-tag">
-                      Indoor pool
+                      Playground
                     </span>
                   </div>
                 </div>
