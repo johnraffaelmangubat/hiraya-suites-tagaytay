@@ -527,12 +527,12 @@ const propertyAmenities = [
 ];
 
 const facilitySports = [
-  { name: "Basketball Court", note: "80/head • Electricity 200/hr" },
-  { name: "Tennis Court", note: "50/head • Electricity 200/hr" },
-  { name: "Badminton Court", note: "Free equipment available in unit • Electricity 200/hr" },
-  { name: "Pickleball Court", note: "Free equipment available in unit • Electricity 200/hr" },
-  { name: "Billiards", note: "150/hr • Electricity Free • Cue stick rental 50/pc/hr" },
-  { name: "Darts", note: "150/hr • Electricity Free • Dart pins 50/hr" },
+  { name: "Basketball Court", note: "₱80/head • Electricity 200/hr" },
+  { name: "Tennis Court", note: "₱50/head • Electricity ₱200/hr" },
+  { name: "Badminton Court", note: "Free equipment available in unit • Electricity ₱200/hr" },
+  { name: "Pickleball Court", note: "Free equipment available in unit • Electricity ₱200/hr" },
+  { name: "Billiards", note: "₱150/hr • Electricity Free • Cue stick rental ₱50/pc/hr" },
+  { name: "Darts", note: "150/hr • Electricity Free • Dart pins ₱50/hr" },
   { name: "Table Tennis", note: "Free equipment available in unit • Electricity Free" },
 ];
 
