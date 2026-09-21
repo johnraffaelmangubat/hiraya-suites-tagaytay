@@ -1752,7 +1752,7 @@ export default function StaycationSite({
               aria-label="Explore the Hiraya Suite photo gallery"
             >
               <Image
-                src="/images/living-room.jpg"
+                src="/images/banner-one.jpg"
                 alt={photos[0].alt}
                 fill
                 priority
@@ -1800,7 +1800,7 @@ export default function StaycationSite({
               aria-label="View the Mayumi Studio gallery"
             >
               <Image
-                src="/images/mayumi-studio.jpg"
+                src="/images/banner-two.jpg"
                 alt={
                   photos.find(
                     (photo) =>
