@@ -12,6 +12,9 @@
   --sand: #f1eee6;
   --green: #7b8d74;
 }
+.booking-wrap.wrap {
+  display:none;
+}
 
 * { box-sizing: border-box; }
 
