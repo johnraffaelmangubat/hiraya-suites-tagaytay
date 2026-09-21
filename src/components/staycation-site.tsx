@@ -85,6 +85,7 @@ const navLinks = [
   { label: "Amenities", id: "amenities" },
   { label: "Gallery", id: "gallery" },
   { label: "Availability", id: "availability" },
+  { label: "How to Book", id: "reserve" },
   { label: "Location", id: "location" },
 ];
 
