@@ -272,8 +272,8 @@ const photos: GalleryPhoto[] = [
   {
     id: "mayumi-studio",
     src: "/images/tower4/bedroom-seven.jpg",
-    title: "A view worth waking up to",
-    room: "Window view",
+    title: "Every corner, thoughtfully placed",
+    room: "Living & sleeping area",
     suite: "mayumi",
     alt: "Cozy open-plan studio apartment with warm wood, neutral tones, and sunlight",
   },
