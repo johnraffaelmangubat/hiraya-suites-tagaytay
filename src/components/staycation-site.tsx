@@ -2960,10 +2960,7 @@ export default function StaycationSite({
               )
             )}
           </div>
-
-          <p className="gallery-note">
-            Page previews stay compact on purpose. Add as many photos as you like — guests open the full set in the lightbox, grouped by suite. Photography is illustrative.
-          </p>
+          
         </section>
 
         <section
