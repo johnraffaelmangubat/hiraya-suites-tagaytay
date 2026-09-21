@@ -3447,14 +3447,14 @@ export default function StaycationSite({
                     )}
                   </ul>
 
-                  <a>
+                  <a
                     href="https://m.me/HirayaSuitesTagaytay"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="button button-outline full-width"
                   >
-                  Request this set-up{" "}
-                  <ArrowUpRight size={16} />
+                    Request this set-up{" "}
+                    <ArrowUpRight size={16} />
                   </a>
                 </article>
               )
@@ -3501,17 +3501,15 @@ export default function StaycationSite({
                   · Monthsary
                 </span>
               </div>
-
-              <button
-                type="button"
+              <a
+                href="https://m.me/HirayaSuitesTagaytay"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-link"
-                onClick={() =>
-                  setInquiryOpen(true)
-                }
               >
-                Ask about add-ons{" "}
+                Request this set-up{" "}
                 <ArrowRight size={15} />
-              </button>
+              </a>
             </aside>
           </div>
         </section>
