@@ -4259,7 +4259,7 @@ export default function StaycationSite({
             days.
           </p>
 
-          <div>
+          <div className="pop-up-footer">
             <button
               type="button"
               onClick={() =>
