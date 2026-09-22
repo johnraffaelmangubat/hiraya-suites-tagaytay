@@ -128,7 +128,14 @@ export const UNITS: Unit[] = [
 export const DEFAULT_UNIT: UnitId = "hiraya";
 
 export const HOLIDAY_DATES = new Set<string>([
+  "2026-10-31", 
+  "2026-11-01", 
+  "2026-11-02", 
+  "2026-11-30", 
+  "2026-12-24",
   "2026-12-25", // Christmas Day
+  "2026-12-26",
+  "2026-12-30",
   "2026-12-31", // New Year's Eve
   "2026-01-01", // New Year's Day
   // add more holiday dates here as "YYYY-MM-DD"
