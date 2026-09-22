@@ -4106,6 +4106,15 @@ export default function StaycationSite({
               <br />
               or a little help planning?
             </p>
+            <a
+              href="https://m.me/HirayaSuitesTagaytay"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-link"
+            >
+              Ask about add-ons{" "}
+              <ArrowRight size={15} />
+            </a>
           </div>
 
           <div className="footer-column footer-socials">
