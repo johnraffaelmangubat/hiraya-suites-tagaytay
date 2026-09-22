@@ -3,7 +3,10 @@ import { db } from "@/db";
 import { inquiries } from "@/db/schema";
 import { and, eq, gte } from "drizzle-orm";
 import { readAvailability } from "@/lib/availability";
+import { Resend } from "resend";
 import {
+  formatDate,
+  formatMoney,
   getNights,
   getQuote,
   getUnit,
@@ -11,6 +14,8 @@ import {
   UNITS,
   type UnitId,
 } from "@/lib/stay";
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -351,11 +356,54 @@ export async function POST(request: NextRequest) {
           id: inquiries.id,
         });
 
+    const reference = `HIR-${inquiry.id
+      .slice(0, 8)
+      .toUpperCase()}`;
+
+    // Send a notification email — this should never block or fail the response
+    try {
+      await resend.emails.send({
+        from: "Hiraya Suites <onboarding@resend.dev>",
+        to: "hirayasuites.tagaytay@gmail.com",
+        replyTo: email,
+        subject: `New inquiry: ${unit.shortName} — ${reference}`,
+        html: `
+          <h2>New inquiry received</h2>
+          <p><strong>Reference:</strong> ${reference}</p>
+          <p><strong>Suite:</strong> ${unit.name}</p>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Phone:</strong> ${phone || "—"}</p>
+          <p><strong>Guests:</strong> ${guests}</p>
+          ${
+            hasDates
+              ? `<p><strong>Dates:</strong> ${formatDate(
+                  body.checkIn
+                )} – ${formatDate(
+                  body.checkOut,
+                  true
+                )}</p>
+                 <p><strong>Estimated total:</strong> ${formatMoney(
+                   estimatedTotal ?? 0
+                 )}</p>`
+              : "<p><strong>Dates:</strong> Not specified</p>"
+          }
+          <p><strong>Message:</strong></p>
+          <p>${message.replace(/\n/g, "<br />")}</p>
+        `,
+      });
+    } catch (emailError) {
+      console.error(
+        "Inquiry email could not be sent:",
+        emailError instanceof Error
+          ? emailError.message
+          : "Unknown error"
+      );
+    }
+
     return NextResponse.json(
       {
-        reference: `HIR-${inquiry.id
-          .slice(0, 8)
-          .toUpperCase()}`,
+        reference,
         suite: unit.shortName,
         message:
           "Your inquiry has been saved. No payment has been taken and your dates are not yet reserved.",
