@@ -4106,19 +4106,6 @@ export default function StaycationSite({
               <br />
               or a little help planning?
             </p>
-
-            <button
-              type="button"
-              className="text-link"
-              onClick={() =>
-                setInquiryOpen(true)
-              }
-            >
-              Say hello{" "}
-              <ArrowUpRight
-                size={16}
-              />
-            </button>
           </div>
 
           <div className="footer-column footer-socials">
