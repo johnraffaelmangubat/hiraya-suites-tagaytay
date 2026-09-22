@@ -4112,7 +4112,7 @@ export default function StaycationSite({
               rel="noopener noreferrer"
               className="text-link"
             >
-              Ask about add-ons{" "}
+              Say Hello! {" "}
               <ArrowRight size={15} />
             </a>
           </div>
