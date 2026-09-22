@@ -4273,7 +4273,7 @@ export default function StaycationSite({
 
             <span>·</span>
 
-            <button
+            <button className="pop-up-footer"
               type="button"
               onClick={() =>
                 setInfoDialog(
