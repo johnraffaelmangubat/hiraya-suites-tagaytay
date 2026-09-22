@@ -12,6 +12,7 @@ export type Unit = {
   maxGuests: number;
   weekdayRate: number;
   weekendRate: number;
+  holidayRate: number;
   additionalGuestFee: number;
   baseGuests: number;
   minNights: number;
@@ -40,6 +41,7 @@ export const UNITS: Unit[] = [
     maxGuests: 4,
     weekdayRate: 1999,
     weekendRate: 2199,
+    holidayRate: 2599,
     additionalGuestFee: 300,
     baseGuests: 2,
     minNights: 1,
@@ -87,6 +89,7 @@ export const UNITS: Unit[] = [
     maxGuests: 4,
     weekdayRate: 1999,
     weekendRate: 2199,
+    holidayRate: 2599,
     additionalGuestFee: 300,
     baseGuests: 2,
     minNights: 1,
@@ -123,6 +126,17 @@ export const UNITS: Unit[] = [
 ];
 
 export const DEFAULT_UNIT: UnitId = "hiraya";
+
+export const HOLIDAY_DATES = new Set<string>([
+  "2026-12-25", // Christmas Day
+  "2026-12-31", // New Year's Eve
+  "2026-01-01", // New Year's Day
+  // add more holiday dates here as "YYYY-MM-DD"
+]);
+
+export function isHoliday(dateKey: string): boolean {
+  return HOLIDAY_DATES.has(dateKey);
+}
 
 export function getUnit(unitId: UnitId): Unit {
   return UNITS.find((u) => u.id === unitId) ?? UNITS[0];
@@ -223,10 +237,11 @@ export function getQuote(
     (sum, night) => {
       const day = fromDateKey(night).getDay();
 
-      const nightlyRate =
-        day === 5 || day === 6
-          ? unit.weekendRate
-          : unit.weekdayRate;
+      const nightlyRate = isHoliday(night)
+        ? unit.holidayRate
+        : day === 5 || day === 6
+        ? unit.weekendRate
+        : unit.weekdayRate;
 
       return sum + nightlyRate;
     },
