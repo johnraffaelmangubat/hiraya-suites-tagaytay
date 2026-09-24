@@ -4127,6 +4127,10 @@ export default function StaycationSite({
             <h3>
               Follow Hiraya
             </h3>
+            <div className="footer-column footer-socials">
+            <h3>
+              Follow Hiraya
+            </h3>
             <div
               className="footer-social-links"
               style={{
@@ -4247,42 +4251,6 @@ export default function StaycationSite({
                   <path
                     fill="#b5a389"
                     d="M14.2 4h3c.2 1.7 1.1 3 2.8 3.8v3.1c-1.2 0-2.2-.3-3.2-.9v5.7c0 3.2-2.3 5.3-5.4 5.3-2.9 0-5.2-2.1-5.2-5s2.2-5 5.2-5c.4 0 .8 0 1.2.1v3.1c-.4-.2-.8-.3-1.2-.3-1.1 0-2 .8-2 2s.9 2 2 2c1.3 0 2-1 2-2.3V4Z"
-                  />
-                </svg>
-              </a>
-
-              
-                href="https://www.threads.net/@hirayasuites.tagaytay"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Hiraya Suites on Threads"
-                title="Threads"
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "40px",
-                  height: "40px",
-                  border: "1px solid #b5a389",
-                  borderRadius: "999px",
-                  color: "inherit",
-                  textDecoration: "none",
-                }}
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  width="18"
-                  height="18"
-                  aria-hidden="true"
-                  focusable="false"
-                >
-                  <path
-                    fill="#b5a389"
-                    d="M16.7 11.4c-.1-.1-.3-.1-.4-.2-.2-2.5-1.6-3.9-3.9-3.9-1.3 0-2.5.6-3.2 1.6l1.3.9c.5-.7 1.2-1 1.9-1 1.1 0 1.9.6 2.1 1.8-.5-.1-1.1-.2-1.7-.2-2.1 0-3.6 1.1-3.6 2.8 0 1.5 1.3 2.6 3.1 2.6 1.3 0 2.4-.6 3-1.6.1.5.4 1 .8 1.3l1.2-.9c-.5-.4-.7-.9-.7-1.7v-.5c0-.3 0-.6-.1-1Zm-4.5 3.1c-.9 0-1.5-.4-1.5-1.1 0-.7.7-1.2 1.9-1.2.5 0 1 .1 1.5.2-.1 1.4-.9 2.1-1.9 2.1Z"
-                  />
-                  <path
-                    fill="#b5a389"
-                    d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2Zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8Z"
                   />
                 </svg>
               </a>
