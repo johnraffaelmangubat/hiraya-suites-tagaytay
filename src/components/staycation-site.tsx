@@ -4135,7 +4135,7 @@ export default function StaycationSite({
                 gap: "10px",
               }}
             >
-              <a
+              
                 href="https://www.facebook.com/share/19rPmSxiRM/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -4167,7 +4167,7 @@ export default function StaycationSite({
                 </svg>
               </a>
 
-              <a
+              
                 href="https://www.instagram.com/hirayasuites.tagaytay?stkn=d2Z2MXN6OGh6YTQy"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -4219,7 +4219,7 @@ export default function StaycationSite({
                 </svg>
               </a>
 
-              <a
+              
                 href="https://www.tiktok.com/@hirayasuites.tagaytay?_r=1&_t=ZS-99pkFOeA04i"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -4250,7 +4250,44 @@ export default function StaycationSite({
                   />
                 </svg>
               </a>
+
+              
+                href="https://www.threads.net/@hirayasuites.tagaytay"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Hiraya Suites on Threads"
+                title="Threads"
+                style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: "40px",
+                  height: "40px",
+                  border: "1px solid #b5a389",
+                  borderRadius: "999px",
+                  color: "inherit",
+                  textDecoration: "none",
+                }}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                  focusable="false"
+                >
+                  <path
+                    fill="#b5a389"
+                    d="M16.7 11.4c-.1-.1-.3-.1-.4-.2-.2-2.5-1.6-3.9-3.9-3.9-1.3 0-2.5.6-3.2 1.6l1.3.9c.5-.7 1.2-1 1.9-1 1.1 0 1.9.6 2.1 1.8-.5-.1-1.1-.2-1.7-.2-2.1 0-3.6 1.1-3.6 2.8 0 1.5 1.3 2.6 3.1 2.6 1.3 0 2.4-.6 3-1.6.1.5.4 1 .8 1.3l1.2-.9c-.5-.4-.7-.9-.7-1.7v-.5c0-.3 0-.6-.1-1Zm-4.5 3.1c-.9 0-1.5-.4-1.5-1.1 0-.7.7-1.2 1.9-1.2.5 0 1 .1 1.5.2-.1 1.4-.9 2.1-1.9 2.1Z"
+                  />
+                  <path
+                    fill="#b5a389"
+                    d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2Zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8Z"
+                  />
+                </svg>
+              </a>
             </div>
+          </div>
           </div>
         </div>
 
