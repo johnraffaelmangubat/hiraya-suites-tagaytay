@@ -2696,7 +2696,7 @@ export default function StaycationSite({
                     )}
                     </div>
                   <p className="facility-footnote margin-top">
-                    Note: ₱200/hr electricity fee applies from 6PM–10PM for Basketball, Tennis, Badminton, and Pickleball courts. Please confirm availability and rates with your host. Details shown are for guest guidance.
+                    Note: ₱200/hr electricity fee applies from 6PM–10PM for Basketball, Tennis, Badminton, and Pickleball courts.
                   </p>
                 </div>
 
