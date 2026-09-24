@@ -534,7 +534,7 @@ const facilitySports = [
   { name: "Pickleball Court", note: "Free • Equipment available in unit" },
   { name: "Billiards", note: "₱150/hr • Cue stick rental ₱50/pc/hr" },
   { name: "Darts", note: "₱150/hr • Dart pins ₱50/hr" },
-  { name: "Table Tennis", note: "₱150/hr • Equipment available in unit • Electricity Free" },
+  { name: "Table Tennis", note: "₱150/hr • Equipment available in unit" },
 ];
 
 const surprisePackages = [
@@ -2696,7 +2696,7 @@ export default function StaycationSite({
                     )}
                     </div>
                   <p className="facility-footnote margin-top">
-                    Facility access, hours, and fees are managed by the building and may vary. An electricity fee of ₱200/hr applies for the Basketball, Tennis, Badminton, and Pickleball courts (Table Tennis, Billiards and Darts has no electricity fee). Please confirm availability and rates with your host. Details shown are for guest guidance.
+                    Note: ₱200/hr electricity fee applies from 6PM–10PM for Basketball, Tennis, Badminton, and Pickleball courts. Please confirm availability and rates with your host. Details shown are for guest guidance.
                   </p>
                 </div>
 
