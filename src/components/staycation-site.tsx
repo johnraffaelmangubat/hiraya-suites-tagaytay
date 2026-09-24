@@ -4284,7 +4284,6 @@ export default function StaycationSite({
                 </svg>
               </a>
             </div>
-            </div>
           </div>
           </div>
         </div>
