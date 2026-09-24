@@ -530,11 +530,11 @@ const propertyAmenities = [
 const facilitySports = [
   { name: "Basketball Court", note: "₱80/head" },
   { name: "Tennis Court", note: "₱50/head" },
-  { name: "Badminton Court", note: "Free equipment available in unit" },
-  { name: "Pickleball Court", note: "Free equipment available in unit" },
+  { name: "Badminton Court", note: "Free • Equipment available in unit" },
+  { name: "Pickleball Court", note: "Free • Equipment available in unit" },
   { name: "Billiards", note: "₱150/hr • Cue stick rental ₱50/pc/hr" },
-  { name: "Darts", note: "150/hr • Dart pins ₱50/hr" },
-  { name: "Table Tennis", note: "Free equipment available in unit • Electricity Free" },
+  { name: "Darts", note: "₱150/hr • Dart pins ₱50/hr" },
+  { name: "Table Tennis", note: "₱150/hr • Equipment available in unit • Electricity Free" },
 ];
 
 const surprisePackages = [
@@ -2675,24 +2675,29 @@ export default function StaycationSite({
                     </p>
                   </div>
                 </div>
+                
+                <div className="facilities-grid-wrapper">
+                  <div className="facilities-grid">
+                    {facilitySports.map(
+                      (item) => (
+                        <div
+                          className="facility-card"
+                          key={item.name}
+                        >
+                          <strong>
+                            {item.name}
+                          </strong>
 
-                <div className="facilities-grid">
-                  {facilitySports.map(
-                    (item) => (
-                      <div
-                        className="facility-card"
-                        key={item.name}
-                      >
-                        <strong>
-                          {item.name}
-                        </strong>
-
-                        <span>
-                          {item.note}
-                        </span>
-                      </div>
-                    )
-                  )}
+                          <span>
+                            {item.note}
+                          </span>
+                        </div>
+                      )
+                    )}
+                    </div>
+                  <p className="facility-footnote">
+                    Facility access, hours, and fees are managed by the building and may vary. An electricity fee of ₱200/hr applies for the Basketball, Tennis, Badminton, and Pickleball courts (Table Tennis, Billiards and Darts has no electricity fee). Please confirm availability and rates with your host. Details shown are for guest guidance.
+                  </p>
                 </div>
 
                 <div className="facility-side-photo">
@@ -2708,10 +2713,7 @@ export default function StaycationSite({
                     recreation
                   </span>
                 </div>
-
-                <p className="facility-footnote">
-                  Facility access, hours, and fees are managed by the building and may vary. An electricity fee of ₱200/hr applies for the Basketball, Tennis, Badminton, and Pickleball courts (Table Tennis, Billiards and Darts has no electricity fee). Please confirm availability and rates with your host. Details shown are for guest guidance.
-                </p>
+                
               </div>
             </div>
           </div>
