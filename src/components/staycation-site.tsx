@@ -4122,6 +4122,7 @@ export default function StaycationSite({
               <ArrowRight size={15} />
             </a>
           </div>
+        </div>
 
           <div className="footer-column footer-socials">
             <h3>
@@ -4287,7 +4288,6 @@ export default function StaycationSite({
                   />
                 </svg>
               </a>
-            </div>
           </div>
         </div>
       
