@@ -2695,7 +2695,7 @@ export default function StaycationSite({
                       )
                     )}
                     </div>
-                  <p className="facility-footnote">
+                  <p className="facility-footnote margin-top">
                     Facility access, hours, and fees are managed by the building and may vary. An electricity fee of ₱200/hr applies for the Basketball, Tennis, Badminton, and Pickleball courts (Table Tennis, Billiards and Darts has no electricity fee). Please confirm availability and rates with your host. Details shown are for guest guidance.
                   </p>
                 </div>
