@@ -2970,6 +2970,7 @@ export default function StaycationSite({
 
                 <h2>
                   Good days start with{" "}
+                  <br />
                   <em>a date.</em>
                 </h2>
 
