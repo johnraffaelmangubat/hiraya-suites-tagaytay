@@ -552,7 +552,7 @@ const surprisePackages = [
   },
   {
     name: "Special Package",
-    price: 1700,
+    price: 1800,
     badge: "Special",
     items: [
       "Celebration banner",
