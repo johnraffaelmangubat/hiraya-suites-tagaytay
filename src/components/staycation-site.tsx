@@ -4127,6 +4127,7 @@ export default function StaycationSite({
             <h3>
               Follow Hiraya
             </h3>
+ 
             <div
               className="footer-social-links"
               style={{
@@ -4166,6 +4167,7 @@ export default function StaycationSite({
                   />
                 </svg>
               </a>
+ 
               <a
                 href="https://www.instagram.com/hirayasuites.tagaytay?stkn=d2Z2MXN6OGh6YTQy"
                 target="_blank"
@@ -4217,6 +4219,7 @@ export default function StaycationSite({
                   />
                 </svg>
               </a>
+ 
               <a
                 href="https://www.tiktok.com/@hirayasuites.tagaytay?_r=1&_t=ZS-99pkFOeA04i"
                 target="_blank"
@@ -4248,8 +4251,9 @@ export default function StaycationSite({
                   />
                 </svg>
               </a>
+ 
               <a
-                href="https://www.threads.net/@hirayasuites.tagaytay"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Hiraya Suites on Threads"
@@ -4285,9 +4289,8 @@ export default function StaycationSite({
               </a>
             </div>
           </div>
-          </div>
         </div>
-
+      
         <div className="footer-bottom">
           <p>
             © {initialToday.slice(0, 4)}{" "}
