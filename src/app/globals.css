@@ -2571,6 +2571,7 @@ h1 em {
     flex-direction: row;
     align-items: center;
     padding: 0;
+    margin-bottom: 30px;
 }
 .footer-column.footer-socials h3 {
     margin: 0;
