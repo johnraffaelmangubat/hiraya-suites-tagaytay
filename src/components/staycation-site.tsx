@@ -4135,7 +4135,7 @@ export default function StaycationSite({
                 gap: "10px",
               }}
             >
-              
+              <a
                 href="https://www.facebook.com/share/19rPmSxiRM/"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -4166,7 +4166,7 @@ export default function StaycationSite({
                   />
                 </svg>
               </a>
-              
+              <a
                 href="https://www.instagram.com/hirayasuites.tagaytay?stkn=d2Z2MXN6OGh6YTQy"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -4217,7 +4217,7 @@ export default function StaycationSite({
                   />
                 </svg>
               </a>
-              
+              <a
                 href="https://www.tiktok.com/@hirayasuites.tagaytay?_r=1&_t=ZS-99pkFOeA04i"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -4248,8 +4248,7 @@ export default function StaycationSite({
                   />
                 </svg>
               </a>
-
-              
+              <a
                 href="https://www.threads.net/@hirayasuites.tagaytay"
                 target="_blank"
                 rel="noopener noreferrer"
