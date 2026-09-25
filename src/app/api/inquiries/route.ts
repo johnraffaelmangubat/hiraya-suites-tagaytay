@@ -359,7 +359,7 @@ export async function POST(request: NextRequest) {
 
         await resend.emails.send({
           from: "Hiraya Suites <onboarding@resend.dev>",
-          to: ["johnraffaelmangubat@gmail.com", "hirayasuites.tagaytay@gmail.com", "rosemnuestro@gmail.com"]
+          to: ["johnraffaelmangubat@gmail.com", "hirayasuites.tagaytay@gmail.com", "rosemnuestro@gmail.com"],
           subject: `New inquiry — ${unit.shortName} (${name})`,
           text: [
             `New inquiry received for ${unit.name}`,
