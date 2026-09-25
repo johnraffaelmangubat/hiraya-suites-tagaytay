@@ -4254,7 +4254,7 @@ export default function StaycationSite({
               </a>
  
               <a
-                href="#"
+                href="https://www.threads.com/@hirayasuites.tagaytay"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Hiraya Suites on Threads"
