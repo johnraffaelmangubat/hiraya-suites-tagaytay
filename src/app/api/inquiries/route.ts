@@ -1,3 +1,4 @@
+import { Resend } from "resend"; 
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/db";
 import { inquiries } from "@/db/schema";
