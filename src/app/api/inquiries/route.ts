@@ -352,6 +352,47 @@ export async function POST(request: NextRequest) {
           id: inquiries.id,
         });
 
+    // Notify by email (failure here should never break the saved inquiry)
+    if (process.env.RESEND_API_KEY) {
+      try {
+        const resend = new Resend(process.env.RESEND_API_KEY);
+
+        await resend.emails.send({
+          from: "Hiraya Suites <onboarding@resend.dev>",
+          to: "johnraffaelmangubat@gmail.com",
+          subject: `New inquiry — ${unit.shortName} (${name})`,
+          text: [
+            `New inquiry received for ${unit.name}`,
+            "",
+            `Name: ${name}`,
+            `Email: ${email}`,
+            `Phone: ${phone || "Not provided"}`,
+            `Guests: ${guests}`,
+            hasDates
+              ? `Dates: ${body.checkIn} to ${body.checkOut}`
+              : "Dates: Not specified (general inquiry)",
+            estimatedTotal
+              ? `Estimated total: ₱${estimatedTotal}`
+              : "",
+            "",
+            "Message:",
+            message,
+            "",
+            `Reference: HIR-${inquiry.id.slice(0, 8).toUpperCase()}`,
+          ]
+            .filter(Boolean)
+            .join("\n"),
+        });
+      } catch (emailError) {
+        console.error(
+          "Inquiry saved but notification email failed:",
+          emailError instanceof Error
+            ? emailError.message
+            : "Unknown error"
+        );
+      }
+    }
+
     return NextResponse.json(
       {
         reference: `HIR-${inquiry.id
