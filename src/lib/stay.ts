@@ -246,7 +246,7 @@ export function getQuote(
 
       const nightlyRate = isHoliday(night)
         ? unit.holidayRate
-        : day === 5 || day === 6
+        : day === 0 || day === 5 || day === 6
         ? unit.weekendRate
         : unit.weekdayRate;
 
