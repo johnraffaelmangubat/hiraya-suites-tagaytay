@@ -3288,7 +3288,7 @@ export default function StaycationSite({
                     <div>
                       <span>
                         Weeknights
-                        (Sun–Thu)
+                        (Mon–Thu)
                       </span>
 
                       <span>
@@ -3301,7 +3301,7 @@ export default function StaycationSite({
                     <div>
                       <span>
                         Weekends
-                        (Fri–Sat)
+                        (Fri–Sun)
                       </span>
 
                       <span>
