@@ -15,6 +15,9 @@
 .booking-wrap.wrap, button.pop-up-footer {
   display:none;
 }
+button.button.copy {
+    margin: 25px 0 15px 0;
+}
 
 * { box-sizing: border-box; }
 
