@@ -115,11 +115,8 @@ export default function InquiryForm({
         `Check-out: ${hasDates ? formatDate(range.end, true) : "Not selected"}`,
         `Guests: ${guests}`,
         `Estimated total: ${quote ? formatMoney(quote.total) : "Not available"}`,
-        "",
-        "My message:",
-        submittedMessage,
-        "",
-        "Please help me with my inquiry. Thank you!",
+
+        "Please help me with my inquiry on what to do next. Thank you!",
       ].join("\n"));
       setCopied(false);
     } catch (err) {
