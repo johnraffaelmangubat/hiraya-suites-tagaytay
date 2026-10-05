@@ -5,7 +5,9 @@ import {
   ArrowUpRight,
   CalendarDays,
   Check,
+  Copy,
   LoaderCircle,
+  MessageCircle,
   ShieldCheck,
 } from "lucide-react";
 import Modal from "@/components/modal";
@@ -33,7 +35,8 @@ export default function InquiryForm({
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
   const [reference, setReference] = useState("");
-  const [suiteName, setSuiteName] = useState("");
+  const [copyText, setCopyText] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const hasDates = Boolean(range.start && range.end);
 
@@ -95,9 +98,30 @@ export default function InquiryForm({
       }
 
       setReference(result.reference);
-      setSuiteName(
-        result.suite || unit.shortName
-      );
+      const submittedName = String(form.get("name") || "");
+      const submittedEmail = String(form.get("email") || "");
+      const submittedPhone = String(form.get("phone") || "").trim();
+      const submittedMessage = String(form.get("message") || "");
+
+      setCopyText([
+        "Hi Hiraya Suites! I just submitted an inquiry through your website.",
+        "",
+        `Inquiry reference: ${result.reference}`,
+        `Name: ${submittedName}`,
+        `Email: ${submittedEmail}`,
+        `Phone: ${submittedPhone || "Not provided"}`,
+        `Suite: ${result.suite || unit.shortName}`,
+        `Check-in: ${hasDates ? formatDate(range.start) : "Not selected"}`,
+        `Check-out: ${hasDates ? formatDate(range.end, true) : "Not selected"}`,
+        `Guests: ${guests}`,
+        `Estimated total: ${quote ? formatMoney(quote.total) : "Not available"}`,
+        "",
+        "My message:",
+        submittedMessage,
+        "",
+        "Please help me with my inquiry. Thank you!",
+      ].join("\n"));
+      setCopied(false);
     } catch (err) {
       setError(
         err instanceof Error
@@ -135,9 +159,9 @@ export default function InquiryForm({
           <h3>Your inquiry is in.</h3>
 
           <p>
-            We’ve saved your {suiteName} details
-            and message. Keep your reference below
-            for your records.
+            We’ve received your inquiry and saved a copy of your details.
+            For faster communication, you can continue the conversation
+            with us on Messenger.
           </p>
 
           <div className="inquiry-reference">
@@ -159,6 +183,44 @@ export default function InquiryForm({
               · {unit.shortName}
             </p>
           )}
+
+          <div className="inquiry-messenger-note">
+            <p>
+              Tap <strong>Copy inquiry details</strong> below, then open Messenger
+              and paste the copied message into our chat. This helps us find your
+              inquiry and reply more easily.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            className="button button-primary full-width"
+            onClick={async () => {
+              try {
+                await navigator.clipboard.writeText(copyText);
+                setCopied(true);
+              } catch {
+                setCopied(false);
+                setError("We couldn’t copy automatically. Please try again or use your browser’s copy option.");
+              }
+            }}
+          >
+            {copied ? <Check size={18} /> : <Copy size={18} />}
+            {copied ? "Inquiry details copied!" : "Copy inquiry details"}
+          </button>
+
+          <a
+            className="button button-primary full-width inquiry-messenger-button"
+            href="https://m.me/HirayaSuitesTagaytay"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <MessageCircle size={18} />
+            Continue on Messenger
+            <ArrowUpRight size={18} />
+          </a>
+
+          {error && <p className="form-error" role="alert">{error}</p>}
 
           <p className="fine-print">
             This is an inquiry and not a confirmed
