@@ -116,7 +116,8 @@ export default function InquiryForm({
         `Guests: ${guests}`,
         `Estimated total: ${quote ? formatMoney(quote.total) : "Not available"}`,
 
-        "Please help me with my inquiry on what to do next. Thank you!",
+        "I’d like to proceed with the booking. Please let me know the next steps. Thank you!",
+        
       ].join("\n"));
       setCopied(false);
     } catch (err) {
