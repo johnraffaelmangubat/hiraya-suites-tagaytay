@@ -303,14 +303,22 @@ export default function InquiryForm({
               <button
                 type="button"
                 className="button button-primary full-width"
-                onClick={() =>
-                  setPaymentStep(true)
-                }
-              >
-                Proceed with your downpayment
+                onClick={() => {
+                  const params = new URLSearchParams({
+                    reference,
+                    suite: unit.shortName,
+                    guests: String(guests),
+                    total: quote ? String(quote.total) : "0",
+                    checkIn: hasDates ? String(range.start) : "",
+                    checkOut: hasDates ? String(range.end) : "",
+                  });
 
-                <ArrowUpRight size={18} />
-              </button>
+                  window.location.href = `/payment?${params.toString()}`;
+              }}
+            >
+              Proceed with your downpayment
+              <ArrowUpRight size={18} />
+            </button>
 
               <p className="fine-print">
                 Ready to proceed? View the payment
