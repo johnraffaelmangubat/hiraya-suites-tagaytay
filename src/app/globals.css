@@ -2868,7 +2868,7 @@ h1 em {
   font-size: 14px;
   line-height: 1.9;
   color: var(--muted);
-  max-width: 360px;
+  max-width: 100%;
   margin: 13px auto 0;
 }
 
@@ -2897,7 +2897,7 @@ h1 em {
 
 .inquiry-success > .fine-print {
   margin: 22px auto;
-  max-width: 370px;
+  max-width: 100%;
 }
 
 .all-amenities {
