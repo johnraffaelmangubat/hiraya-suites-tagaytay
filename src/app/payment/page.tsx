@@ -274,7 +274,7 @@ export default async function PaymentPage({
 
           <div className="payment-instructions">
             <h3>
-              After sending the payment
+              How to complete your downpayment
             </h3>
 
             <ol>
@@ -284,8 +284,7 @@ export default async function PaymentPage({
               </li>
 
               <li>
-                Keep your payment receipt or
-                screenshot.
+                Keep your payment receipt or screenshot after completing the payment.
               </li>
 
               <li>
