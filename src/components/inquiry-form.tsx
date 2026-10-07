@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, type FormEvent } from "react";
@@ -43,7 +44,8 @@ export default function InquiryForm({
   const [reference, setReference] = useState("");
   const [copyText, setCopyText] = useState("");
   const [copied, setCopied] = useState(false);
-  const [successStep, setSuccessStep] = useState<SuccessStep>("confirmation");
+  const [successStep, setSuccessStep] =
+    useState<SuccessStep>("confirmation");
 
   const hasDates = Boolean(range.start && range.end);
 
@@ -67,7 +69,10 @@ export default function InquiryForm({
       ? "/images/towerb/qr%20tb.jpg"
       : "/images/tower4/qr%20t4.jpg";
 
-  const qrLabel = unit.id === "hiraya" ? "Tower B" : "Tower 4";
+  const qrLabel =
+    unit.id === "hiraya"
+      ? "Tower B"
+      : "Tower 4";
 
   async function submit(
     event: FormEvent<HTMLFormElement>
@@ -118,24 +123,49 @@ export default function InquiryForm({
       }
 
       setReference(result.reference);
-      const submittedName = String(form.get("name") || "");
-      const submittedEmail = String(form.get("email") || "");
-      const submittedPhone = String(form.get("phone") || "").trim();
-      setCopyText([
-        "Hi Hiraya Suites! I recently sent an inquiry through your website and would like to follow up.",
-        "",
-        `Inquiry reference: ${result.reference}`,
-        `Name: ${submittedName}`,
-        `Email: ${submittedEmail}`,
-        `Phone: ${submittedPhone || "Not provided"}`,
-        `Suite: ${result.suite || unit.shortName}`,
-        `Check-in: ${hasDates ? formatDate(range.start) : "Not selected"}`,
-        `Check-out: ${hasDates ? formatDate(range.end, true) : "Not selected"}`,
-        `Guests: ${guests}`,
-        `Estimated total: ${quote ? formatMoney(quote.total) : "Not available"}`,
-        "",
-        "I’d like to proceed with the booking. Please let me know the next steps. Thank you!",
-      ].join("\n"));
+
+      const submittedName = String(
+        form.get("name") || ""
+      );
+
+      const submittedEmail = String(
+        form.get("email") || ""
+      );
+
+      const submittedPhone = String(
+        form.get("phone") || ""
+      ).trim();
+
+      setCopyText(
+        [
+          "Hi Hiraya Suites! I recently sent an inquiry through your website and would like to follow up.",
+          "",
+          `Inquiry reference: ${result.reference}`,
+          `Name: ${submittedName}`,
+          `Email: ${submittedEmail}`,
+          `Phone: ${submittedPhone || "Not provided"}`,
+          `Suite: ${result.suite || unit.shortName}`,
+          `Check-in: ${
+            hasDates
+              ? formatDate(range.start)
+              : "Not selected"
+          }`,
+          `Check-out: ${
+            hasDates
+              ? formatDate(range.end, true)
+              : "Not selected"
+          }`,
+          `Guests: ${guests}`,
+          `Estimated total: ${
+            quote
+              ? formatMoney(quote.total)
+              : "Not available"
+          }`,
+          "",
+          "I’d like to proceed with the booking. Please let me know the next steps. Thank you!",
+        ].join("\n")
+      );
+
       setCopied(false);
       setSuccessStep("confirmation");
     } catch (err) {
@@ -167,11 +197,17 @@ export default function InquiryForm({
     >
       {reference ? (
         successStep === "payment" ? (
-          <div className="inquiry-payment" role="region" aria-label="Downpayment details">
+          <div
+            className="inquiry-payment"
+            role="region"
+            aria-label="Downpayment details"
+          >
             <button
               type="button"
               className="inquiry-back-link"
-              onClick={() => setSuccessStep("confirmation")}
+              onClick={() =>
+                setSuccessStep("confirmation")
+              }
             >
               <ArrowLeft size={16} />
               Back to inquiry details
@@ -183,10 +219,13 @@ export default function InquiryForm({
               </div>
 
               <h3>Booking payment details</h3>
+
               <p>
-                Your inquiry has been received. If you’re ready to proceed,
-                please send the ₱{DOWNPAYMENT.toLocaleString("en-PH")} downpayment
-                using the QR code below.
+                Your inquiry has been received. If
+                you’re ready to proceed, please send
+                the ₱
+                {DOWNPAYMENT.toLocaleString("en-PH")}{" "}
+                downpayment using the QR code below.
               </p>
             </div>
 
@@ -194,44 +233,93 @@ export default function InquiryForm({
               <>
                 <div className="payment-breakdown">
                   <div className="payment-breakdown-heading">
-                    <span>PAYMENT BREAKDOWN</span>
-                    <strong>{suiteName}</strong>
+                    <span>
+                      PAYMENT BREAKDOWN
+                    </span>
+
+                    <strong>
+                      {unit.shortName}
+                    </strong>
                   </div>
 
                   <div className="payment-row">
-                    <span>Estimated total</span>
-                    <strong>{formatMoney(quote.total)}</strong>
+                    <span>
+                      Estimated total
+                    </span>
+
+                    <strong>
+                      {formatMoney(quote.total)}
+                    </strong>
                   </div>
 
                   <div className="payment-row">
                     <span>Downpayment</span>
-                    <strong>₱{DOWNPAYMENT.toLocaleString("en-PH")}</strong>
+
+                    <strong>
+                      ₱
+                      {DOWNPAYMENT.toLocaleString(
+                        "en-PH"
+                      )}
+                    </strong>
                   </div>
 
                   <div className="payment-row">
-                    <span>Remaining balance</span>
-                    <strong>{formatMoney(balance)}</strong>
+                    <span>
+                      Remaining balance
+                    </span>
+
+                    <strong>
+                      {formatMoney(balance)}
+                    </strong>
                   </div>
 
                   <div className="payment-row payment-row-deposit">
                     <span>
                       Security deposit
-                      <small>Refundable upon checkout if there are no stains or issues in the unit.</small>
+
+                      <small>
+                        Refundable upon checkout if
+                        there are no stains or issues
+                        in the unit.
+                      </small>
                     </span>
-                    <strong>₱{SECURITY_DEPOSIT.toLocaleString("en-PH")}</strong>
+
+                    <strong>
+                      ₱
+                      {SECURITY_DEPOSIT.toLocaleString(
+                        "en-PH"
+                      )}
+                    </strong>
                   </div>
 
                   <div className="payment-row payment-row-total">
-                    <span>Total remaining balance</span>
-                    <strong>{formatMoney(totalRemaining)}</strong>
+                    <span>
+                      Total remaining balance
+                    </span>
+
+                    <strong>
+                      {formatMoney(
+                        totalRemaining
+                      )}
+                    </strong>
                   </div>
                 </div>
 
                 <div className="payment-qr-card">
                   <div>
-                    <span className="payment-qr-label">PAY VIA QR</span>
-                    <h4>{qrLabel} payment QR</h4>
-                    <p>Please make sure you use the QR code for your selected suite.</p>
+                    <span className="payment-qr-label">
+                      PAY VIA QR
+                    </span>
+
+                    <h4>
+                      {qrLabel} payment QR
+                    </h4>
+
+                    <p>
+                      Please make sure you use the
+                      QR code for your selected
+                      suite.
+                    </p>
                   </div>
 
                   <div className="payment-qr-image-wrap">
@@ -243,24 +331,44 @@ export default function InquiryForm({
                   </div>
 
                   <p className="payment-reference-note">
-                    After sending the payment, please send your payment receipt on
-                    Messenger together with your inquiry reference <strong>{reference}</strong>.
+                    After sending the payment,
+                    please send your payment receipt
+                    on Messenger together with your
+                    inquiry reference{" "}
+                    <strong>{reference}</strong>.
                   </p>
                 </div>
               </>
             ) : (
               <div className="payment-warning">
-                Your selected dates do not have an estimated total yet. Please
-                message us on Messenger first so we can confirm the amount to pay.
+                Your selected dates do not have an
+                estimated total yet. Please message
+                us on Messenger first so we can
+                confirm the amount to pay.
               </div>
             )}
 
             <div className="payment-notes">
               <strong>Before you pay</strong>
+
               <ul>
-                <li>Parking fees are not included in the estimated total.</li>
-                <li>The ₱500 security deposit is refundable upon checkout if there are no stains or issues in the unit.</li>
-                <li>The booking is confirmed only after payment and confirmation from Hiraya Suites.</li>
+                <li>
+                  Parking fees are not included in
+                  the estimated total.
+                </li>
+
+                <li>
+                  The ₱500 security deposit is
+                  refundable upon checkout if there
+                  are no stains or issues in the
+                  unit.
+                </li>
+
+                <li>
+                  The booking is confirmed only
+                  after payment and confirmation from
+                  Hiraya Suites.
+                </li>
               </ul>
             </div>
 
@@ -271,7 +379,9 @@ export default function InquiryForm({
               rel="noreferrer"
             >
               <MessageCircle size={18} />
+
               Send payment receipt on Messenger
+
               <ArrowUpRight size={18} />
             </a>
 
@@ -284,106 +394,137 @@ export default function InquiryForm({
             </button>
           </div>
         ) : (
-        <div
-          className="inquiry-success"
-          role="status"
-        >
-          <div className="success-mark">
-            <Check size={30} />
-          </div>
+          <div
+            className="inquiry-success"
+            role="status"
+          >
+            <div className="success-mark">
+              <Check size={30} />
+            </div>
 
-          <h3>Your inquiry is in.</h3>
+            <h3>Your inquiry is in.</h3>
 
-          <p>
-            We’ve received your inquiry and saved a copy of your details.
-            For faster communication, you can continue the conversation
-            with us on Messenger.
-          </p>
-
-          <div className="inquiry-reference">
-            <span>
-              YOUR INQUIRY REFERENCE
-            </span>
-
-            <strong>{reference}</strong>
-          </div>
-
-          {hasDates && (
-            <p className="success-dates">
-              {formatDate(range.start)} –{" "}
-              {formatDate(range.end, true)} ·{" "}
-              {guests}{" "}
-              {guests === 1
-                ? "guest"
-                : "guests"}{" "}
-              · {unit.shortName}
-            </p>
-          )}
-
-          <div className="inquiry-messenger-note">
             <p>
-              Tap <strong>Copy inquiry details</strong> below, then open Messenger
-              and paste the copied message into our chat. This helps us find your
-              inquiry and reply more easily.
+              We’ve received your inquiry and saved
+              a copy of your details. For faster
+              communication, you can continue the
+              conversation with us on Messenger.
             </p>
-          </div>
 
-          <button
-            type="button"
-            className="button button-primary full-width"
-            onClick={async () => {
-              try {
-                await navigator.clipboard.writeText(copyText);
-                setCopied(true);
-              } catch {
-                setCopied(false);
-                setError("We couldn’t copy automatically. Please try again or use your browser’s copy option.");
-              }
-            }}
-          >
-            {copied ? <Check size={18} /> : <Copy size={18} />}
-            {copied ? "Inquiry details copied!" : "Copy inquiry details"}
-          </button>
+            <div className="inquiry-reference">
+              <span>
+                YOUR INQUIRY REFERENCE
+              </span>
 
-          <a
-            className="button button-primary full-width inquiry-messenger-button"
-            href="https://m.me/HirayaSuitesTagaytay"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <MessageCircle size={18} />
-            Continue on Messenger
-            <ArrowUpRight size={18} />
-          </a>
+              <strong>{reference}</strong>
+            </div>
 
-          {quote && (
+            {hasDates && (
+              <p className="success-dates">
+                {formatDate(range.start)} –{" "}
+                {formatDate(range.end, true)} ·{" "}
+                {guests}{" "}
+                {guests === 1
+                  ? "guest"
+                  : "guests"}{" "}
+                · {unit.shortName}
+              </p>
+            )}
+
+            <div className="inquiry-messenger-note">
+              <p>
+                Tap{" "}
+                <strong>
+                  Copy inquiry details
+                </strong>{" "}
+                below, then open Messenger and paste
+                the copied message into our chat. This
+                helps us find your inquiry and reply
+                more easily.
+              </p>
+            </div>
+
             <button
               type="button"
-              className="button button-secondary full-width"
-              onClick={() => setSuccessStep("payment")}
+              className="button button-primary full-width"
+              onClick={async () => {
+                try {
+                  await navigator.clipboard.writeText(
+                    copyText
+                  );
+
+                  setCopied(true);
+                } catch {
+                  setCopied(false);
+
+                  setError(
+                    "We couldn’t copy automatically. Please try again or use your browser’s copy option."
+                  );
+                }
+              }}
             >
-              Proceed with your downpayment
+              {copied ? (
+                <Check size={18} />
+              ) : (
+                <Copy size={18} />
+              )}
+
+              {copied
+                ? "Inquiry details copied!"
+                : "Copy inquiry details"}
+            </button>
+
+            <a
+              className="button button-primary full-width inquiry-messenger-button"
+              href="https://m.me/HirayaSuitesTagaytay"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <MessageCircle size={18} />
+
+              Continue on Messenger
+
+              <ArrowUpRight size={18} />
+            </a>
+
+            {quote && (
+              <button
+                type="button"
+                className="button button-secondary full-width"
+                onClick={() =>
+                  setSuccessStep("payment")
+                }
+              >
+                Proceed with your downpayment
+
+                <ArrowUpRight size={18} />
+              </button>
+            )}
+
+            {error && (
+              <p
+                className="form-error"
+                role="alert"
+              >
+                {error}
+              </p>
+            )}
+
+            <p className="fine-print">
+              This is an inquiry and not a confirmed
+              reservation. No payment has been taken
+              and your dates have not been reserved.
+            </p>
+
+            <button
+              type="button"
+              className="button button-primary full-width"
+              onClick={onClose}
+            >
+              Back to your getaway{" "}
               <ArrowUpRight size={18} />
             </button>
-          )}
-
-          {error && <p className="form-error" role="alert">{error}</p>}
-
-          <p className="fine-print">
-            This is an inquiry and not a confirmed
-            reservation. No payment has been taken
-            and your dates have not been reserved.
-          </p>
-
-          <button
-            type="button"
-            className="button button-primary full-width"
-            onClick={onClose}
-          >
-            Back to your getaway{" "}
-            <ArrowUpRight size={18} />
-          </button>
-        </div>
+          </div>
         )
       ) : (
         <form
@@ -420,8 +561,7 @@ export default function InquiryForm({
                   estimated total
                 </span>
 
-                {quote.additionalGuests >
-                  0 && (
+                {quote.additionalGuests > 0 && (
                   <span>
                     Includes ₱
                     {formatMoney(
@@ -436,6 +576,7 @@ export default function InquiryForm({
 
           <div className="inquiry-suite-note">
             <small>Selected suite:</small>
+
             <strong>{unit.name}</strong>
           </div>
 
@@ -543,6 +684,7 @@ export default function InquiryForm({
                   size={18}
                   className="spin"
                 />
+
                 Sending your inquiry…
               </>
             ) : (
@@ -555,6 +697,7 @@ export default function InquiryForm({
 
           <p className="form-reassurance">
             <ShieldCheck size={14} />
+
             No payment required. Just the start of
             something lovely.
           </p>
