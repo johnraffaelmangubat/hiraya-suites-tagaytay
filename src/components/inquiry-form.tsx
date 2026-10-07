@@ -226,7 +226,7 @@ export default function InquiryForm({
 
           <button
             type="button"
-            className="button button-primary full-width"
+            className="button button-primary full-width copy"
             onClick={async () => {
               try {
                 await navigator.clipboard.writeText(
