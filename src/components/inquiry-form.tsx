@@ -26,6 +26,9 @@ type InquiryFormProps = {
   onClose: () => void;
 };
 
+const DOWNPAYMENT = 1000;
+const SECURITY_DEPOSIT = 500;
+
 export default function InquiryForm({
   unit,
   range,
@@ -98,27 +101,80 @@ export default function InquiryForm({
       }
 
       setReference(result.reference);
-      const submittedName = String(form.get("name") || "");
-      const submittedEmail = String(form.get("email") || "");
-      const submittedPhone = String(form.get("phone") || "").trim();
-      const submittedMessage = String(form.get("message") || "");
 
-      setCopyText([
-        "Hi Hiraya Suites! I just submitted an inquiry through your website.",
-        "",
-        `Inquiry reference: ${result.reference}`,
-        `Name: ${submittedName}`,
-        `Email: ${submittedEmail}`,
-        `Phone: ${submittedPhone || "Not provided"}`,
-        `Suite: ${result.suite || unit.shortName}`,
-        `Check-in: ${hasDates ? formatDate(range.start) : "Not selected"}`,
-        `Check-out: ${hasDates ? formatDate(range.end, true) : "Not selected"}`,
-        `Guests: ${guests}`,
-        `Estimated total: ${quote ? formatMoney(quote.total) : "Not available"}`,
+      const submittedName = String(
+        form.get("name") || ""
+      );
 
-        "I’d like to proceed with the booking. Please let me know the next steps. Thank you!",
-        
-      ].join("\n"));
+      const submittedEmail = String(
+        form.get("email") || ""
+      );
+
+      const submittedPhone = String(
+        form.get("phone") || ""
+      ).trim();
+
+      const submittedMessage = String(
+        form.get("message") || ""
+      );
+
+      const estimatedTotal = quote?.total || 0;
+      const remainingBalance = Math.max(
+        estimatedTotal - DOWNPAYMENT,
+        0
+      );
+
+      const totalRemaining = remainingBalance + SECURITY_DEPOSIT;
+
+      setCopyText(
+        [
+          "Hi Hiraya Suites! I just submitted an inquiry through your website.",
+          "",
+          `Inquiry reference: ${result.reference}`,
+          `Name: ${submittedName}`,
+          `Email: ${submittedEmail}`,
+          `Phone: ${submittedPhone || "Not provided"}`,
+          `Suite: ${result.suite || unit.shortName}`,
+          `Check-in: ${
+            hasDates
+              ? formatDate(range.start)
+              : "Not selected"
+          }`,
+          `Check-out: ${
+            hasDates
+              ? formatDate(range.end, true)
+              : "Not selected"
+          }`,
+          `Guests: ${guests}`,
+          `Estimated total: ${
+            quote
+              ? formatMoney(quote.total)
+              : "Not available"
+          }`,
+          "",
+          "Payment breakdown:",
+          `Downpayment: ${formatMoney(DOWNPAYMENT)}`,
+          `Remaining room balance: ${formatMoney(
+            remainingBalance
+          )}`,
+          `Refundable security deposit: ${formatMoney(
+            SECURITY_DEPOSIT
+          )}`,
+          `Total remaining upon check-in: ${formatMoney(
+            totalRemaining
+          )}`,
+          "Parking: Excluded",
+          "",
+          submittedMessage
+            ? `Message: ${submittedMessage}`
+            : "",
+          "",
+          "I’d like to proceed with the booking. Please let me know the next steps. Thank you!",
+        ]
+          .filter(Boolean)
+          .join("\n")
+      );
+
       setCopied(false);
     } catch (err) {
       setError(
@@ -129,6 +185,28 @@ export default function InquiryForm({
     } finally {
       setSending(false);
     }
+  }
+
+  function openPaymentPage() {
+    if (!reference) return;
+
+    const estimatedTotal = quote?.total || 0;
+
+    const params = new URLSearchParams({
+      reference,
+      name: "",
+      suite: unit.shortName,
+      guests: String(guests),
+      total: String(estimatedTotal),
+      checkIn: hasDates
+        ? formatDate(range.start)
+        : "",
+      checkOut: hasDates
+        ? formatDate(range.end, true)
+        : "",
+    });
+
+    window.location.href = `/payment?${params.toString()}`;
   }
 
   return (
@@ -157,9 +235,9 @@ export default function InquiryForm({
           <h3>Your inquiry is in.</h3>
 
           <p>
-            We’ve received your inquiry and saved a copy of your details.
-            For faster communication, you can continue the conversation
-            with us on Messenger.
+            We’ve received your inquiry and saved a copy
+            of your details. You can now proceed with the
+            downpayment to continue your booking.
           </p>
 
           <div className="inquiry-reference">
@@ -182,11 +260,51 @@ export default function InquiryForm({
             </p>
           )}
 
+          {quote && (
+            <div className="inquiry-payment-preview">
+              <div>
+                <span>Estimated stay</span>
+                <strong>
+                  {formatMoney(quote.total)}
+                </strong>
+              </div>
+
+              <div>
+                <span>Downpayment</span>
+                <strong>
+                  {formatMoney(DOWNPAYMENT)}
+                </strong>
+              </div>
+
+              <div>
+                <span>Remaining room balance</span>
+                <strong>
+                  {formatMoney(
+                    Math.max(
+                      quote.total -
+                        DOWNPAYMENT,
+                      0
+                    )
+                  )}
+                </strong>
+              </div>
+            </div>
+          )}
+
+          <button
+            type="button"
+            className="button button-primary full-width inquiry-payment-button"
+            onClick={openPaymentPage}
+          >
+            Proceed with your downpayment
+            <ArrowUpRight size={18} />
+          </button>
+
           <div className="inquiry-messenger-note">
             <p>
-              Tap <strong>Copy inquiry details</strong> below, then open Messenger
-              and paste the copied message into our chat. This helps us find your
-              inquiry and reply more easily.
+              You can also continue on Messenger. Tap{" "}
+              <strong>Copy inquiry details</strong> first,
+              then paste the message into our chat.
             </p>
           </div>
 
@@ -195,16 +313,29 @@ export default function InquiryForm({
             className="button button-primary full-width copy"
             onClick={async () => {
               try {
-                await navigator.clipboard.writeText(copyText);
+                await navigator.clipboard.writeText(
+                  copyText
+                );
+
                 setCopied(true);
               } catch {
                 setCopied(false);
-                setError("We couldn’t copy automatically. Please try again or use your browser’s copy option.");
+
+                setError(
+                  "We couldn’t copy automatically. Please try again or use your browser’s copy option."
+                );
               }
             }}
           >
-            {copied ? <Check size={18} /> : <Copy size={18} />}
-            {copied ? "Inquiry details copied!" : "Copy inquiry details"}
+            {copied ? (
+              <Check size={18} />
+            ) : (
+              <Copy size={18} />
+            )}
+
+            {copied
+              ? "Inquiry details copied!"
+              : "Copy inquiry details"}
           </button>
 
           <a
@@ -218,12 +349,19 @@ export default function InquiryForm({
             <ArrowUpRight size={18} />
           </a>
 
-          {error && <p className="form-error" role="alert">{error}</p>}
+          {error && (
+            <p
+              className="form-error"
+              role="alert"
+            >
+              {error}
+            </p>
+          )}
 
           <p className="fine-print">
-            This is an inquiry and not a confirmed
-            reservation. No payment has been taken
-            and your dates have not been reserved.
+            This is an inquiry and not yet a confirmed
+            reservation. Your booking is subject to
+            confirmation by Hiraya Suites.
           </p>
 
           <button
@@ -231,7 +369,7 @@ export default function InquiryForm({
             className="button button-primary full-width"
             onClick={onClose}
           >
-            Back to your getaway{" "}
+            Back to your getaway
             <ArrowUpRight size={18} />
           </button>
         </div>
@@ -397,7 +535,7 @@ export default function InquiryForm({
               </>
             ) : (
               <>
-                Send my inquiry{" "}
+                Send my inquiry
                 <ArrowUpRight size={18} />
               </>
             )}
