@@ -280,7 +280,7 @@ export default function InquiryForm({
             <>
               <button
                 type="button"
-                className="button button-primary full-width"
+                className="button button-primary full-width downpayment"
                 onClick={() =>
                   setPaymentStep(true)
                 }
