@@ -247,7 +247,7 @@ export default function InquiryForm({
 
           <button
             type="button"
-            className="button button-primary full-width"
+            className="button button-primary full-width copy"
             onClick={async () => {
               try {
                 await navigator.clipboard.writeText(
@@ -297,6 +297,12 @@ export default function InquiryForm({
               {error}
             </p>
           )}
+          <p className="fine-print">
+                Ready to proceed? View the payment
+                breakdown and payment instructions
+                on the next step. Parking is not
+                included in the estimated total.
+              </p>
 
           {!paymentStep ? (
             <>
@@ -320,12 +326,6 @@ export default function InquiryForm({
               <ArrowUpRight size={18} />
             </button>
 
-              <p className="fine-print">
-                Ready to proceed? View the payment
-                breakdown and payment instructions
-                on the next step. Parking is not
-                included in the estimated total.
-              </p>
             </>
           ) : (
             <div className="inquiry-payment-step">
