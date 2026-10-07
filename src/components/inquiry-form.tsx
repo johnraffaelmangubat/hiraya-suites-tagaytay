@@ -26,9 +26,6 @@ type InquiryFormProps = {
   onClose: () => void;
 };
 
-const DOWNPAYMENT = 1000;
-const SECURITY_DEPOSIT = 500;
-
 export default function InquiryForm({
   unit,
   range,
@@ -40,6 +37,7 @@ export default function InquiryForm({
   const [reference, setReference] = useState("");
   const [copyText, setCopyText] = useState("");
   const [copied, setCopied] = useState(false);
+  const [paymentStep, setPaymentStep] = useState(false);
 
   const hasDates = Boolean(range.start && range.end);
 
@@ -114,66 +112,40 @@ export default function InquiryForm({
         form.get("phone") || ""
       ).trim();
 
-      const submittedMessage = String(
-        form.get("message") || ""
-      );
-
-      const estimatedTotal = quote?.total || 0;
-      const remainingBalance = Math.max(
-        estimatedTotal - DOWNPAYMENT,
-        0
-      );
-
-      const totalRemaining = remainingBalance + SECURITY_DEPOSIT;
-
-      setCopyText(
-        [
-          "Hi Hiraya Suites! I just submitted an inquiry through your website.",
-          "",
-          `Inquiry reference: ${result.reference}`,
-          `Name: ${submittedName}`,
-          `Email: ${submittedEmail}`,
-          `Phone: ${submittedPhone || "Not provided"}`,
-          `Suite: ${result.suite || unit.shortName}`,
-          `Check-in: ${
-            hasDates
-              ? formatDate(range.start)
-              : "Not selected"
-          }`,
-          `Check-out: ${
-            hasDates
-              ? formatDate(range.end, true)
-              : "Not selected"
-          }`,
-          `Guests: ${guests}`,
-          `Estimated total: ${
-            quote
-              ? formatMoney(quote.total)
-              : "Not available"
-          }`,
-          "",
-          "Payment breakdown:",
-          `Downpayment: ${formatMoney(DOWNPAYMENT)}`,
-          `Remaining room balance: ${formatMoney(
-            remainingBalance
-          )}`,
-          `Refundable security deposit: ${formatMoney(
-            SECURITY_DEPOSIT
-          )}`,
-          `Total remaining upon check-in: ${formatMoney(
-            totalRemaining
-          )}`,
-          "Parking: Excluded",
-          "",
-          submittedMessage
-            ? `Message: ${submittedMessage}`
-            : "",
-          "",
-          "I’d like to proceed with the booking. Please let me know the next steps. Thank you!",
-        ]
-          .filter(Boolean)
-          .join("\n")
-      );
+      /*
+       * Messenger copy for the INITIAL INQUIRY.
+       *
+       * Payment details are intentionally not included here
+       * because the guest will see them separately on the
+       * payment step.
+       */
+      setCopyText([
+        "Hi Hiraya Suites! I just submitted an inquiry through your website.",
+        "",
+        `Inquiry reference: ${result.reference}`,
+        `Name: ${submittedName}`,
+        `Email: ${submittedEmail}`,
+        `Phone: ${submittedPhone || "Not provided"}`,
+        `Suite: ${result.suite || unit.shortName}`,
+        `Check-in: ${
+          hasDates
+            ? formatDate(range.start, true)
+            : "Not selected"
+        }`,
+        `Check-out: ${
+          hasDates
+            ? formatDate(range.end, true)
+            : "Not selected"
+        }`,
+        `Guests: ${guests}`,
+        `Estimated total: ${
+          quote
+            ? formatMoney(quote.total)
+            : "Not available"
+        }`,
+        "",
+        "I’d like to proceed with my booking. Please let me know the next steps. Thank you!",
+      ].join("\n"));
 
       setCopied(false);
     } catch (err) {
@@ -185,28 +157,6 @@ export default function InquiryForm({
     } finally {
       setSending(false);
     }
-  }
-
-  function openPaymentPage() {
-    if (!reference) return;
-
-    const estimatedTotal = quote?.total || 0;
-
-    const params = new URLSearchParams({
-      reference,
-      name: "",
-      suite: unit.shortName,
-      guests: String(guests),
-      total: String(estimatedTotal),
-      checkIn: hasDates
-        ? formatDate(range.start)
-        : "",
-      checkOut: hasDates
-        ? formatDate(range.end, true)
-        : "",
-    });
-
-    window.location.href = `/payment?${params.toString()}`;
   }
 
   return (
@@ -235,9 +185,10 @@ export default function InquiryForm({
           <h3>Your inquiry is in.</h3>
 
           <p>
-            We’ve received your inquiry and saved a copy
-            of your details. You can now proceed with the
-            downpayment to continue your booking.
+            We’ve received your inquiry and saved
+            a copy of your details. For faster
+            communication, you can continue the
+            conversation with us on Messenger.
           </p>
 
           <div className="inquiry-reference">
@@ -250,7 +201,7 @@ export default function InquiryForm({
 
           {hasDates && (
             <p className="success-dates">
-              {formatDate(range.start)} –{" "}
+              {formatDate(range.start, true)} –{" "}
               {formatDate(range.end, true)} ·{" "}
               {guests}{" "}
               {guests === 1
@@ -260,57 +211,22 @@ export default function InquiryForm({
             </p>
           )}
 
-          {quote && (
-            <div className="inquiry-payment-preview">
-              <div>
-                <span>Estimated stay</span>
-                <strong>
-                  {formatMoney(quote.total)}
-                </strong>
-              </div>
-
-              <div>
-                <span>Downpayment</span>
-                <strong>
-                  {formatMoney(DOWNPAYMENT)}
-                </strong>
-              </div>
-
-              <div>
-                <span>Remaining room balance</span>
-                <strong>
-                  {formatMoney(
-                    Math.max(
-                      quote.total -
-                        DOWNPAYMENT,
-                      0
-                    )
-                  )}
-                </strong>
-              </div>
-            </div>
-          )}
-
-          <button
-            type="button"
-            className="button button-primary full-width inquiry-payment-button"
-            onClick={openPaymentPage}
-          >
-            Proceed with your downpayment
-            <ArrowUpRight size={18} />
-          </button>
-
           <div className="inquiry-messenger-note">
             <p>
-              You can also continue on Messenger. Tap{" "}
-              <strong>Copy inquiry details</strong> first,
-              then paste the message into our chat.
+              Tap{" "}
+              <strong>
+                Copy inquiry details
+              </strong>{" "}
+              below, then open Messenger and paste
+              the copied message into our chat. This
+              helps us find your inquiry and reply
+              more easily.
             </p>
           </div>
 
           <button
             type="button"
-            className="button button-primary full-width copy"
+            className="button button-primary full-width"
             onClick={async () => {
               try {
                 await navigator.clipboard.writeText(
@@ -345,7 +261,9 @@ export default function InquiryForm({
             rel="noreferrer"
           >
             <MessageCircle size={18} />
+
             Continue on Messenger
+
             <ArrowUpRight size={18} />
           </a>
 
@@ -358,20 +276,180 @@ export default function InquiryForm({
             </p>
           )}
 
-          <p className="fine-print">
-            This is an inquiry and not yet a confirmed
-            reservation. Your booking is subject to
-            confirmation by Hiraya Suites.
-          </p>
+          {!paymentStep ? (
+            <>
+              <button
+                type="button"
+                className="button button-primary full-width"
+                onClick={() =>
+                  setPaymentStep(true)
+                }
+              >
+                Proceed with your downpayment
 
-          <button
-            type="button"
-            className="button button-primary full-width"
-            onClick={onClose}
-          >
-            Back to your getaway
-            <ArrowUpRight size={18} />
-          </button>
+                <ArrowUpRight size={18} />
+              </button>
+
+              <p className="fine-print">
+                Ready to proceed? View the payment
+                breakdown and payment instructions
+                on the next step. Parking is not
+                included in the estimated total.
+              </p>
+            </>
+          ) : (
+            <div className="inquiry-payment-step">
+              <button
+                type="button"
+                className="button button-secondary full-width"
+                onClick={() =>
+                  setPaymentStep(false)
+                }
+              >
+                Back to inquiry details
+              </button>
+
+              <div className="payment-breakdown">
+                <h4>
+                  Payment breakdown
+                </h4>
+
+                <div className="payment-row">
+                  <span>
+                    Estimated total
+                  </span>
+
+                  <strong>
+                    {quote
+                      ? formatMoney(
+                          quote.total
+                        )
+                      : "Not available"}
+                  </strong>
+                </div>
+
+                <div className="payment-row">
+                  <span>
+                    Downpayment
+                  </span>
+
+                  <strong>
+                    {formatMoney(1000)}
+                  </strong>
+                </div>
+
+                <div className="payment-row">
+                  <span>
+                    Remaining balance
+                  </span>
+
+                  <strong>
+                    {quote
+                      ? formatMoney(
+                          Math.max(
+                            quote.total - 1000,
+                            0
+                          )
+                        )
+                      : "Not available"}
+                  </strong>
+                </div>
+
+                <div className="payment-row">
+                  <span>
+                    Refundable security deposit
+                  </span>
+
+                  <strong>
+                    {formatMoney(500)}
+                  </strong>
+                </div>
+
+                <div className="payment-row payment-total-row">
+                  <span>
+                    Total to pay after downpayment
+                  </span>
+
+                  <strong>
+                    {quote
+                      ? formatMoney(
+                          Math.max(
+                            quote.total - 1000,
+                            0
+                          ) + 500
+                        )
+                      : "Not available"}
+                  </strong>
+                </div>
+              </div>
+
+              <div className="payment-note">
+                <ShieldCheck size={18} />
+
+                <p>
+                  The ₱500 security deposit is
+                  refundable upon checkout,
+                  provided there are no stains,
+                  damages, missing items, or other
+                  issues in the unit.
+                </p>
+              </div>
+
+              <div className="payment-note">
+                <p>
+                  <strong>
+                    Parking is not included.
+                  </strong>{" "}
+                  Any parking fee is paid
+                  separately.
+                </p>
+              </div>
+
+              <div className="payment-qr-section">
+                <h4>
+                  Payment QR Code
+                </h4>
+
+                <p>
+                  Please use the QR code for your
+                  selected suite. The actual payment
+                  QR code will be displayed here.
+                </p>
+
+                <div
+                  className="payment-qr-placeholder"
+                  aria-label={`${unit.shortName} payment QR code placeholder`}
+                >
+                  <div>
+                    <strong>
+                      {unit.shortName} QR CODE
+                    </strong>
+
+                    <span>
+                      QR placeholder
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="fine-print">
+                Your booking is not confirmed until
+                the required payment is received and
+                we confirm your reservation.
+              </p>
+            </div>
+          )}
+
+          {!paymentStep && (
+            <button
+              type="button"
+              className="button button-secondary full-width"
+              onClick={onClose}
+            >
+              Back to your getaway{" "}
+              <ArrowUpRight size={18} />
+            </button>
+          )}
         </div>
       ) : (
         <form
@@ -385,7 +463,11 @@ export default function InquiryForm({
               <div>
                 <strong>
                   {unit.shortName} ·{" "}
-                  {formatDate(range.start)} –{" "}
+                  {formatDate(
+                    range.start,
+                    true
+                  )}{" "}
+                  –{" "}
                   {formatDate(
                     range.end,
                     true
@@ -414,7 +496,10 @@ export default function InquiryForm({
                     Includes ₱
                     {formatMoney(
                       quote.additionalGuestTotal
-                    ).replace("₱", "")}{" "}
+                    ).replace(
+                      "₱",
+                      ""
+                    )}{" "}
                     additional guest fee
                   </span>
                 )}
@@ -423,8 +508,13 @@ export default function InquiryForm({
           )}
 
           <div className="inquiry-suite-note">
-            <small>Selected suite:</small>
-            <strong>{unit.name}</strong>
+            <small>
+              Selected suite:
+            </small>
+
+            <strong>
+              {unit.name}
+            </strong>
           </div>
 
           <div className="form-row">
@@ -483,7 +573,8 @@ export default function InquiryForm({
                         ? "guest"
                         : "guests"
                     } from ${formatDate(
-                      range.start
+                      range.start,
+                      true
                     )} to ${formatDate(
                       range.end,
                       true
@@ -531,11 +622,12 @@ export default function InquiryForm({
                   size={18}
                   className="spin"
                 />
+
                 Sending your inquiry…
               </>
             ) : (
               <>
-                Send my inquiry
+                Send my inquiry{" "}
                 <ArrowUpRight size={18} />
               </>
             )}
@@ -543,14 +635,15 @@ export default function InquiryForm({
 
           <p className="form-reassurance">
             <ShieldCheck size={14} />
-            No payment required. Just the start of
-            something lovely.
+
+            No payment required. Just the start
+            of something lovely.
           </p>
 
           <p className="fine-print">
             Rates shown are based on your selected
-            dates and number of guests. Inquiries do
-            not reserve dates until confirmed by
+            dates and number of guests. Inquiries
+            do not reserve dates until confirmed by
             Hiraya Suites.
           </p>
         </form>
