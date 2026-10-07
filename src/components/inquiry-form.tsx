@@ -26,17 +26,6 @@ type InquiryFormProps = {
   onClose: () => void;
 };
 
-const PAYMENT_QR_PLACEHOLDERS = {
-  hiraya: {
-    label: "Tower B",
-    path: "/images/payment/tower-b-qr-placeholder.svg",
-  },
-  mayumi: {
-    label: "Tower 4",
-    path: "/images/payment/tower-4-qr-placeholder.svg",
-  },
-} as const;
-
 export default function InquiryForm({
   unit,
   range,
@@ -48,12 +37,9 @@ export default function InquiryForm({
   const [reference, setReference] = useState("");
   const [copyText, setCopyText] = useState("");
   const [copied, setCopied] = useState(false);
-  const [showPayment, setShowPayment] = useState(false);
+  const [paymentStep, setPaymentStep] = useState(false);
 
   const hasDates = Boolean(range.start && range.end);
-  const paymentQr =
-    PAYMENT_QR_PLACEHOLDERS[unit.id as keyof typeof PAYMENT_QR_PLACEHOLDERS] ??
-    PAYMENT_QR_PLACEHOLDERS.hiraya;
 
   const quote = hasDates
     ? getQuote(
@@ -129,10 +115,9 @@ export default function InquiryForm({
         `Guests: ${guests}`,
         `Estimated total: ${quote ? formatMoney(quote.total) : "Not available"}`,
         "",
-        "Please let me know if the dates are available and if I can proceed with the booking. Thank you!",
+        "I’d like to proceed with the booking. Please let me know the next steps. Thank you!",
       ].join("\n"));
       setCopied(false);
-      setShowPayment(false);
     } catch (err) {
       setError(
         err instanceof Error
@@ -231,77 +216,109 @@ export default function InquiryForm({
             <ArrowUpRight size={18} />
           </a>
 
-          {!showPayment ? (
-            <button
-              type="button"
-              className="button button-secondary full-width"
-              onClick={() => setShowPayment(true)}
-            >
-              Proceed with downpayment
-              <ArrowUpRight size={18} />
-            </button>
+          {error && <p className="form-error" role="alert">{error}</p>}
+
+          {!paymentStep ? (
+            <>
+              <button
+                type="button"
+                className="button button-primary full-width"
+                onClick={() => setPaymentStep(true)}
+              >
+                Proceed with your downpayment
+                <ArrowUpRight size={18} />
+              </button>
+
+              <p className="fine-print">
+                Ready to proceed? View the payment breakdown and payment
+                instructions on the next step. Parking is not included in
+                the estimated total.
+              </p>
+            </>
           ) : (
-            <div className="inquiry-payment" aria-label="Downpayment details">
-              <div className="inquiry-payment-header">
-                <span className="inquiry-payment-eyebrow">BOOKING PAYMENT</span>
-                <h4>Proceed with your downpayment</h4>
-                <p>
-                  To proceed with your booking, the required downpayment is ₱1,000.
-                  Parking is not included in the amounts below and is charged separately.
-                </p>
-              </div>
-
-              <div className="inquiry-payment-breakdown">
-                <div><span>Estimated total</span><strong>{quote ? formatMoney(quote.total) : "Not available"}</strong></div>
-                <div><span>Downpayment</span><strong>₱1,000</strong></div>
-                <div><span>Balance</span><strong>{quote ? formatMoney(Math.max(0, quote.total - 1000)) : "Not available"}</strong></div>
-                <div><span>Security deposit <small>(refundable)</small></span><strong>₱500</strong></div>
-                <div className="payment-total-row"><span>Total remaining upon arrival</span><strong>{quote ? formatMoney(Math.max(0, quote.total - 1000) + 500) : "Not available"}</strong></div>
-              </div>
-
-              <div className="inquiry-payment-note">
-                <ShieldCheck size={17} />
-                <p>
-                  The ₱500 security deposit is refundable upon checkout if there are no stains,
-                  damages, missing items, or other issues with the unit.
-                </p>
-              </div>
-
-              <div className="inquiry-qr">
-                <img
-                  className="inquiry-qr-image"
-                  src={paymentQr.path}
-                  alt={`${paymentQr.label} payment QR code placeholder`}
-                />
-                <p>Scan the QR code above to pay the ₱1,000 downpayment.</p>
-              </div>
-
+            <div className="inquiry-payment-step">
               <button
                 type="button"
                 className="button button-secondary full-width"
-                onClick={() => setShowPayment(false)}
+                onClick={() => setPaymentStep(false)}
               >
                 Back to inquiry details
               </button>
+
+              <div className="payment-breakdown">
+                <h4>Payment breakdown</h4>
+
+                <div className="payment-row">
+                  <span>Estimated total</span>
+                  <strong>{quote ? formatMoney(quote.total) : "Not available"}</strong>
+                </div>
+
+                <div className="payment-row">
+                  <span>Downpayment</span>
+                  <strong>{formatMoney(1000)}</strong>
+                </div>
+
+                <div className="payment-row">
+                  <span>Remaining balance</span>
+                  <strong>{quote ? formatMoney(Math.max(quote.total - 1000, 0)) : "Not available"}</strong>
+                </div>
+
+                <div className="payment-row">
+                  <span>Refundable security deposit</span>
+                  <strong>{formatMoney(500)}</strong>
+                </div>
+
+                <div className="payment-row payment-total-row">
+                  <span>Total to pay after downpayment</span>
+                  <strong>{quote ? formatMoney(Math.max(quote.total - 1000, 0) + 500) : "Not available"}</strong>
+                </div>
+              </div>
+
+              <div className="payment-note">
+                <ShieldCheck size={18} />
+                <p>
+                  The ₱500 security deposit is refundable upon checkout,
+                  provided there are no stains, damages, missing items, or
+                  other issues in the unit.
+                </p>
+              </div>
+
+              <div className="payment-note">
+                <p><strong>Parking is not included.</strong> Any parking fee is paid separately.</p>
+              </div>
+
+              <div className="payment-qr-section">
+                <h4>Payment QR Code</h4>
+                <p>
+                  Please use the QR code for your selected suite. The actual
+                  payment QR code will be displayed here.
+                </p>
+
+                <div className="payment-qr-placeholder" aria-label={`${unit.shortName} payment QR code placeholder`}>
+                  <div>
+                    <strong>{unit.shortName} QR CODE</strong>
+                    <span>QR placeholder</span>
+                  </div>
+                </div>
+              </div>
+
+              <p className="fine-print">
+                Your booking is not confirmed until the required payment is
+                received and we confirm your reservation.
+              </p>
             </div>
           )}
 
-          {error && <p className="form-error" role="alert">{error}</p>}
-
-          <p className="fine-print">
-            This is an inquiry and not a confirmed
-            reservation. No payment has been taken
-            and your dates have not been reserved.
-          </p>
-
-          <button
-            type="button"
-            className="button button-primary full-width"
-            onClick={onClose}
-          >
-            Back to your getaway{" "}
-            <ArrowUpRight size={18} />
-          </button>
+          {!paymentStep && (
+            <button
+              type="button"
+              className="button button-secondary full-width"
+              onClick={onClose}
+            >
+              Back to your getaway{" "}
+              <ArrowUpRight size={18} />
+            </button>
+          )}
         </div>
       ) : (
         <form
