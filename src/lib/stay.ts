@@ -52,7 +52,7 @@ export const UNITS: Unit[] = [
       "Couples getaways, small families, friend groups of 3–4, and longer stays.",
     vibe: "Warm, roomy, and a little indulgent.",
     highlights: [
-      "9th flr",
+      "9ᵗʰ flr",
       "Private balcony",
       "Separate living area",
       "Queen bed + sofa bed for 2",
@@ -101,7 +101,7 @@ export const UNITS: Unit[] = [
       "Solo slow-downs, couples, and short, cozy escapes.",
     vibe: "Cozy, curated, and easy to love.",
     highlights: [
-      "8th flr",
+      "8ᵗʰ flr",
       "Full Double Sized Bed and Pullout Bed",
       "Bright open-plan layout",
       "Kitchenette for small bites",
