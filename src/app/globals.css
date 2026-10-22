@@ -5982,3 +5982,77 @@ h1 em {
     transition-duration: .01ms !important;
   }
 }
+
+
+/* Private-link parking availability page */
+.parking-page {
+  min-height: 100vh;
+  padding: 34px 20px 28px;
+  background: #faf9f6;
+  color: #35332d;
+}
+.parking-shell { width: 100%; max-width: 880px; margin: 0 auto; }
+.parking-back { display: inline-flex; align-items: center; gap: 8px; color: #65533e; font-size: 13px; margin-bottom: 38px; }
+.parking-back:hover { color: #332d25; }
+.parking-heading { text-align: center; margin: 0 auto 30px; }
+.parking-eyebrow { color: #806347; font-size: 11px; font-weight: 700; letter-spacing: 2.3px; }
+.parking-heading h1 { margin-top: 10px; font-family: var(--font-serif), Georgia, serif; font-size: clamp(38px, 6vw, 54px); line-height: 1.1; font-weight: 400; letter-spacing: -1px; }
+.parking-heading p { max-width: 510px; margin: 13px auto 0; color: #7b786f; font-size: 14px; line-height: 1.8; }
+.parking-card { overflow: hidden; border: 1px solid #e6e1d7; border-radius: 13px; background: #fffefa; box-shadow: 0 14px 40px #332d2508; }
+.parking-card-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px 25px; border-bottom: 1px solid #eee9e0; }
+.parking-title { display: flex; align-items: center; gap: 13px; }
+.parking-icon { display: grid; place-items: center; width: 43px; height: 43px; border-radius: 9px; background: #f1eee6; color: #806347; }
+.parking-title h2 { font-family: var(--font-sans), sans-serif; font-size: 15px; font-weight: 650; letter-spacing: 0; }
+.parking-title p { margin-top: 5px; color: #898477; font-size: 12px; }
+.parking-refresh { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 9px 12px; border: 1px solid #e6e1d7; border-radius: 6px; background: #fffefa; color: #65533e; font-size: 12px; }
+.parking-refresh:disabled { opacity: .65; }
+.parking-spin { animation: parking-spin 1.2s linear infinite; }
+@keyframes parking-spin { to { transform: rotate(360deg); } }
+.parking-month-bar { display: flex; align-items: center; justify-content: space-between; padding: 20px 25px 17px; }
+.parking-month-bar h3 { font-family: var(--font-serif), Georgia, serif; font-size: 25px; font-weight: 500; }
+.parking-month-button { display: grid; place-items: center; width: 35px; height: 35px; border: 1px solid #e6e1d7; border-radius: 50%; background: #fffefa; color: #65533e; }
+.parking-month-button:hover { background: #f1eee6; }
+.parking-calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); padding: 0 20px; }
+.parking-weekday { padding: 10px 0; text-align: center; color: #898477; font-size: 11px; font-weight: 600; }
+.parking-day { min-width: 0; min-height: 73px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; margin: 3px; border: 1px solid transparent; border-radius: 7px; font-size: 13px; }
+.parking-day > span { font-weight: 600; }
+.parking-day small { font-size: 9px; line-height: 1.2; }
+.parking-day.is-free { border-color: #e0e8dc; background: #f3f7f0; color: #486343; }
+.parking-day.is-busy { border-color: #ead9d2; background: #fbf0ed; color: #975d4e; }
+.parking-day.is-past { background: #f7f6f2; color: #b0ada5; }
+.parking-day.is-loading small { visibility: hidden; }
+.parking-empty { pointer-events: none; }
+.parking-legend { display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; padding: 16px 20px 22px; color: #777267; font-size: 11px; }
+.parking-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.legend-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.legend-free { background: #7f9b73; }
+.legend-busy { background: #c78370; }
+.legend-past { background: #c9c6bd; }
+.parking-note { margin: 0 25px; padding: 17px 18px; border-radius: 8px; background: #f6f2e9; }
+.parking-note strong { display: block; color: #65533e; font-size: 12px; }
+.parking-note p { margin-top: 6px; color: #777267; font-size: 11px; line-height: 1.8; }
+.parking-updated { padding: 16px 25px 20px; text-align: center; color: #9a958a; font-size: 10px; }
+.parking-error { margin: 10px 25px 22px; padding: 20px; border: 1px solid #ead9d2; border-radius: 8px; background: #fbf0ed; color: #804b3e; text-align: center; font-size: 13px; line-height: 1.7; }
+.parking-retry { margin-top: 12px; padding: 9px 14px; border-radius: 5px; background: #806347; color: white; }
+.parking-footer { margin-top: 27px; text-align: center; color: #999286; font-size: 11px; }
+.parking-footer span { margin: 0 5px; }
+@media (max-width: 560px) {
+  .parking-page { padding: 23px 13px; }
+  .parking-back { margin-bottom: 28px; }
+  .parking-heading { margin-bottom: 22px; }
+  .parking-heading p { font-size: 13px; }
+  .parking-card-head { padding: 17px 15px; }
+  .parking-title { gap: 9px; }
+  .parking-icon { width: 37px; height: 37px; }
+  .parking-title p { max-width: 170px; line-height: 1.5; }
+  .parking-refresh { padding: 9px; }
+  .parking-refresh span { display: none; }
+  .parking-month-bar { padding: 17px 15px 12px; }
+  .parking-calendar-grid { padding: 0 7px; }
+  .parking-day { min-height: 57px; gap: 5px; margin: 2px 1px; font-size: 12px; }
+  .parking-day small { font-size: 8px; letter-spacing: -.2px; }
+  .parking-weekday { font-size: 10px; }
+  .parking-legend { gap: 13px; padding-bottom: 17px; }
+  .parking-note { margin: 0 13px; padding: 14px; }
+  .parking-updated { padding-bottom: 17px; }
+}
