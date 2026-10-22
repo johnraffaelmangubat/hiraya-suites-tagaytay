@@ -112,7 +112,7 @@ export default function ParkingAvailabilityPage() {
               </div>
               <div className="parking-legend">
                 <span><i className="legend-dot legend-free" /> Available</span>
-                <span><i className="legend-dot legend-busy" /> Unavailable</span>
+                <span><i className="legend-dot legend-busy" /> Booked</span>
                 <span><i className="legend-dot legend-past" /> Past date</span>
               </div>
             </>
