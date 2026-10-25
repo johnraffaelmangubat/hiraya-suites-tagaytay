@@ -8,7 +8,8 @@ const PARKING_TIME_ZONE = "Asia/Manila";
 
 type CalendarDateTime = {
   value: string;
-  timeZone?: string;
+  time?: string;
+  isDateOnly: boolean;
 };
 
 type CalendarEvent = {
@@ -23,12 +24,33 @@ function unfoldLines(value: string): string[] {
     .split(/\r?\n/);
 }
 
-function dateKeyFromParts(
-  year: string,
-  month: string,
-  day: string
-): string {
+function dateKey(year: string, month: string, day: string): string {
   return `${year}-${month}-${day}`;
+}
+
+function getTimeZoneParts(instant: Date) {
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: PARKING_TIME_ZONE,
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hourCycle: "h23",
+  }).formatToParts(instant);
+
+  const get = (type: string) =>
+    parts.find((part) => part.type === type)?.value;
+
+  return {
+    year: get("year"),
+    month: get("month"),
+    day: get("day"),
+    hour: get("hour"),
+    minute: get("minute"),
+    second: get("second"),
+  };
 }
 
 function parseCalendarDateTime(
@@ -43,79 +65,75 @@ function parseCalendarDateTime(
 
   if (!match) return null;
 
+  const isDateOnly = !match[4];
+
+  if (isDateOnly) {
+    return {
+      value: dateKey(match[1], match[2], match[3]),
+      isDateOnly: true,
+    };
+  }
+
   const timeZoneMatch = parameters.match(
     /(?:^|;)TZID=([^;:]+)/i
   );
 
   const timeZone = timeZoneMatch?.[1];
+  let year = match[1];
+  let month = match[2];
+  let day = match[3];
+  let hour = match[4];
+  let minute = match[5];
+  let second = match[6];
 
-  // All-day dates and Manila-local dates already use
-  // the correct local calendar date.
-  if (
-    !match[4] ||
-    (timeZone &&
-      timeZone.toLowerCase() ===
-        PARKING_TIME_ZONE.toLowerCase())
-  ) {
-    return {
-      value: dateKeyFromParts(
-        match[1],
-        match[2],
-        match[3]
-      ),
-      timeZone,
-    };
-  }
-
-  // UTC timestamps must be converted to Philippine dates.
+  // UTC timestamps must be converted into Philippine local time.
   if (match[7]) {
     const instant = new Date(
-      `${match[1]}-${match[2]}-${match[3]}T` +
-        `${match[4]}:${match[5]}:${match[6]}Z`
+      `${year}-${month}-${day}T${hour}:${minute}:${second}Z`
     );
 
     if (Number.isNaN(instant.getTime())) return null;
 
-    const parts = new Intl.DateTimeFormat("en-CA", {
-      timeZone: PARKING_TIME_ZONE,
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }).formatToParts(instant);
+    const parts = getTimeZoneParts(instant);
 
-    const getPart = (type: string) =>
-      parts.find((part) => part.type === type)?.value;
+    if (
+      !parts.year ||
+      !parts.month ||
+      !parts.day ||
+      !parts.hour ||
+      !parts.minute ||
+      !parts.second
+    ) {
+      return null;
+    }
 
-    const year = getPart("year");
-    const month = getPart("month");
-    const day = getPart("day");
-
-    if (!year || !month || !day) return null;
-
-    return {
-      value: dateKeyFromParts(year, month, day),
-      timeZone: PARKING_TIME_ZONE,
-    };
+    year = parts.year;
+    month = parts.month;
+    day = parts.day;
+    hour = parts.hour;
+    minute = parts.minute;
+    second = parts.second;
+  } else if (
+    timeZone &&
+    timeZone.toLowerCase() !== PARKING_TIME_ZONE.toLowerCase()
+  ) {
+    // Do not silently reinterpret another named timezone as Manila.
+    // Preserve its written date until timezone-specific handling is added.
   }
 
-  // Preserve the written date for other non-UTC events
-  // instead of accidentally shifting them by a day.
   return {
-    value: dateKeyFromParts(
-      match[1],
-      match[2],
-      match[3]
-    ),
-    timeZone,
+    value: dateKey(year, month, day),
+    time: `${hour}${minute}${second}`,
+    isDateOnly: false,
   };
 }
 
-function toUtcDate(key: string): Date {
-  return new Date(`${key}T12:00:00.000Z`);
+function toUtcDate(value: string): Date {
+  return new Date(`${value}T12:00:00.000Z`);
 }
 
-function addDay(key: string): string {
-  const date = toUtcDate(key);
+function addDay(value: string): string {
+  const date = toUtcDate(value);
   date.setUTCDate(date.getUTCDate() + 1);
   return date.toISOString().slice(0, 10);
 }
@@ -131,22 +149,39 @@ function parseBusyDates(ics: string): string[] {
     }
 
     if (line === "END:VEVENT") {
-      if (event?.start) {
-        const start = event.start.value;
-        const end = event.end?.value;
+      const start = event?.start;
+      const end = event?.end;
 
-        // DTSTART is inclusive and DTEND is exclusive.
-        // This keeps a checkout date available unless
-        // another event blocks that date.
-        if (!end || end <= start) {
-          dates.add(start);
+      if (start) {
+        const startDate = start.value;
+        const endDate = end?.value;
+
+        if (!end || !endDate || endDate < startDate) {
+          dates.add(startDate);
         } else {
+          // Block every calendar date the event overlaps.
+          // DTSTART is inclusive.
           for (
-            let date = start;
-            date < end;
+            let date = startDate;
+            date < endDate;
             date = addDay(date)
           ) {
             dates.add(date);
+          }
+
+          if (endDate === startDate) {
+            // A timed event beginning and ending on the same date
+            // still blocks that date.
+            dates.add(startDate);
+          } else if (
+            !end.isDateOnly &&
+            end.time &&
+            end.time !== "000000"
+          ) {
+            // All-day DTEND is exclusive.
+            // A timed event ending after midnight occupies part
+            // of its end date, so block that date too.
+            dates.add(endDate);
           }
         }
       }
@@ -161,8 +196,7 @@ function parseBusyDates(ics: string): string[] {
     if (separator < 0) continue;
 
     const propertyAndParameters = line.slice(0, separator);
-    const value = line.slice(separator + 1);
-
+    const rawValue = line.slice(separator + 1);
     const property = propertyAndParameters
       .split(";")[0]
       .toUpperCase();
@@ -172,7 +206,7 @@ function parseBusyDates(ics: string): string[] {
     }
 
     const parsed = parseCalendarDateTime(
-      value,
+      rawValue,
       propertyAndParameters
     );
 
@@ -215,9 +249,7 @@ export async function GET() {
     const ics = await response.text();
 
     if (!ics.includes("BEGIN:VCALENDAR")) {
-      throw new Error(
-        "The calendar feed did not return a valid iCalendar file."
-      );
+      throw new Error("Google Calendar returned an invalid calendar feed.");
     }
 
     return NextResponse.json(
