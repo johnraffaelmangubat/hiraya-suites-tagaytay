@@ -6178,3 +6178,7 @@ h1 em {
     font-size: 12px;
   }
 }
+
+/* new unit: gallery badge colors (match the other suites) */
+.gallery-suite-badge.suite-tower2 { background: #eaf0f4ed; color: #4d5f6b; }
+.gallery-thumb-badge.suite-tower2 { background: #eaf0f4f0; color: #4d5f6b; }
