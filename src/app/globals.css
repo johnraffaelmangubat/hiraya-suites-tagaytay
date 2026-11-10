@@ -6056,3 +6056,125 @@ h1 em {
   .parking-note { margin: 0 13px; padding: 14px; }
   .parking-updated { padding-bottom: 17px; }
 }
+
+
+/* =====================================================================
+ * NEW UNIT + SUITE CAROUSEL (appended; nothing above was changed)
+ * ===================================================================== */
+
+.suite-carousel {
+  position: relative;
+}
+
+.suite-cards.suite-cards--carousel {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  padding: 8px 2px 14px;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.suite-cards.suite-cards--carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.suite-cards--carousel .suite-card {
+  flex: 0 0 calc((100% - 24px) / 2);
+  scroll-snap-align: start;
+}
+
+.suite-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.suite-carousel-btn {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--bronze-dark);
+  cursor: pointer;
+  transition: background .2s, border-color .2s, opacity .2s;
+}
+
+.suite-carousel-btn:hover:not(:disabled) {
+  border-color: var(--bronze);
+  background: var(--sand);
+}
+
+.suite-carousel-btn:disabled {
+  opacity: .35;
+  cursor: default;
+}
+
+.suite-carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.suite-carousel-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: #d8d0c0;
+  cursor: pointer;
+  transition: width .2s, background .2s;
+}
+
+.suite-carousel-dot.is-active {
+  width: 26px;
+  background: var(--bronze);
+}
+
+@media (max-width: 900px) {
+  .suite-cards.suite-cards--carousel {
+    gap: 16px;
+  }
+
+  .suite-cards--carousel .suite-card {
+    flex-basis: 86%;
+  }
+}
+
+/* three suite pills in the booking picker */
+@media (min-width: 521px) {
+  .suite-picker {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 521px) and (max-width: 759px) {
+  .suite-picker {
+    gap: 6px;
+  }
+
+  .suite-pill .suite-pill-inner {
+    padding: 12px 8px;
+  }
+
+  .suite-pill small {
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  .suite-pill strong {
+    font-size: 15px;
+  }
+
+  .suite-pill span {
+    font-size: 12px;
+  }
+}
