@@ -139,9 +139,9 @@ export const UNITS: Unit[] = [
     size: "25 sqm", // EDIT
     beds: "1 Queen Bed", // EDIT
     maxGuests: 4, // EDIT
-    weekdayRate: 1999, // EDIT
-    weekendRate: 2199, // EDIT
-    holidayRate: 2599, // EDIT
+    weekdayRate: 2399, // Mon-Thu nights
+    weekendRate: 2599, // Fri-Sun nights
+    holidayRate: 2999, // dates listed in HOLIDAY_DATES
     additionalGuestFee: 300, // EDIT
     baseGuests: 2, // EDIT
     minNights: 1, // EDIT
