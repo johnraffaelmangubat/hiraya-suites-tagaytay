@@ -117,52 +117,12 @@ type GalleryPhoto = {
  * ===================================================================== */
 const TOWER2_PHOTOS: GalleryPhoto[] = [
   {
-    id: "tower2-mirror-kitchen",
-    src: "/images/unit3/mirror-kitchen.jpg",
-    title: "Step inside, settle in",
-    room: "Entrance",
-    suite: "tower2",
-    alt: "Studio entrance with a round wall mirror, leading to the kitchenette and bed",
-  },
-  {
     id: "tower2-bed-one",
     src: "/images/unit3/bed-one.jpg",
     title: "A calm place to land",
     room: "Bedroom",
     suite: "tower2",
     alt: "Cozy daybed with pillows beside a window with a city view",
-  },
-  {
-    id: "tower2-kitchen",
-    src: "/images/unit3/kitchen.jpg",
-    title: "Light bites, made easy",
-    room: "Kitchenette",
-    suite: "tower2",
-    alt: "Kitchenette with light wood cabinets, a sink, and a countertop",
-  },
-  {
-    id: "tower2-tv",
-    src: "/images/unit3/tv.jpg",
-    title: "Movie night, sorted",
-    room: "TV & Netflix",
-    suite: "tower2",
-    alt: "Wall-mounted smart TV on a wood-paneled wall with a console below",
-  },
-  {
-    id: "tower2-dining-table",
-    src: "/images/unit3/dining-table.jpg",
-    title: "Breakfast for two",
-    room: "Dining nook",
-    suite: "tower2",
-    alt: "Round white dining table with two chairs and a place setting",
-  },
-  {
-    id: "tower2-cr",
-    src: "/images/unit3/cr.jpg",
-    title: "Fresh and clean",
-    room: "Bathroom",
-    suite: "tower2",
-    alt: "Private bathroom with an arched mirror, sink, and a wooden shelf",
   },
   {
     id: "tower2-bed-two",
@@ -196,7 +156,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
     suite: "tower2",
     alt: "Comfortable double bed with soft bedding and framed wall art above",
   },
-  {
+   {
     id: "tower2-mirror-out",
     src: "/images/unit3/mirror-out.jpg",
     title: "Everything within reach",
@@ -211,6 +171,49 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
     room: "Bedroom",
     suite: "tower2",
     alt: "Standing mirror and coat stand beside a window with a city view",
+  },
+  {
+    id: "tower2-tv",
+    src: "/images/unit3/tv.jpg",
+    title: "Movie/Game night, sorted",
+    room: "TV & Netflix",
+    suite: "tower2",
+    alt: "Wall-mounted smart TV on a wood-paneled wall with a console below",
+  },
+  {
+    id: "tower2-dining-table",
+    src: "/images/unit3/dining-table.jpg",
+    title: "Breakfast for two",
+    room: "Dining nook",
+    suite: "tower2",
+    alt: "Round white dining table with two chairs and a place setting",
+  },
+  {
+    id: "tower2-mirror-kitchen",
+    src: "/images/unit3/mirror-kitchen.jpg",
+    title: "Step inside, settle in",
+    room: "Entrance",
+    suite: "tower2",
+    alt: "Studio entrance with a round wall mirror, leading to the kitchenette and bed",
+  },
+  
+  {
+    id: "tower2-kitchen",
+    src: "/images/unit3/kitchen.jpg",
+    title: "Light bites, made easy",
+    room: "Kitchenette",
+    suite: "tower2",
+    alt: "Kitchenette with light wood cabinets, a sink, and a countertop",
+  },
+  
+  
+  {
+    id: "tower2-cr",
+    src: "/images/unit3/cr.jpg",
+    title: "Fresh and clean",
+    room: "Bathroom",
+    suite: "tower2",
+    alt: "Private bathroom with an arched mirror, sink, and a wooden shelf",
   },
 ];
 
