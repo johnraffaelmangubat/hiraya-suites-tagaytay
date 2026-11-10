@@ -118,7 +118,7 @@ type GalleryPhoto = {
 const TOWER2_PHOTOS: GalleryPhoto[] = [
   {
     id: "tower2-bed-one",
-    src: "/images/unit3/bed-one.jpg",
+    src: "/images/tower2/bed-one.jpg",
     title: "A calm place to land",
     room: "Bedroom",
     suite: "tower2",
@@ -126,7 +126,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "tower2-bed-two",
-    src: "/images/unit3/bed-two.jpg",
+    src: "/images/tower2/bed-two.JPG",
     title: "Slow mornings, soft light",
     room: "Bedroom",
     suite: "tower2",
@@ -134,7 +134,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "tower2-bed-three",
-    src: "/images/unit3/bed-three.jpg",
+    src: "/images/tower2/bed-three.JPG",
     title: "Rest with a view",
     room: "Bedroom",
     suite: "tower2",
@@ -142,7 +142,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "tower2-bed-four",
-    src: "/images/unit3/bed-four.jpg",
+    src: "/images/tower2/bed-four.JPG",
     title: "Dressed for comfort",
     room: "Bedroom",
     suite: "tower2",
@@ -150,7 +150,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "tower2-bed-five",
-    src: "/images/unit3/bed-five.jpg",
+    src: "/images/tower2/bed-five.JPG",
     title: "Made for deep sleep",
     room: "Bedroom",
     suite: "tower2",
@@ -158,7 +158,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
   },
    {
     id: "tower2-mirror-out",
-    src: "/images/unit3/mirror-out.jpg",
+    src: "/images/tower2/mirror-out.JPG",
     title: "Everything within reach",
     room: "Bedroom",
     suite: "tower2",
@@ -166,7 +166,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "tower2-mirror",
-    src: "/images/unit3/mirror.jpg",
+    src: "/images/tower2/mirror.JPG",
     title: "A little corner by the window",
     room: "Bedroom",
     suite: "tower2",
@@ -174,7 +174,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "tower2-tv",
-    src: "/images/unit3/tv.jpg",
+    src: "/images/tower2/tv.JPG",
     title: "Movie/Game night, sorted",
     room: "TV & Netflix",
     suite: "tower2",
@@ -182,7 +182,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "tower2-dining-table",
-    src: "/images/unit3/dining-table.jpg",
+    src: "/images/tower2/dining-table.JPG",
     title: "Breakfast for two",
     room: "Dining nook",
     suite: "tower2",
@@ -190,7 +190,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
   },
   {
     id: "tower2-mirror-kitchen",
-    src: "/images/unit3/mirror-kitchen.jpg",
+    src: "/images/tower2/mirror-kitchen.JPG",
     title: "Step inside, settle in",
     room: "Entrance",
     suite: "tower2",
@@ -199,17 +199,16 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
   
   {
     id: "tower2-kitchen",
-    src: "/images/unit3/kitchen.jpg",
+    src: "/images/tower2/kitchen.JPG",
     title: "Light bites, made easy",
     room: "Kitchenette",
     suite: "tower2",
     alt: "Kitchenette with light wood cabinets, a sink, and a countertop",
   },
   
-  
   {
     id: "tower2-cr",
-    src: "/images/unit3/cr.jpg",
+    src: "/images/tower2/cr.JPG",
     title: "Fresh and clean",
     room: "Bathroom",
     suite: "tower2",
