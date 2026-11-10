@@ -135,7 +135,7 @@ export const UNITS: Unit[] = [
     eyebrow: "TAAL VIEW", // EDIT: small label above the name
     tagline: "Partial Taal View & City View", // EDIT
     description:
-      "A comfortable Hiraya Suites unit in Tagaytay with self check-in, a full set of home comforts, and Netflix on the TV. Edit this description with the real details of the unit.", // EDIT
+      "Enjoy a cozy escape at our newly renovated 23rd-floor Lower Penthouse in SMDC Wind Residences Tower 2. Featuring a queen-sized bed, partial Taal Lake and city views, PS4, karaoke, and everything you need for a relaxing stay.", // EDIT
     size: "25 sqm", // EDIT
     beds: "1 Queen Bed", // EDIT
     maxGuests: 2, // EDIT
@@ -151,9 +151,10 @@ export const UNITS: Unit[] = [
     bestFor: "Couples, small families, and short cozy escapes.", // EDIT
     vibe: "Cozy, curated, and easy to love.", // EDIT
     highlights: [
-      "Self check-in", // EDIT
+      "Partial Taal Lake & city views",
+      "23ʳᵈ flr Lower Penthouse",
       "Bright open-plan layout", // EDIT
-      "Kitchenette for small bites", // EDIT
+      "Ideal for 2 guests", // EDIT
     ],
     amenities: [
       "Fast Wi-Fi",
