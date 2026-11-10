@@ -118,7 +118,7 @@ type GalleryPhoto = {
 const UNIT3_PHOTOS: GalleryPhoto[] = [
   {
     id: "unit3-mirror-kitchen",
-    src: "/images/tower2/mirror-kitchen.jpg",
+    src: "/images/unit3/mirror-kitchen.jpg",
     title: "Step inside, settle in",
     room: "Entrance",
     suite: "unit3",
