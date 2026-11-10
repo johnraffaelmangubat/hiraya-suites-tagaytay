@@ -130,10 +130,10 @@ export const UNITS: Unit[] = [
    * ===================================================================== */
   {
     id: "tower2", // EDIT (optional): internal id, max 20 chars, no spaces
-    name: "SMDC Tower 2", // EDIT: full name
+    name: "SMDC Wind Residences Tower 4",
     shortName: "Tower 2", // EDIT: short name for tabs and buttons
-    eyebrow: "CITY VIEW", // EDIT: small label above the name
-    tagline: "A fresh new place to stay.", // EDIT
+    eyebrow: "TAAL VIEW", // EDIT: small label above the name
+    tagline: "Partial Taal View & City View", // EDIT
     description:
       "A comfortable Hiraya Suites unit in Tagaytay with self check-in, a full set of home comforts, and Netflix on the TV. Edit this description with the real details of the unit.", // EDIT
     size: "25 sqm", // EDIT
@@ -182,12 +182,21 @@ export const HOLIDAY_DATES = new Set<string>([
   "2026-11-01", 
   "2026-11-02", 
   "2026-11-30", 
+  "2026-12-19",
+  "2026-12-20",
+  "2026-12-21",
+  "2026-12-22",
+  "2026-12-23",
   "2026-12-24",
   "2026-12-25", // Christmas Day
   "2026-12-26",
+  "2026-12-27",
+  "2026-12-28",
+  "2026-12-29",
   "2026-12-30",
   "2026-12-31", // New Year's Eve
   "2026-01-01", // New Year's Day
+  "2026-01-02", // New Year's Day
   // add more holiday dates here as "YYYY-MM-DD"
 ]);
 
