@@ -365,7 +365,7 @@ const photos: GalleryPhoto[] = [
   },
 
   {
-    id: "unit3-bedroom",
+    id: "unit3-bed-one",
     src: "/images/unit3/bed-one.jpg",
     title: "A calm place to land",
     room: "Bedroom",
@@ -373,7 +373,7 @@ const photos: GalleryPhoto[] = [
     alt: "Bedroom with a cozy bed and warm lighting",
   },
   {
-    id: "unit3-bedroom",
+    id: "unit3-bed-two",
     src: "/images/unit3/bed-two.jpg",
     title: "Slow mornings, soft light",
     room: "Bedroom",
@@ -381,7 +381,7 @@ const photos: GalleryPhoto[] = [
     alt: "Bedroom with a cozy bed and warm lighting",
   },
   {
-    id: "unit3-bedroom",
+    id: "unit3-bed-three",
     src: "/images/unit3/bed-three.jpg",
     title: "Rest with a view",
     room: "Bedroom",
@@ -389,7 +389,7 @@ const photos: GalleryPhoto[] = [
     alt: "Bedroom with a cozy bed and warm lighting",
   },
   {
-    id: "unit3-bedroom",
+    id: "unit3-bed-four",
     src: "/images/unit3/bed-four.jpg",
     title: "Dressed for comfort",
     room: "Bedroom",
@@ -397,7 +397,7 @@ const photos: GalleryPhoto[] = [
     alt: "Bedroom with a cozy bed and warm lighting",
   },
   {
-    id: "unit3-bedroom",
+    id: "unit3-bed-five",
     src: "/images/unit3/bed-five.jpg",
     title: "Made for deep sleep",
     room: "Bedroom",
@@ -405,7 +405,7 @@ const photos: GalleryPhoto[] = [
     alt: "Bedroom with a cozy bed and warm lighting",
   },
   {
-    id: "unit3-bedroom",
+    id: "unit3-mirror-out",
     src: "/images/unit3/mirror-out.jpg",
     title: "Everything within reach",
     room: "Bedroom",
@@ -413,7 +413,7 @@ const photos: GalleryPhoto[] = [
     alt: "Bedroom with a cozy bed and warm lighting",
   },
    {
-    id: "unit3-bedroom",
+    id: "unit3-mirror",
     src: "/images/unit3/mirror.jpg",
     title: "A little corner by the window",
     room: "Bedroom",
@@ -421,7 +421,7 @@ const photos: GalleryPhoto[] = [
     alt: "Bedroom with a cozy bed and warm lighting",
   },
    {
-    id: "unit3-bedroom",
+    id: "unit3-tv",
     src: "/images/unit3/tv.jpg",
     title: "Movie night, sorted",
     room: "Bedroom",
@@ -429,7 +429,7 @@ const photos: GalleryPhoto[] = [
     alt: "Bedroom with a cozy bed and warm lighting",
   },
    {
-    id: "unit3-bedroom",
+    id: "unit3-dining-table",
     src: "/images/unit3/dining-table.jpg",
     title: "Breakfast for two",
     room: "Bedroom",
@@ -437,7 +437,7 @@ const photos: GalleryPhoto[] = [
     alt: "Bedroom with a cozy bed and warm lighting",
   },
    {
-    id: "unit3-bedroom",
+    id: "unit3-mirror-kitchen",
     src: "/images/unit3/mirror-kitchen.jpg",
     title: "Step inside, settle in",
     room: "Bedroom",
@@ -445,7 +445,7 @@ const photos: GalleryPhoto[] = [
     alt: "Bedroom with a cozy bed and warm lighting",
   },
    {
-    id: "unit3-bedroom",
+    id: "unit3-cr",
     src: "/images/unit3/cr.jpg",
     title: "Fresh and clean",
     room: "Bedroom",
