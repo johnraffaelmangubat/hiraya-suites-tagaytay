@@ -86,6 +86,17 @@ export async function readAvailability() {
     );
 
     /*
+     * 3b. Get Airbnb blocked dates for the new unit.
+     */
+    const airbnbUnit3Dates =
+      await getAirbnbBlockedDates("unit3");
+
+    console.log(
+      "[availability] Airbnb unit3 dates:",
+      airbnbUnit3Dates.length
+    );
+
+    /*
      * 4. Create an empty blocked-date set
      *    for every unit.
      */
@@ -128,6 +139,13 @@ export async function readAvailability() {
      */
     for (const date of airbnbMayumiDates) {
       blockedByUnit.mayumi.add(date);
+    }
+
+    /*
+     * 7b. Add new unit Airbnb dates.
+     */
+    for (const date of airbnbUnit3Dates) {
+      blockedByUnit.unit3.add(date);
     }
 
     /*

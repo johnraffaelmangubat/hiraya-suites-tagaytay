@@ -170,5 +170,19 @@ export async function getAirbnbBlockedDates(
     return fetchAirbnbCalendar(unitId, url);
   }
 
+  if (unitId === "unit3") {
+    const url = process.env.AIRBNB_UNIT3_ICAL_URL;
+
+    if (!url) {
+      console.warn(
+        "[airbnb] AIRBNB_UNIT3_ICAL_URL is not configured."
+      );
+
+      return [];
+    }
+
+    return fetchAirbnbCalendar(unitId, url);
+  }
+
   return [];
 }

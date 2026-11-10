@@ -1,4 +1,4 @@
-export type UnitId = "hiraya" | "mayumi";
+export type UnitId = "hiraya" | "mayumi" | "unit3";
 
 export type Unit = {
   id: UnitId;
@@ -124,6 +124,54 @@ export const UNITS: Unit[] = [
     ],
     heroImage: "/images/tower4/bedroom.jpg",
     galleryTag: "The cozy studio",
+  },
+  /* =====================================================================
+   * NEW UNIT  -  EDIT THE VALUES BELOW (everything marked "EDIT")
+   * ===================================================================== */
+  {
+    id: "unit3", // EDIT (optional): internal id, max 20 chars, no spaces
+    name: "SMDC New Unit", // EDIT: full name
+    shortName: "New Unit", // EDIT: short name for tabs and buttons
+    eyebrow: "CITY VIEW", // EDIT: small label above the name
+    tagline: "A fresh new place to stay.", // EDIT
+    description:
+      "A comfortable Hiraya Suites unit in Tagaytay with self check-in, a full set of home comforts, and Netflix on the TV. Edit this description with the real details of the unit.", // EDIT
+    size: "25 sqm", // EDIT
+    beds: "1 Queen Bed", // EDIT
+    maxGuests: 4, // EDIT
+    weekdayRate: 1999, // EDIT
+    weekendRate: 2199, // EDIT
+    holidayRate: 2599, // EDIT
+    additionalGuestFee: 300, // EDIT
+    baseGuests: 2, // EDIT
+    minNights: 1, // EDIT
+    maxNights: 14, // EDIT
+    checkInTime: "4:00 PM", // EDIT
+    checkOutTime: "2:00 PM", // EDIT
+    bestFor: "Couples, small families, and short cozy escapes.", // EDIT
+    vibe: "Cozy, curated, and easy to love.", // EDIT
+    highlights: [
+      "Self check-in", // EDIT
+      "Bright open-plan layout", // EDIT
+      "Kitchenette for small bites", // EDIT
+    ],
+    amenities: [
+      "Fast Wi-Fi",
+      "Smart TV & Netflix",
+      "Kitchenette",
+      "Air conditioning",
+      "Swimming pool access*",
+      "Fresh linens & towels",
+      "Coffee essentials",
+      "Easy self check-in",
+      "Hot shower & toiletries",
+      "Refrigerator",
+      "Dining essentials",
+      "Hair dryer",
+      "24/7 building security",
+    ], // EDIT
+    heroImage: "/images/tower4/bedroom.jpg", // EDIT: replace with "/images/unit3/bedroom.jpg" once you add photos
+    galleryTag: "The newest suite", // EDIT
   },
 ];
 
