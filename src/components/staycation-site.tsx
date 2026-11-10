@@ -217,7 +217,7 @@ const TOWER2_PHOTOS: GalleryPhoto[] = [
 const TOWER2 = UNITS.find((u) => u.id === "tower2")!;
 
 /* NEW UNIT  -  Airbnb listing link (EDIT). Leave "" to hide the button. */
-const TOWER2_AIRBNB_URL = "";
+const TOWER2_AIRBNB_URL = "airbnb.com/h/hirayasuitestagaytaylowerpenthouse";
 
 const photos: GalleryPhoto[] = [
   {
