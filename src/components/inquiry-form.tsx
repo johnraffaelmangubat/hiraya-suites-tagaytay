@@ -62,7 +62,9 @@ export default function InquiryForm({
   const qrCode =
     unit.id === "hiraya"
       ? "/images/towerb/qr%20tb.jpg"
-      : "/images/tower4/qr%20t4.jpg";
+      : unit.id === "unit3"
+        ? "/images/unit3/qr.jpg" // EDIT: add this QR image file for the new unit
+        : "/images/tower4/qr%20t4.jpg";
 
   async function submit(
     event: FormEvent<HTMLFormElement>

@@ -101,6 +101,27 @@ type GalleryPhoto = {
   alt: string;
 };
 
+/* =====================================================================
+ * NEW UNIT  -  GALLERY PHOTOS (EDIT)
+ * Add one entry per photo. Put the image files in public/images/unit3/
+ * While this list is empty, the new unit simply has no gallery section.
+ * Example entry:
+ *   {
+ *     id: "unit3-bedroom",
+ *     src: "/images/unit3/bedroom.jpg",
+ *     title: "A calm place to land",
+ *     room: "Bedroom",
+ *     suite: "unit3",
+ *     alt: "Bedroom with a queen bed and warm lighting",
+ *   },
+ * ===================================================================== */
+const UNIT3_PHOTOS: GalleryPhoto[] = [];
+
+const UNIT3 = UNITS.find((u) => u.id === "unit3")!;
+
+/* NEW UNIT  -  Airbnb listing link (EDIT). Leave "" to hide the button. */
+const UNIT3_AIRBNB_URL = "";
+
 const photos: GalleryPhoto[] = [
   {
     id: "hiraya-living",
@@ -342,7 +363,9 @@ const photos: GalleryPhoto[] = [
     suite: "mayumi",
     alt: "Cozy open-plan studio apartment with warm wood, neutral tones, and sunlight",
   },
-  
+
+  ...UNIT3_PHOTOS,
+
   {
     id: "shared-pool",
     src: "/images/outdoor-pool.jpg",
@@ -427,11 +450,21 @@ const galleryGroups: {
     detail: "Cozy studio for two",
     blurb: "Compact, charming, quietly lovely.",
   },
+  ...(UNIT3_PHOTOS.length > 0
+    ? [
+        {
+          id: "unit3" as GallerySuite,
+          label: UNIT3.name,
+          detail: UNIT3.galleryTag,
+          blurb: UNIT3.tagline,
+        },
+      ]
+    : []),
   {
     id: "shared",
     label: "Shared spaces",
     detail: "Pool & little joys",
-    blurb: "The little extras both suites can enjoy.",
+    blurb: "The little extras all suites can enjoy.",
   },
 ];
 
@@ -443,7 +476,7 @@ const galleryFilters: {
   {
     id: "all",
     label: "All photos",
-    detail: "Both suites + shared spaces",
+    detail: "All suites + shared spaces",
   },
   {
     id: "hiraya",
@@ -455,6 +488,15 @@ const galleryFilters: {
     label: "Tower 4",
     detail: "CITY VIEW",
   },
+  ...(UNIT3_PHOTOS.length > 0
+    ? [
+        {
+          id: "unit3" as GalleryFilter,
+          label: UNIT3.shortName,
+          detail: UNIT3.eyebrow,
+        },
+      ]
+    : []),
   {
     id: "shared",
     label: "Shared spaces",
@@ -467,12 +509,14 @@ const GALLERY_PREVIEW_LIMIT = 3;
 function suiteLabel(suite: GallerySuite): string {
   if (suite === "hiraya") return "Tower B";
   if (suite === "mayumi") return "Tower 4";
+  if (suite === "unit3") return UNIT3.shortName;
   return "Shared space";
 }
 
 function suiteShort(suite: GallerySuite): string {
   if (suite === "hiraya") return "Tower B";
   if (suite === "mayumi") return "Tower 4";
+  if (suite === "unit3") return UNIT3.shortName;
   return "Shared";
 }
 
@@ -741,6 +785,41 @@ const unitAmenityMap: Record<
       label: "Thoughtful little touches",
     },
   ],
+  /* NEW UNIT amenity highlights (EDIT the labels) */
+  unit3: [
+    {
+      icon: BedDouble,
+      label: "Comfortable bed",
+    },
+    {
+      icon: Bath,
+      label: "Private bathroom",
+    },
+    {
+      icon: CookingPot,
+      label: "Compact kitchenette",
+    },
+    {
+      icon: Utensils,
+      label: "Dining essentials",
+    },
+    {
+      icon: Refrigerator,
+      label: "Refrigerator",
+    },
+    {
+      icon: Monitor,
+      label: "Smart TV & Netflix",
+    },
+    {
+      icon: Wind,
+      label: "Hair dryer",
+    },
+    {
+      icon: Heart,
+      label: "Thoughtful little touches",
+    },
+  ],
 };
 
 const faqs: {
@@ -851,7 +930,7 @@ const faqs: {
     a: (
       <>
         <p>
-          Yes. <strong>Light cooking is allowed</strong> in both units.
+          Yes. <strong>Light cooking is allowed</strong> in all units.
         </p>
 
         <p>
@@ -1013,7 +1092,14 @@ export default function StaycationSite({
     useState<Record<UnitId, number>>({
       hiraya: 2,
       mayumi: 2,
+      unit3: 2,
     });
+
+  const suiteCarouselRef =
+    useRef<HTMLDivElement | null>(null);
+
+  const [suiteSlide, setSuiteSlide] =
+    useState(0);
 
   const [availability, setAvailability] =
     useState<AvailabilityData>({
@@ -1131,6 +1217,7 @@ export default function StaycationSite({
       all: photos.length,
       hiraya: photosForSuite("hiraya").length,
       mayumi: photosForSuite("mayumi").length,
+      unit3: photosForSuite("unit3").length,
       shared: photosForSuite("shared").length,
     }),
     []
@@ -1480,6 +1567,58 @@ export default function StaycationSite({
     }
   }
 
+  function getSuiteStep() {
+    const track = suiteCarouselRef.current;
+    const card = track?.firstElementChild as HTMLElement | null;
+
+    if (!track || !card) return 0;
+
+    const gap = parseFloat(getComputedStyle(track).columnGap || "24") || 24;
+
+    return card.offsetWidth + gap;
+  }
+
+  function scrollSuites(direction: 1 | -1) {
+    const track = suiteCarouselRef.current;
+    const step = getSuiteStep();
+
+    if (!track || !step) return;
+
+    track.scrollBy({
+      left: direction * step,
+      behavior: "smooth",
+    });
+  }
+
+  function goToSuiteSlide(index: number) {
+    const track = suiteCarouselRef.current;
+    const step = getSuiteStep();
+
+    if (!track || !step) return;
+
+    track.scrollTo({
+      left: index * step,
+      behavior: "smooth",
+    });
+  }
+
+  function handleSuiteCarouselScroll() {
+    const track = suiteCarouselRef.current;
+    const step = getSuiteStep();
+
+    if (!track || !step) return;
+
+    const maxIndex = UNITS.length - 1;
+    const atEnd =
+      track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+
+    setSuiteSlide(
+      atEnd
+        ? maxIndex
+        : Math.min(maxIndex, Math.round(track.scrollLeft / step))
+    );
+  }
+
   function selectUnit(next: UnitId) {
     setSelectedUnit(next);
     setRangeError("");
@@ -1817,8 +1956,8 @@ export default function StaycationSite({
               />
 
               <span>
-                <BedDouble size={15} /> Two
-                suites. Two little moods.
+                <BedDouble size={15} /> Three
+                suites. Three little moods.
               </span>
             </button>
 
@@ -1912,7 +2051,40 @@ export default function StaycationSite({
               </span>
               </div>
             </button>
-             
+
+            <button
+              type="button"
+              className={`suite-pill ${
+                selectedUnit === "unit3"
+                  ? "is-active"
+                  : ""
+              }`}
+              onClick={() =>
+                selectUnit("unit3")
+              }
+              aria-pressed={
+                selectedUnit ===
+                "unit3"
+              }
+            >
+              <div className="suite-pill-inner">
+                <small>
+                  {UNIT3.eyebrow}
+                </small>
+
+                <strong>
+                  {UNIT3.name}
+                </strong>
+
+                <span>
+                  Up to {UNIT3.maxGuests} ·{" "}
+                  {formatMoney(
+                    UNIT3.weekdayRate
+                  )}
+                  /night
+                </span>
+              </div>
+            </button>
           </div>
 
           <div
@@ -2146,7 +2318,7 @@ export default function StaycationSite({
               </p>
 
               <h2>
-                Two little escapes.
+                Three little escapes.
                 <br />
                 <em>
                   Which one feels like
@@ -2158,11 +2330,16 @@ export default function StaycationSite({
             <span className="availability-tag">
               <span className="status-dot" />
               Live availability
-              shown for both suites
+              shown for every suite
             </span>
           </div>
 
-          <div className="suite-cards">
+          <div className="suite-carousel">
+          <div
+            className="suite-cards suite-cards--carousel"
+            ref={suiteCarouselRef}
+            onScroll={handleSuiteCarouselScroll}
+          >
             {UNITS.map((suite) => {
               const isSelected =
                 suite.id ===
@@ -2443,6 +2620,49 @@ export default function StaycationSite({
                 </article>
               );
             })}
+          </div>
+
+          <div className="suite-carousel-controls">
+            <button
+              type="button"
+              className="suite-carousel-btn"
+              onClick={() => scrollSuites(-1)}
+              disabled={suiteSlide <= 0}
+              aria-label="Previous suite"
+            >
+              <ChevronLeft size={18} />
+            </button>
+
+            <div
+              className="suite-carousel-dots"
+              role="tablist"
+              aria-label="Suite slides"
+            >
+              {UNITS.map((suite, index) => (
+                <button
+                  key={suite.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={index === suiteSlide}
+                  aria-label={`Show ${suite.shortName}`}
+                  className={`suite-carousel-dot ${
+                    index === suiteSlide ? "is-active" : ""
+                  }`}
+                  onClick={() => goToSuiteSlide(index)}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="suite-carousel-btn"
+              onClick={() => scrollSuites(1)}
+              disabled={suiteSlide >= UNITS.length - 1}
+              aria-label="Next suite"
+            >
+              <ChevronRight size={18} />
+            </button>
+          </div>
           </div>
         </section>
 
@@ -3572,6 +3792,11 @@ export default function StaycationSite({
              <a className="button button-outline full-width" href="https://www.airbnb.com/h/hirayasuitestagaytaytower4" target="_blank" rel="noopener noreferrer">
               Airbnb Tower 4 <ArrowUpRight size={16} />
             </a>
+            {UNIT3_AIRBNB_URL && (
+              <a className="button button-outline full-width" style={{ marginTop: 12 }} href={UNIT3_AIRBNB_URL} target="_blank" rel="noopener noreferrer">
+                Airbnb {UNIT3.shortName} <ArrowUpRight size={16} />
+              </a>
+            )}
             <p className="fine-print">Booking terms on Airbnb follow the platform’s policies.</p>
           </article>
         </div>
@@ -4025,7 +4250,7 @@ export default function StaycationSite({
             </h2>
 
             <p>
-              Two suites. All that’s
+              Three suites. All that’s
               missing is you.
             </p>
           </div>
