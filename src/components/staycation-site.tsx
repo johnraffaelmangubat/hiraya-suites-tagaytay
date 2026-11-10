@@ -3408,17 +3408,6 @@ export default function StaycationSite({
                     {rangeError}
                   </p>
                 )}
-
-                <p className="calendar-note">
-                  <Info size={14} /> Select
-                  a check-in date, then a
-                  check-out date.{" "}
-                  {unit.shortName} accepts{" "}
-                  {unit.minNights}–
-                  {unit.maxNights} nights
-                  for up to{" "}
-                  {unit.maxGuests} guests.
-                </p>
               </div>
 
               <aside
