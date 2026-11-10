@@ -130,7 +130,7 @@ export const UNITS: Unit[] = [
    * ===================================================================== */
   {
     id: "tower2", // EDIT (optional): internal id, max 20 chars, no spaces
-    name: "SMDC Wind Residences Tower 4",
+    name: "SMDC Wind Residences Tower 2",
     shortName: "Tower 2", // EDIT: short name for tabs and buttons
     eyebrow: "TAAL VIEW", // EDIT: small label above the name
     tagline: "Partial Taal View & City View", // EDIT
@@ -138,7 +138,7 @@ export const UNITS: Unit[] = [
       "A comfortable Hiraya Suites unit in Tagaytay with self check-in, a full set of home comforts, and Netflix on the TV. Edit this description with the real details of the unit.", // EDIT
     size: "25 sqm", // EDIT
     beds: "1 Queen Bed", // EDIT
-    maxGuests: 4, // EDIT
+    maxGuests: 2, // EDIT
     weekdayRate: 2399, // Mon-Thu nights
     weekendRate: 2599, // Fri-Sun nights
     holidayRate: 2999, // dates listed in HOLIDAY_DATES
