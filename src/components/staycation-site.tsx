@@ -125,7 +125,7 @@ const UNIT3_AIRBNB_URL = "";
 const photos: GalleryPhoto[] = [
   {
     id: "hiraya-living",
-    src: "/images/towerb/bedroom.jpg",
+    src: "/images/tower 2/bed-one.jpg",
     title: "Your cozy living space",
     room: "Bedroom wide view",
     suite: "hiraya",
