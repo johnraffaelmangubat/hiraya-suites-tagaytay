@@ -170,7 +170,7 @@ export const UNITS: Unit[] = [
       "Hair dryer",
       "24/7 building security",
     ], // EDIT
-    heroImage: "/images/tower4/bedroom.jpg", // EDIT: replace with "/images/tower2/bedroom.jpg" once you add photos
+    heroImage: "/images/tower2/bed-one.jpg", // EDIT: replace with "/images/tower2/bedroom.jpg" once you add photos
     galleryTag: "The newest suite", // EDIT
   },
 ];
