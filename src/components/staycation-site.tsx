@@ -103,121 +103,121 @@ type GalleryPhoto = {
 
 /* =====================================================================
  * NEW UNIT  -  GALLERY PHOTOS (EDIT)
- * Add one entry per photo. Put the image files in public/images/unit3/
+ * Add one entry per photo. Put the image files in public/images/tower2/
  * While this list is empty, the new unit simply has no gallery section.
  * Example entry:
  *   {
- *     id: "unit3-bedroom",
- *     src: "/images/unit3/bedroom.jpg",
+ *     id: "tower2-bedroom",
+ *     src: "/images/tower2/bedroom.jpg",
  *     title: "A calm place to land",
  *     room: "Bedroom",
- *     suite: "unit3",
+ *     suite: "tower2",
  *     alt: "Bedroom with a queen bed and warm lighting",
  *   },
  * ===================================================================== */
-const UNIT3_PHOTOS: GalleryPhoto[] = [
+const TOWER2_PHOTOS: GalleryPhoto[] = [
   {
-    id: "unit3-mirror-kitchen",
-    src: "/images/unit3/mirror-kitchen.jpg",
+    id: "tower2-mirror-kitchen",
+    src: "/images/tower2/mirror-kitchen.jpg",
     title: "Step inside, settle in",
     room: "Entrance",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Studio entrance with a round wall mirror, leading to the kitchenette and bed",
   },
   {
-    id: "unit3-bed-one",
-    src: "/images/unit3/bed-one.jpg",
+    id: "tower2-bed-one",
+    src: "/images/tower2/bed-one.jpg",
     title: "A calm place to land",
     room: "Bedroom",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Cozy daybed with pillows beside a window with a city view",
   },
   {
-    id: "unit3-kitchen",
-    src: "/images/unit3/kitchen.jpg",
+    id: "tower2-kitchen",
+    src: "/images/tower2/kitchen.jpg",
     title: "Light bites, made easy",
     room: "Kitchenette",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Kitchenette with light wood cabinets, a sink, and a countertop",
   },
   {
-    id: "unit3-tv",
-    src: "/images/unit3/tv.jpg",
+    id: "tower2-tv",
+    src: "/images/tower2/tv.jpg",
     title: "Movie night, sorted",
     room: "TV & Netflix",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Wall-mounted smart TV on a wood-paneled wall with a console below",
   },
   {
-    id: "unit3-dining-table",
-    src: "/images/unit3/dining-table.jpg",
+    id: "tower2-dining-table",
+    src: "/images/tower2/dining-table.jpg",
     title: "Breakfast for two",
     room: "Dining nook",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Round white dining table with two chairs and a place setting",
   },
   {
-    id: "unit3-cr",
-    src: "/images/unit3/cr.jpg",
+    id: "tower2-cr",
+    src: "/images/tower2/cr.jpg",
     title: "Fresh and clean",
     room: "Bathroom",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Private bathroom with an arched mirror, sink, and a wooden shelf",
   },
   {
-    id: "unit3-bed-two",
-    src: "/images/unit3/bed-two.jpg",
+    id: "tower2-bed-two",
+    src: "/images/tower2/bed-two.jpg",
     title: "Slow mornings, soft light",
     room: "Bedroom",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Bedroom with a daybed and a large window overlooking the city",
   },
   {
-    id: "unit3-bed-three",
-    src: "/images/unit3/bed-three.jpg",
+    id: "tower2-bed-three",
+    src: "/images/tower2/bed-three.jpg",
     title: "Rest with a view",
     room: "Bedroom",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Bed and daybed by a bright window with a city view",
   },
   {
-    id: "unit3-bed-four",
-    src: "/images/unit3/bed-four.jpg",
+    id: "tower2-bed-four",
+    src: "/images/tower2/bed-four.jpg",
     title: "Dressed for comfort",
     room: "Bedroom",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Double bed with taupe bedding against a wooden headboard wall",
   },
   {
-    id: "unit3-bed-five",
-    src: "/images/unit3/bed-five.jpg",
+    id: "tower2-bed-five",
+    src: "/images/tower2/bed-five.jpg",
     title: "Made for deep sleep",
     room: "Bedroom",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Comfortable double bed with soft bedding and framed wall art above",
   },
   {
-    id: "unit3-mirror-out",
-    src: "/images/unit3/mirror-out.jpg",
+    id: "tower2-mirror-out",
+    src: "/images/tower2/mirror-out.jpg",
     title: "Everything within reach",
     room: "Bedroom",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Bed in the foreground with a standing mirror and coat stand by the window",
   },
   {
-    id: "unit3-mirror",
-    src: "/images/unit3/mirror.jpg",
+    id: "tower2-mirror",
+    src: "/images/tower2/mirror.jpg",
     title: "A little corner by the window",
     room: "Bedroom",
-    suite: "unit3",
+    suite: "tower2",
     alt: "Standing mirror and coat stand beside a window with a city view",
   },
 ];
 
-const UNIT3 = UNITS.find((u) => u.id === "unit3")!;
+const TOWER2 = UNITS.find((u) => u.id === "tower2")!;
 
 /* NEW UNIT  -  Airbnb listing link (EDIT). Leave "" to hide the button. */
-const UNIT3_AIRBNB_URL = "";
+const TOWER2_AIRBNB_URL = "";
 
 const photos: GalleryPhoto[] = [
   {
@@ -461,7 +461,7 @@ const photos: GalleryPhoto[] = [
     alt: "Cozy open-plan studio apartment with warm wood, neutral tones, and sunlight",
   },
 
-  ...UNIT3_PHOTOS,
+  ...TOWER2_PHOTOS,
 
   {
     id: "shared-pool",
@@ -547,13 +547,13 @@ const galleryGroups: {
     detail: "Cozy studio for two",
     blurb: "Compact, charming, quietly lovely.",
   },
-  ...(UNIT3_PHOTOS.length > 0
+  ...(TOWER2_PHOTOS.length > 0
     ? [
         {
-          id: "unit3" as GallerySuite,
-          label: UNIT3.name,
-          detail: UNIT3.galleryTag,
-          blurb: UNIT3.tagline,
+          id: "tower2" as GallerySuite,
+          label: TOWER2.name,
+          detail: TOWER2.galleryTag,
+          blurb: TOWER2.tagline,
         },
       ]
     : []),
@@ -585,12 +585,12 @@ const galleryFilters: {
     label: "Tower 4",
     detail: "CITY VIEW",
   },
-  ...(UNIT3_PHOTOS.length > 0
+  ...(TOWER2_PHOTOS.length > 0
     ? [
         {
-          id: "unit3" as GalleryFilter,
-          label: UNIT3.shortName,
-          detail: UNIT3.eyebrow,
+          id: "tower2" as GalleryFilter,
+          label: TOWER2.shortName,
+          detail: TOWER2.eyebrow,
         },
       ]
     : []),
@@ -606,14 +606,14 @@ const GALLERY_PREVIEW_LIMIT = 3;
 function suiteLabel(suite: GallerySuite): string {
   if (suite === "hiraya") return "Tower B";
   if (suite === "mayumi") return "Tower 4";
-  if (suite === "unit3") return UNIT3.shortName;
+  if (suite === "tower2") return TOWER2.shortName;
   return "Shared space";
 }
 
 function suiteShort(suite: GallerySuite): string {
   if (suite === "hiraya") return "Tower B";
   if (suite === "mayumi") return "Tower 4";
-  if (suite === "unit3") return UNIT3.shortName;
+  if (suite === "tower2") return TOWER2.shortName;
   return "Shared";
 }
 
@@ -883,7 +883,7 @@ const unitAmenityMap: Record<
     },
   ],
   /* NEW UNIT amenity highlights (EDIT the labels) */
-  unit3: [
+  tower2: [
     {
       icon: BedDouble,
       label: "Comfortable bed",
@@ -1189,7 +1189,7 @@ export default function StaycationSite({
     useState<Record<UnitId, number>>({
       hiraya: 2,
       mayumi: 2,
-      unit3: 2,
+      tower2: 2,
     });
 
   const suiteCarouselRef =
@@ -1314,7 +1314,7 @@ export default function StaycationSite({
       all: photos.length,
       hiraya: photosForSuite("hiraya").length,
       mayumi: photosForSuite("mayumi").length,
-      unit3: photosForSuite("unit3").length,
+      tower2: photosForSuite("tower2").length,
       shared: photosForSuite("shared").length,
     }),
     []
@@ -2152,31 +2152,31 @@ export default function StaycationSite({
             <button
               type="button"
               className={`suite-pill ${
-                selectedUnit === "unit3"
+                selectedUnit === "tower2"
                   ? "is-active"
                   : ""
               }`}
               onClick={() =>
-                selectUnit("unit3")
+                selectUnit("tower2")
               }
               aria-pressed={
                 selectedUnit ===
-                "unit3"
+                "tower2"
               }
             >
               <div className="suite-pill-inner">
                 <small>
-                  {UNIT3.eyebrow}
+                  {TOWER2.eyebrow}
                 </small>
 
                 <strong>
-                  {UNIT3.name}
+                  {TOWER2.name}
                 </strong>
 
                 <span>
-                  Up to {UNIT3.maxGuests} ·{" "}
+                  Up to {TOWER2.maxGuests} ·{" "}
                   {formatMoney(
-                    UNIT3.weekdayRate
+                    TOWER2.weekdayRate
                   )}
                   /night
                 </span>
@@ -3889,9 +3889,9 @@ export default function StaycationSite({
              <a className="button button-outline full-width" href="https://www.airbnb.com/h/hirayasuitestagaytaytower4" target="_blank" rel="noopener noreferrer">
               Airbnb Tower 4 <ArrowUpRight size={16} />
             </a>
-            {UNIT3_AIRBNB_URL && (
-              <a className="button button-outline full-width" style={{ marginTop: 12 }} href={UNIT3_AIRBNB_URL} target="_blank" rel="noopener noreferrer">
-                Airbnb {UNIT3.shortName} <ArrowUpRight size={16} />
+            {TOWER2_AIRBNB_URL && (
+              <a className="button button-outline full-width" style={{ marginTop: 12 }} href={TOWER2_AIRBNB_URL} target="_blank" rel="noopener noreferrer">
+                Airbnb {TOWER2.shortName} <ArrowUpRight size={16} />
               </a>
             )}
             <p className="fine-print">Booking terms on Airbnb follow the platform’s policies.</p>
