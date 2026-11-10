@@ -170,12 +170,12 @@ export async function getAirbnbBlockedDates(
     return fetchAirbnbCalendar(unitId, url);
   }
 
-  if (unitId === "unit3") {
-    const url = process.env.AIRBNB_UNIT3_ICAL_URL;
+  if (unitId === "tower2") {
+    const url = process.env.AIRBNB_TOWER2_ICAL_URL;
 
     if (!url) {
       console.warn(
-        "[airbnb] AIRBNB_UNIT3_ICAL_URL is not configured."
+        "[airbnb] AIRBNB_TOWER2_ICAL_URL is not configured."
       );
 
       return [];

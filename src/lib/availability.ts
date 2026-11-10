@@ -88,12 +88,12 @@ export async function readAvailability() {
     /*
      * 3b. Get Airbnb blocked dates for the new unit.
      */
-    const airbnbUnit3Dates =
-      await getAirbnbBlockedDates("unit3");
+    const airbnbTower2Dates =
+      await getAirbnbBlockedDates("tower2");
 
     console.log(
-      "[availability] Airbnb unit3 dates:",
-      airbnbUnit3Dates.length
+      "[availability] Airbnb tower2 dates:",
+      airbnbTower2Dates.length
     );
 
     /*
@@ -144,8 +144,8 @@ export async function readAvailability() {
     /*
      * 7b. Add new unit Airbnb dates.
      */
-    for (const date of airbnbUnit3Dates) {
-      blockedByUnit.unit3.add(date);
+    for (const date of airbnbTower2Dates) {
+      blockedByUnit.tower2.add(date);
     }
 
     /*

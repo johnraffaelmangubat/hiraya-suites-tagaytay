@@ -1,4 +1,4 @@
-export type UnitId = "hiraya" | "mayumi" | "unit3";
+export type UnitId = "hiraya" | "mayumi" | "tower2";
 
 export type Unit = {
   id: UnitId;
@@ -129,9 +129,9 @@ export const UNITS: Unit[] = [
    * NEW UNIT  -  EDIT THE VALUES BELOW (everything marked "EDIT")
    * ===================================================================== */
   {
-    id: "unit3", // EDIT (optional): internal id, max 20 chars, no spaces
-    name: "SMDC New Unit", // EDIT: full name
-    shortName: "New Unit", // EDIT: short name for tabs and buttons
+    id: "tower2", // EDIT (optional): internal id, max 20 chars, no spaces
+    name: "SMDC Tower 2", // EDIT: full name
+    shortName: "Tower 2", // EDIT: short name for tabs and buttons
     eyebrow: "CITY VIEW", // EDIT: small label above the name
     tagline: "A fresh new place to stay.", // EDIT
     description:
@@ -170,7 +170,7 @@ export const UNITS: Unit[] = [
       "Hair dryer",
       "24/7 building security",
     ], // EDIT
-    heroImage: "/images/tower4/bedroom.jpg", // EDIT: replace with "/images/unit3/bedroom.jpg" once you add photos
+    heroImage: "/images/tower4/bedroom.jpg", // EDIT: replace with "/images/tower2/bedroom.jpg" once you add photos
     galleryTag: "The newest suite", // EDIT
   },
 ];
