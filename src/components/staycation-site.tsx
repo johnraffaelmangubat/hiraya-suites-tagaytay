@@ -364,7 +364,14 @@ const photos: GalleryPhoto[] = [
     alt: "Cozy open-plan studio apartment with warm wood, neutral tones, and sunlight",
   },
 
-  ...UNIT3_PHOTOS,
+  {
+    id: "unit3-bedroom",
+    src: "/images/unit3/bed-one.jpg",
+    title: "A calm place to land",
+    room: "Bedroom",
+    suite: "unit3",
+    alt: "Bedroom with a cozy bed and warm lighting",
+  },
 
   {
     id: "shared-pool",
